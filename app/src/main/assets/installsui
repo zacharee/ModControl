@@ -1,0 +1,28 @@
+#!/system/bin/sh
+
+# am start -n com.android.settings/com.android.settings.Settings
+
+mount -o rw,remount /
+mount -o rw,remount /system
+
+mkdir /data/media/0/Zacharee1Mods/apks
+mkdir /data/media/0/Zacharee1Mods/mod
+mkdir /data/media/0/Zacharee1Mods/mod/go
+mkdir /data/media/0/Zacharee1Mods/mod/go/res
+mkdir /data/media/0/Zacharee1Mods/mod/go/res/layout
+
+unzip -od /data/media/0/Zacharee1Mods/mod/ /data/media/0/Zacharee1Mods/"$1"
+
+cp /data/media/0/Zacharee1Mods/zip /system/bin/zip
+chmod 0755 /system/bin/zip
+
+cp -a /data/media/0/Zacharee1Mods/mod/res/. /data/media/0/Zacharee1Mods/mod/go/res/
+
+cp /system/priv-app/LGSystemUI/LGSystemUI.apk /data/media/0/Zacharee1Mods/apks/LGSystemUI.apk
+cd /data/media/0/Zacharee1Mods/mod/go/
+zip -rv /system/priv-app/LGSystemUI/LGSystemUI.apk ./res/layout/*
+
+chmod 0644 /system/priv-app/LGSystemUI/LGSystemUI.apk
+
+rm -rf /data/media/0/Zacharee1Mods/mod/
+killall com.android.systemui

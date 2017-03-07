@@ -1,0 +1,9 @@
+#!/system/bin/sh
+
+# am start -n com.android.settings/com.android.settings.Settings
+
+cd /data/media/0/Zacharee1Mods/
+
+sh ./restoresb
+sh ./restoresui
+sh ./restoreqt
