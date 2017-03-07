@@ -97,6 +97,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // Show the Up button in the action bar.
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
+
+
     }
 
     public void darkEnable() {

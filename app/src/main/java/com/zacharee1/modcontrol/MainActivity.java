@@ -1,24 +1,19 @@
 package com.zacharee1.modcontrol;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ListAdapter;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -29,8 +24,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.concurrent.Exchanger;
-import java.util.jar.Manifest;
 
 public class MainActivity extends AppCompatActivity {
     public boolean enabled;
@@ -44,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public Switch wideData;
     public RadioGroup radioGroup1;
     public RadioGroup radioGroup2;
-    public int mod_enabled;
     public ContentResolver cr;
-    public Context cx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,18 +82,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         try {
-            Process process = Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
+            Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
+            modEnable();
+            radEnable();
+            minBatSUI();
+            minBatAOD();
+            minBatImm();
+            wideData();
         } catch (Exception e) {
-
+            Log.e("error", e.getMessage());
         }
-//        enableDisable.run();
-//        radCoice.run();
-        modEnable();
-        radEnable();
-        minBatSUI();
-        minBatAOD();
-        minBatImm();
-        wideData();
+
     }
 
     @Override
@@ -123,12 +113,14 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return true;
+        } else if (id == R.id.action_credits) {
+            startActivity(new Intent(MainActivity.this, CreditsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void modEnable() {
+    public void modEnable() throws IOException {
         Switch enable = (Switch) findViewById(R.id.enable_switch);
         enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -147,29 +139,45 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
                     enabled = false;
                     Toast.makeText(getApplicationContext(), "Restoring defaults...", Toast.LENGTH_SHORT).show();
-                    clearRad(radioGroup1);
-                    clearRad(radioGroup2);
+                    if (!enabled) {
+                        try {
+                            clearRad(radioGroup1);
+                            clearRad(radioGroup2);
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
+                    }
                     bataod.setChecked(false);
                     batstat.setChecked(false);
+                    batstatImm.setChecked(false);
                     wideData.setChecked(false);
-//                    restoreAll();
+
+                    try {
+                        copyZip("qtwhite.zip");
+                        copyFile2("installqt", "qtwhite.zip");
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
                 }
             }
         });
     }
 
-    public void radEnable() {
+    public void radEnable() throws IOException {
         radioGroup1 = (RadioGroup) findViewById(R.id.color_tool1);
         radioGroup2 = (RadioGroup) findViewById(R.id.color_tool2);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                clearRad(radioGroup2);
+                try {
+                    clearRad(radioGroup2);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
                 final String installqt = "installqt";
                 if (checkedId == R.id.red_tool) {
                     if (enabled) {
                         final String file = "qtred.zip";
-//                        Toast.makeText(getApplicationContext(), "Installing Red...", Toast.LENGTH_SHORT).show();
                         try {
                             copyZip(file);
                             copyFile2(installqt, file);
@@ -181,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.white_tool) {
                     if (enabled) {
                         final String file = "qtwhite.zip";
-//                        Toast.makeText(getApplicationContext(), "Installing White...", Toast.LENGTH_SHORT).show();
                         try {
                             copyZip(file);
                             copyFile2(installqt, file);
@@ -193,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.green_tool) {
                     if (enabled) {
                         final String file = "qtgreen.zip";
-//                        Toast.makeText(getApplicationContext(), "Installing White...", Toast.LENGTH_SHORT).show();
                         try {
                             copyZip(file);
                             copyFile2(installqt, file);
@@ -204,8 +210,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 if (!enabled) {
-//                    Toast.makeText(getApplicationContext(), "Please enable the app.", Toast.LENGTH_SHORT).show();
-                    clearRad(group);
+                    try {
+                        clearRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
                 }
             }
         });
@@ -213,12 +222,15 @@ public class MainActivity extends AppCompatActivity {
         radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                clearRad(radioGroup1);
+                try {
+                    clearRad(radioGroup1);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
                 final String installqt = "installqt";
                 if (checkedId == R.id.purple_tool) {
                     if (enabled) {
                         final String file = "qtpurple.zip";
-//                        Toast.makeText(getApplicationContext(), "Installing White...", Toast.LENGTH_SHORT).show();
                         try {
                             copyZip(file);
                             copyFile2(installqt, file);
@@ -230,7 +242,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.multi_tool) {
                     if (enabled) {
                         final String file = "qtmulti.zip";
-//                        Toast.makeText(getApplicationContext(), "Installing Multi...", Toast.LENGTH_SHORT).show();
                         try {
                             copyZip(file);
                             copyFile2(installqt, file);
@@ -242,7 +253,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.blue_tool) {
                     if (enabled) {
                         final String file = "qtblue.zip";
-//                        Toast.makeText(getApplicationContext(), "Installing Blue...", Toast.LENGTH_SHORT).show();
                         try {
                             copyZip(file);
                             copyFile2(installqt, file);
@@ -252,12 +262,18 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
+                if (!enabled) {
+                    try {
+                        clearRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
             }
         });
     }
 
-    public void wideData() {
-//        final Switch enable = (Switch) findViewById(R.id.minbatstat_switch);
+    public void wideData() throws IOException {
         wideData = (Switch) findViewById(R.id.wide_data);
         wideData.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -274,7 +290,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
-//                        install("sui");
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -288,19 +303,15 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
-//                    restore("sui");
-
                 }
                 if (!enabled) {
-//                    Toast.makeText(getApplicationContext(), "Please enable the app.", Toast.LENGTH_SHORT).show();
                     wideData.setChecked(false);
                 }
             }
         });
     }
 
-    public void minBatSUI() {
-//        final Switch enable = (Switch) findViewById(R.id.minbatstat_switch);
+    public void minBatSUI() throws IOException {
         batstat = (Switch) findViewById(R.id.minbatstat_switch);
         batstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -317,7 +328,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
-//                        install("sui");
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -331,19 +341,16 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
-//                    restore("sui");
 
                 }
                 if (!enabled) {
-//                    Toast.makeText(getApplicationContext(), "Please enable the app.", Toast.LENGTH_SHORT).show();
                     batstat.setChecked(false);
                 }
             }
         });
     }
 
-    public void minBatImm() {
-//        final Switch enable = (Switch) findViewById(R.id.minbatstat_switch);
+    public void minBatImm() throws IOException {
         batstatImm = (Switch) findViewById(R.id.minbatstat_imm_switch);
         batstatImm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -360,7 +367,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
-//                        install("sui");
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -374,19 +380,16 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
-//                    restore("sui");
 
                 }
                 if (!enabled) {
-//                    Toast.makeText(getApplicationContext(), "Please enable the app.", Toast.LENGTH_SHORT).show();
                     batstatImm.setChecked(false);
                 }
             }
         });
     }
 
-    public void minBatAOD() {
-//        final Switch enable = (Switch) findViewById(R.id.minbataod_switch);
+    public void minBatAOD() throws IOException {
         bataod = (Switch) findViewById(R.id.minbataod_switch);
         bataod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -403,7 +406,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
-//                        install("sb");
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -417,89 +419,18 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
-//                    restore("sb");
                 }
                 if (!enabled) {
-//                    Toast.makeText(getApplicationContext(), "Please enable the app.", Toast.LENGTH_SHORT).show();
                     bataod.setChecked(false);
                 }
             }
         });
     }
 
-    public void clearRad(RadioGroup group){
+    public void clearRad(RadioGroup group) throws IOException {
         group.setOnCheckedChangeListener(null);
-        if(group != null) group.clearCheck();
+        group.clearCheck();
         radEnable();
-    }
-
-    public void restoreAll() {
-        String restore = "restoreall.zip";
-        try {
-            copyZip(restore);
-            copyFile2("restoreall", "restoreall");
-            copyFile2("restoreqt", "restoreqt");
-            copyFile2("restoresui", "restoresui");
-            copyFile2("restoresb", "restoresb");
-            runScript("dummy", "restoreall", restore);
-            sudo("killall com.android.systemui");
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void restore(String which) {
-        String restore = "restoreall.zip";
-        if (which.equals("qt")) {
-            try {
-                copyZip(restore);
-                copyFile2("restoreqt", "restoreqt");
-                runScript("dummy", "restoreqt", restore);
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        } else if (which.equals("sui")) {
-            try {
-                copyZip(restore);
-                copyFile2("restoresui", "restoresui");
-                runScript("dummy", "restoresui", restore);
-                sudo("killall com.android.systemui");
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        } else if (which.equals("sb")) {
-            try {
-                copyZip(restore);
-                copyFile2("restoresb", "restoresb");
-                runScript("dummy", "restoresb", restore);
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void install(String which) {
-        String install;
-        if (which.equals("sb")) {
-            install = "installsb";
-            try {
-                copyZip(install + ".zip");
-                copyFile2(install, install);
-                runScript("dummy", install, install + ".zip");
-            } catch (Exception e) {
-
-            }
-        } else if (which.equals("sui")) {
-            install = "installsui";
-            try {
-                copyZip(install + ".zip");
-                copyFile2(install, install);
-                runScript("dummy", install, install + ".zip");
-                sudo("killall com.android.systemui");
-            } catch (Exception e) {
-
-            }
-        }
     }
 
     public void copyZip(String targetFile) throws IOException {
@@ -508,20 +439,20 @@ public class MainActivity extends AppCompatActivity {
         File modFolder = new File(targetDirectory);
 
         if (!modFolder.isDirectory()) {
-            modFolder.mkdir();
-            if (!modFolder.mkdir()) {
+            boolean result = modFolder.mkdir();
+            if (!result) {
                 throw new IOException("Could not create nonexistent mod folder. Abort.");
             }
         }
         try (
                 InputStream in = assetManager.open(targetFile);
-                OutputStream out = new FileOutputStream(targetDirectory + targetFile);
+                OutputStream out = new FileOutputStream(targetDirectory + targetFile)
         ) {
             copyFile(in, out);
         }
         try (
                 InputStream in =  assetManager.open("zip");
-                OutputStream out = new FileOutputStream(targetDirectory + "zip");
+                OutputStream out = new FileOutputStream(targetDirectory + "zip")
         ) {
             copyFile(in, out);
         }
@@ -533,8 +464,8 @@ public class MainActivity extends AppCompatActivity {
         File modFolder = new File(targetDirectory);
 
         if (!modFolder.isDirectory()) {
-            modFolder.mkdir();
-            if (!modFolder.mkdir()) {
+            boolean result = modFolder.mkdir();
+            if (!result) {
                 throw new IOException("Could not create nonexistent mod folder. Abort.");
             }
         }
@@ -543,7 +474,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try (
                         InputStream in = assetManager.open(targetFile);
-                        OutputStream out = new FileOutputStream(targetDirectory + targetFile);
+                        OutputStream out = new FileOutputStream(targetDirectory + targetFile)
                 ) {
                     copyFile(in, out);
                 } catch (Exception e) {
@@ -551,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 try (
                         InputStream in = assetManager.open("zip");
-                        OutputStream out = new FileOutputStream(targetDirectory + "zip");
+                        OutputStream out = new FileOutputStream(targetDirectory + "zip")
                 ) {
                     copyFile(in, out);
                 } catch (Exception e) {
@@ -574,13 +505,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void copyFile(InputStream in, OutputStream out) throws IOException {
-//        Toast.makeText(getApplicationContext(), "Copy...", Toast.LENGTH_SHORT).show();
         byte[] buffer = new byte[10240];
         int read;
         while((read = in.read(buffer)) != -1){
             out.write(buffer, 0, read);
         }
-//        Toast.makeText(getApplicationContext(), "Done!", Toast.LENGTH_SHORT).show();
     }
 
     public void runScript(final String targetDirectory, final String targetFile, final String zip) throws IOException{
@@ -595,8 +524,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
-//        sudo("killall com.lge.quicktools");
-//        sudo("killall com.lge.signboard");
     }
 
     public void sudo(String...strings) throws IOException {
