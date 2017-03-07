@@ -5,10 +5,6 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.zacharee1.modcontrol.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -21,19 +17,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_margin="16dp"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lg_v20_mod_control"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/title"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/lg_v20_mod_control"
                 android:textAlignment="center"
-                android:textSize="25sp"
                 android:textColor="#000000"
+                android:textSize="25sp"
                 tools:ignore="ObsoleteLayoutParam,RtlHardcoded" />
 
             <LinearLayout
@@ -95,9 +92,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:buttonTint="#ccc"
                         android:checked="false"
-                        android:text="@string/white"
-                        android:buttonTint="#ccc" />
+                        android:text="@string/white" />
 
                     <RadioButton
                         android:id="@+id/red_tool"
@@ -105,9 +102,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:buttonTint="#D32F2F"
                         android:checked="false"
-                        android:text="@string/red"
-                        android:buttonTint="#D32F2F" />
+                        android:text="@string/red" />
 
                     <RadioButton
                         android:id="@+id/green_tool"
@@ -115,8 +112,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
-                        android:text="@string/green"
-                        android:buttonTint="#689F38" />
+                        android:buttonTint="#689F38"
+                        android:text="@string/green" />
 
                 </RadioGroup>
 
@@ -133,10 +130,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:buttonTint="#303F9F"
                         android:checked="false"
                         android:text="@string/blue"
-                        android:textAlignment="viewStart"
-                        android:buttonTint="#303F9F" />
+                        android:textAlignment="viewStart" />
 
                     <RadioButton
                         android:id="@+id/purple_tool"
@@ -144,9 +141,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:buttonTint="#7B1FA2"
                         android:checked="false"
-                        android:text="@string/purple"
-                        android:buttonTint="#7B1FA2" />
+                        android:text="@string/purple" />
 
                     <RadioButton
                         android:id="@+id/multi_tool"
@@ -154,8 +151,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
-                        android:text="@string/multi"
-                        android:buttonTint="#000" />
+                        android:buttonTint="#000"
+                        android:text="@string/multi" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -252,6 +249,81 @@
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
                         android:textSize="14sp" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/minclockstat_label"
+                        android:layout_width="286dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/_3minit_clock_in_statusbar"
+                        android:textSize="20sp" />
+
+                    <Switch
+                        android:id="@+id/minclockstat_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:switchMinWidth="50dp"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/minclockimm_label"
+                        android:layout_width="286dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/_3minit_clock_in_immersive"
+                        android:textSize="20sp" />
+
+                    <Switch
+                        android:id="@+id/minclockimm_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:switchMinWidth="50dp"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/minclockaod_label"
+                        android:layout_width="286dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/_3minit_clock_in_aod"
+                        android:textSize="20sp" />
+
+                    <Switch
+                        android:id="@+id/minclockaod_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:switchMinWidth="50dp"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>

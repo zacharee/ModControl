@@ -27,16 +27,26 @@ import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
     public boolean enabled;
+
     public boolean minbatsuiBool;
     public boolean minbataodBool;
     public boolean minbatimmBool;
     public boolean widedataBool;
+    public boolean minclocksuiBool;
+    public boolean minclockaodBool;
+    public boolean minclockimmBool;
+
     public Switch batstat;
     public Switch batstatImm;
     public Switch bataod;
     public Switch wideData;
+    public Switch clockstat;
+    public Switch clockstatImm;
+    public Switch clockaod;
+
     public RadioGroup radioGroup1;
     public RadioGroup radioGroup2;
+
     public ContentResolver cr;
 
     @Override
@@ -50,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         Switch minbataod = (Switch) findViewById(R.id.minbataod_switch);
         Switch minbatimm = (Switch) findViewById(R.id.minbatstat_imm_switch);
         Switch widedata = (Switch) findViewById(R.id.wide_data);
+        Switch minclocksui = (Switch) findViewById(R.id.minclockstat_switch);
+        Switch minclockaod = (Switch) findViewById(R.id.minclockaod_switch);
+        Switch minclockimm = (Switch) findViewById(R.id.minclockimm_switch);
 
         SharedPreferences sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
@@ -81,6 +94,21 @@ public class MainActivity extends AppCompatActivity {
             widedataBool = true;
         }
 
+        minclocksui.setChecked(sharedPrefs.getBoolean("minclocksui", true));
+        if (sharedPrefs.getBoolean("minclocksui", true)) {
+            minclocksuiBool = true;
+        }
+
+        minclockimm.setChecked(sharedPrefs.getBoolean("minclockimm", true));
+        if (sharedPrefs.getBoolean("minclockimm", true)) {
+            minclockimmBool = true;
+        }
+
+        minclockaod.setChecked(sharedPrefs.getBoolean("minclockaod", true));
+        if (sharedPrefs.getBoolean("minclockaod", true)) {
+            minclockaodBool = true;
+        }
+
         try {
             Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
             modEnable();
@@ -89,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
             minBatAOD();
             minBatImm();
             wideData();
+            minClockSUI();
+            minClockAOD();
+            minClockImm();
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
@@ -268,6 +299,120 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
+                }
+            }
+        });
+    }
+
+    public void minClockSUI() throws IOException {
+        clockstat = (Switch) findViewById(R.id.minclockstat_switch);
+        clockstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (enabled) {
+                        SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putBoolean("minclocksui", true);
+                        editor.apply();
+
+                        Settings.System.putInt(cr, "minclocksui", 0);
+
+                        try {
+                            sudo("killall com.android.systemui");
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else {
+                    SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("minclocksui", false);
+                    editor.apply();
+
+                    Settings.System.putInt(cr, "minclocksui", 1);
+
+                    try {
+                        sudo("killall com.android.systemui");
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+                if (!enabled) {
+                    clockstat.setChecked(false);
+                }
+            }
+        });
+    }
+
+    public void minClockImm() throws IOException {
+        clockstatImm = (Switch) findViewById(R.id.minclockimm_switch);
+        clockstatImm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (enabled) {
+                        SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putBoolean("minclockimm", true);
+                        editor.apply();
+
+                        Settings.System.putInt(cr, "minclockimm", 0);
+
+                        try {
+                            sudo("killall com.android.systemui");
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else {
+                    SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("minclockimm", false);
+                    editor.apply();
+
+                    Settings.System.putInt(cr, "minclockimm", 1);
+
+                    try {
+                        sudo("killall com.android.systemui");
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+                if (!enabled) {
+                    clockstatImm.setChecked(false);
+                }
+            }
+        });
+    }
+
+    public void minClockAOD() throws IOException {
+        clockstat = (Switch) findViewById(R.id.minclockstat_switch);
+        clockstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (enabled) {
+                        SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putBoolean("minclockaod", true);
+                        editor.apply();
+
+                        Settings.System.putInt(cr, "minclockaod", 0);
+
+                        try {
+                            sudo("killall com.lge.signboard");
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else {
+                    SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("minclockaod", false);
+                    editor.apply();
+
+                    Settings.System.putInt(cr, "minclockaod", 1);
+
+                    try {
+                        sudo("killall com.lge.signboard");
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+                if (!enabled) {
+                    clockstat.setChecked(false);
                 }
             }
         });

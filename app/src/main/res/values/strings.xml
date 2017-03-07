@@ -90,4 +90,7 @@
     <string name="red">Red</string>
     <string name="stausbar">Stausbar</string>
     <string name="white">White</string>
+    <string name="_3minit_clock_in_statusbar">3Minit Clock in Statusbar</string>
+    <string name="_3minit_clock_in_immersive">3Minit Clock in Immersive</string>
+    <string name="_3minit_clock_in_aod">3Minit Clock in AOD</string>
 </resources>
