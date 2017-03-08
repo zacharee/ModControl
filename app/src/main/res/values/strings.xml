@@ -99,6 +99,7 @@
     <string name="restart_signboard">Restart SignBoard</string>
     <string name="textview">TextView</string>
     <string name="make_your_selection_and_press_the_appropriate_reboot_button">Make your selection and press the appropriate reboot button.</string>
-    <string name="aod">AOD</string>
-    <string name="statusbar_immersive_mode">Statusbar, Immersive Mode</string>
+    <string name="aod">AOD, QTools, Sig</string>
+    <string name="statusbar_immersive_mode">Statbar, Imm Mode</string>
+    <string name="orange">Orange</string>
 </resources>

@@ -30,6 +30,8 @@ import java.io.OutputStream;
 public class MainActivity extends AppCompatActivity {
     public boolean enabled;
 
+    public Switch enableSwitch;
+
     public boolean minbatsuiBool;
     public boolean minbataodBool;
     public boolean minbatimmBool;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public RadioGroup radioGroup2;
     public RadioGroup radioGroup3;
     public RadioGroup radioGroup4;
+    public RadioGroup radioGroup5;
 
     public Button rebootSysUI;
     public Button rebootSB;
@@ -62,14 +65,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Switch enableSwitch = (Switch) findViewById(R.id.enable_switch);
-        Switch minbatsui = (Switch) findViewById(R.id.minbatstat_switch);
-        Switch minbataod = (Switch) findViewById(R.id.minbataod_switch);
-        Switch minbatimm = (Switch) findViewById(R.id.minbatstat_imm_switch);
-        Switch widedata = (Switch) findViewById(R.id.wide_data);
-        Switch minclocksui = (Switch) findViewById(R.id.minclockstat_switch);
-        Switch minclockaod = (Switch) findViewById(R.id.minclockaod_switch);
-        Switch minclockimm = (Switch) findViewById(R.id.minclockimm_switch);
+
+        enableSwitch = (Switch) findViewById(R.id.enable_switch);
+        batstat = (Switch) findViewById(R.id.minbatstat_switch);
+        bataod = (Switch) findViewById(R.id.minbataod_switch);
+        batstatImm = (Switch) findViewById(R.id.minbatstat_imm_switch);
+        wideData = (Switch) findViewById(R.id.wide_data);
+        clockstat = (Switch) findViewById(R.id.minclockstat_switch);
+        clockaod = (Switch) findViewById(R.id.minclockaod_switch);
+        clockstatImm = (Switch) findViewById(R.id.minclockimm_switch);
+
+        rebootSysUI = (Button) findViewById(R.id.restart_sysui);
+        rebootSB = (Button) findViewById(R.id.restart_sb);
+
+        radioGroup1 = (RadioGroup) findViewById(R.id.color_tool1);
+        radioGroup2 = (RadioGroup) findViewById(R.id.color_tool2);
+        radioGroup5 = (RadioGroup) findViewById(R.id.color_tool3);
+        radioGroup3 = (RadioGroup) findViewById(R.id.color_sig1);
+        radioGroup4 = (RadioGroup) findViewById(R.id.color_sig2);
 
         SharedPreferences sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
@@ -81,43 +94,44 @@ public class MainActivity extends AppCompatActivity {
             enabled = true;
         }
 
-        minbatsui.setChecked(sharedPrefs.getBoolean("minbatsui", true));
+        batstat.setChecked(sharedPrefs.getBoolean("minbatsui", true));
         if (sharedPrefs.getBoolean("minbatsui", true)) {
             minbatsuiBool = true;
         }
 
-        minbatimm.setChecked(sharedPrefs.getBoolean("minbatimm", true));
+        batstatImm.setChecked(sharedPrefs.getBoolean("minbatimm", true));
         if (sharedPrefs.getBoolean("minbatimm", true)) {
             minbatimmBool = true;
         }
 
-        minbataod.setChecked(sharedPrefs.getBoolean("minbataod", true));
+        bataod.setChecked(sharedPrefs.getBoolean("minbataod", true));
         if (sharedPrefs.getBoolean("minbataod", true)) {
             minbataodBool = true;
         }
 
-        widedata.setChecked(sharedPrefs.getBoolean("signal_wide", true));
+        wideData.setChecked(sharedPrefs.getBoolean("signal_wide", true));
         if (sharedPrefs.getBoolean("signal_wide", true)) {
             widedataBool = true;
         }
 
-        minclocksui.setChecked(sharedPrefs.getBoolean("minclocksui", true));
+        clockstat.setChecked(sharedPrefs.getBoolean("minclocksui", true));
         if (sharedPrefs.getBoolean("minclocksui", true)) {
             minclocksuiBool = true;
         }
 
-        minclockimm.setChecked(sharedPrefs.getBoolean("minclockimm", true));
+        clockstatImm.setChecked(sharedPrefs.getBoolean("minclockimm", true));
         if (sharedPrefs.getBoolean("minclockimm", true)) {
             minclockimmBool = true;
         }
 
-        minclockaod.setChecked(sharedPrefs.getBoolean("minclockaod", true));
+        clockaod.setChecked(sharedPrefs.getBoolean("minclockaod", true));
         if (sharedPrefs.getBoolean("minclockaod", true)) {
             minclockaodBool = true;
         }
 
         try {
             Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
+            reboot();
             modEnable();
             radEnable();
             minBatSUI();
@@ -128,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
             minClockAOD();
             minClockImm();
             sigOption();
-            reboot();
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
@@ -161,8 +174,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void modEnable() throws IOException {
-        Switch enable = (Switch) findViewById(R.id.enable_switch);
-        enable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -187,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             clearQTRad(radioGroup1);
                             clearQTRad(radioGroup2);
+                            clearQTRad(radioGroup5);
                             clearSigRad(radioGroup3);
                             clearSigRad(radioGroup4);
                         } catch (Exception e) {
@@ -220,8 +233,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reboot() throws IOException {
-        rebootSysUI = (Button) findViewById(R.id.restart_sysui);
-        rebootSB = (Button) findViewById(R.id.restart_sb);
 
         rebootSysUI.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,6 +250,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     sudo("killall com.lge.signboard");
+                    sudo("killall com.lge.appwidget.signature");
+                    sudo("killall com.lge.quicktools");
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -247,8 +260,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sigOption() throws IOException {
-        radioGroup3 = (RadioGroup) findViewById(R.id.color_sig1);
-        radioGroup4 = (RadioGroup) findViewById(R.id.color_sig2);
         radioGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -322,9 +333,9 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("error", e.getMessage());
                         }
                     }
-                } else if (checkedId == R.id.dummy_sig) {
+                } else if (checkedId == R.id.orange_sig) {
                     if (enabled) {
-                        final String file = "sigdummy.zip";
+                        final String file = "sigorange.zip";
                         try {
                             copyZip(file);
                             copyFile2(installsig, file);
@@ -357,13 +368,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void radEnable() throws IOException {
-        radioGroup1 = (RadioGroup) findViewById(R.id.color_tool1);
-        radioGroup2 = (RadioGroup) findViewById(R.id.color_tool2);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
                     clearQTRad(radioGroup2);
+                    clearQTRad(radioGroup5);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -417,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
                     clearQTRad(radioGroup1);
+                    clearQTRad(radioGroup5);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -464,10 +475,41 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        radioGroup5.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearQTRad(radioGroup1);
+                    clearQTRad(radioGroup2);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installqt = "installqt";
+                if (checkedId == R.id.orange_tool) {
+                    if (enabled) {
+                        final String file = "qtorange.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installqt, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearQTRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
     }
 
     public void minClockSUI() throws IOException {
-        clockstat = (Switch) findViewById(R.id.minclockstat_switch);
         clockstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -477,12 +519,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "minclocksui", 0);
-
-                        try {
-//                            sudo("killall com.android.systemui");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -490,12 +526,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "minclocksui", 1);
-
-                    try {
-//                        sudo("killall com.android.systemui");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
                 }
                 if (!enabled) {
                     clockstat.setChecked(false);
@@ -505,7 +535,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minClockImm() throws IOException {
-        clockstatImm = (Switch) findViewById(R.id.minclockimm_switch);
         clockstatImm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -515,12 +544,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "minclockimm", 0);
-
-                        try {
-//                            sudo("killall com.android.systemui");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -528,12 +551,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "minclockimm", 1);
-
-                    try {
-//                        sudo("killall com.android.systemui");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
                 }
                 if (!enabled) {
                     clockstatImm.setChecked(false);
@@ -543,7 +560,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minClockAOD() throws IOException {
-        clockstat = (Switch) findViewById(R.id.minclockaod_switch);
         clockstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -553,12 +569,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "minclockaod", 0);
-
-                        try {
-//                            sudo("killall com.lge.signboard");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -566,12 +576,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "minclockaod", 1);
-
-                    try {
-//                        sudo("killall com.lge.signboard");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
                 }
                 if (!enabled) {
                     clockstat.setChecked(false);
@@ -581,7 +585,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void wideData() throws IOException {
-        wideData = (Switch) findViewById(R.id.wide_data);
         wideData.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -591,12 +594,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "wide_data", 0);
-
-                        try {
-//                            sudo("killall com.android.systemui");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -604,12 +601,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "wide_data", 1);
-
-                    try {
-//                        sudo("killall com.android.systemui");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
                 }
                 if (!enabled) {
                     wideData.setChecked(false);
@@ -619,7 +610,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minBatSUI() throws IOException {
-        batstat = (Switch) findViewById(R.id.minbatstat_switch);
         batstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -629,12 +619,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "bat_stat_stock", 0);
-
-                        try {
-//                            sudo("killall com.android.systemui");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -642,12 +626,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "bat_stat_stock", 1);
-
-                    try {
-//                        sudo("killall com.android.systemui");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
 
                 }
                 if (!enabled) {
@@ -658,7 +636,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minBatImm() throws IOException {
-        batstatImm = (Switch) findViewById(R.id.minbatstat_imm_switch);
         batstatImm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -668,12 +645,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "battery_min_imm", 0);
-
-                        try {
-//                            sudo("killall com.android.systemui");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -681,13 +652,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "battery_min_imm", 1);
-
-                    try {
-//                        sudo("killall com.android.systemui");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
-
                 }
                 if (!enabled) {
                     batstatImm.setChecked(false);
@@ -697,7 +661,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minBatAOD() throws IOException {
-        bataod = (Switch) findViewById(R.id.minbataod_switch);
         bataod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -707,12 +670,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         Settings.System.putInt(cr, "min_bat_aod", 0);
-
-                        try {
-//                            sudo("killall com.lge.signboard");
-                        } catch (Exception e) {
-                            Log.e("error", e.getMessage());
-                        }
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
@@ -720,12 +677,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     Settings.System.putInt(cr, "min_bat_aod", 1);
-
-                    try {
-//                        sudo("killall com.lge.signboard");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
                 }
                 if (!enabled) {
                     bataod.setChecked(false);

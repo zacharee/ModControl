@@ -24,5 +24,3 @@ zip -rv /system/app/SBSignature/SBSignature.apk ./res/layout/*
 chmod 0644 /system/app/SBSignature/SBSignature.apk
 
 rm -rf /data/media/0/Zacharee1Mods/mod/
-killall com.lge.signboard
-killall com.lge.appwidget.signature

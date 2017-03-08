@@ -215,6 +215,47 @@
                         android:text="@string/multi" />
 
                 </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/color_tool3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/orange_tool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#FF5722"
+                        android:checked="false"
+                        android:text="@string/orange"
+                        android:textAlignment="viewStart" />
+
+                    <RadioButton
+                        android:id="@+id/dummy1_tool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#000"
+                        android:checked="false"
+                        android:text="@string/suggest_one" />
+
+                    <RadioButton
+                        android:id="@+id/dummy2_tool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#000"
+                        android:text="@string/suggest_one" />
+
+                </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -302,13 +343,13 @@
                         android:text="@string/purple" />
 
                     <RadioButton
-                        android:id="@+id/dummy_sig"
+                        android:id="@+id/orange_sig"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
-                        android:buttonTint="#000"
-                        android:text="@string/suggest_one" />
+                        android:buttonTint="#FF5722"
+                        android:text="@string/orange" />
 
                 </RadioGroup>
             </LinearLayout>

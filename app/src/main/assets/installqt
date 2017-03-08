@@ -24,5 +24,3 @@ zip -rv /system/priv-app/LGQuickTools/LGQuickTools.apk ./res/drawable/*
 chmod 0644 /system/priv-app/LGQuickTools/LGQuickTools.apk
 
 rm -rf /data/media/0/Zacharee1Mods/mod/
-killall com.lge.signboard
-killall com.lge.quicktools
