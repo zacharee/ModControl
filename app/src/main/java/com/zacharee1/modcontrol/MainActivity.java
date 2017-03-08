@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     public RadioGroup radioGroup1;
     public RadioGroup radioGroup2;
+    public RadioGroup radioGroup3;
+    public RadioGroup radioGroup4;
 
     public ContentResolver cr;
 
@@ -120,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             minClockSUI();
             minClockAOD();
             minClockImm();
+            sigOption();
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
@@ -176,8 +179,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Restoring defaults...", Toast.LENGTH_SHORT).show();
                     if (!enabled) {
                         try {
-                            clearRad(radioGroup1);
-                            clearRad(radioGroup2);
+                            clearQTRad(radioGroup1);
+                            clearQTRad(radioGroup2);
+                            clearSigRad(radioGroup3);
+                            clearSigRad(radioGroup4);
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -201,6 +206,116 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void sigOption() throws IOException {
+        radioGroup3 = (RadioGroup) findViewById(R.id.color_sig1);
+        radioGroup4 = (RadioGroup) findViewById(R.id.color_sig2);
+        radioGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearSigRad(radioGroup4);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installsig = "installsig";
+                if (checkedId == R.id.red_sig) {
+                    if (enabled) {
+                        final String file = "sigred.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.white_sig) {
+                    if (enabled) {
+                        final String file = "sigwhite.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.green_sig) {
+                    if (enabled) {
+                        final String file = "siggreen.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearSigRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
+
+        radioGroup4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearSigRad(radioGroup3);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installsig = "installsig";
+                if (checkedId == R.id.purple_sig) {
+                    if (enabled) {
+                        final String file = "sigpurple.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.dummy_sig) {
+                    if (enabled) {
+                        final String file = "sigdummy.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.blue_sig) {
+                    if (enabled) {
+                        final String file = "sigblue.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearSigRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
+    }
+
     public void radEnable() throws IOException {
         radioGroup1 = (RadioGroup) findViewById(R.id.color_tool1);
         radioGroup2 = (RadioGroup) findViewById(R.id.color_tool2);
@@ -208,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearRad(radioGroup2);
+                    clearQTRad(radioGroup2);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -249,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (!enabled) {
                     try {
-                        clearRad(group);
+                        clearQTRad(group);
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -261,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearRad(radioGroup1);
+                    clearQTRad(radioGroup1);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -302,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (!enabled) {
                     try {
-                        clearRad(group);
+                        clearQTRad(group);
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -579,10 +694,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void clearRad(RadioGroup group) throws IOException {
+    public void clearQTRad(RadioGroup group) throws IOException {
         group.setOnCheckedChangeListener(null);
         group.clearCheck();
         radEnable();
+    }
+
+    public void clearSigRad(RadioGroup group) throws IOException {
+        group.setOnCheckedChangeListener(null);
+        group.clearCheck();
+        sigOption();
     }
 
     public void copyZip(String targetFile) throws IOException {
