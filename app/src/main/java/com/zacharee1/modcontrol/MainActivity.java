@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
                     editor.putBoolean("minbatsui", false);
                     editor.putBoolean("minbataod", false);
                     editor.putBoolean("signal_wide", false);
+                    editor.putBoolean("minclocksui", false);
+                    editor.putBoolean("minbatimm", false);
+                    editor.putBoolean("minclockimm", false);
+                    editor.putBoolean("minclockaod", false);
                     editor.apply();
                     enabled = false;
                     Toast.makeText(getApplicationContext(), "Restoring defaults...", Toast.LENGTH_SHORT).show();
@@ -182,6 +186,9 @@ public class MainActivity extends AppCompatActivity {
                     batstat.setChecked(false);
                     batstatImm.setChecked(false);
                     wideData.setChecked(false);
+                    clockstat.setChecked(false);
+                    clockstatImm.setChecked(false);
+                    clockaod.setChecked(false);
 
                     try {
                         copyZip("qtwhite.zip");
@@ -381,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minClockAOD() throws IOException {
-        clockstat = (Switch) findViewById(R.id.minclockstat_switch);
+        clockstat = (Switch) findViewById(R.id.minclockaod_switch);
         clockstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
