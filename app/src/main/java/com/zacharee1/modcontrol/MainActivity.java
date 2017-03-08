@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minClockAOD() throws IOException {
-        clockstat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        clockaod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     if (enabled) {
@@ -578,7 +578,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "minclockaod", 1);
                 }
                 if (!enabled) {
-                    clockstat.setChecked(false);
+                    clockaod.setChecked(false);
                 }
             }
         });
