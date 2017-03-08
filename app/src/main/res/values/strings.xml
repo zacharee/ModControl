@@ -95,4 +95,10 @@
     <string name="_3minit_clock_in_aod">3Minit Clock in AOD</string>
     <string name="suggest_one">Suggest One!</string>
     <string name="colored_signature">Colored Signature</string>
+    <string name="restart_systemui">Restart SystemUI</string>
+    <string name="restart_signboard">Restart SignBoard</string>
+    <string name="textview">TextView</string>
+    <string name="make_your_selection_and_press_the_appropriate_reboot_button">Make your selection and press the appropriate reboot button.</string>
+    <string name="aod">AOD</string>
+    <string name="statusbar_immersive_mode">Statusbar, Immersive Mode</string>
 </resources>

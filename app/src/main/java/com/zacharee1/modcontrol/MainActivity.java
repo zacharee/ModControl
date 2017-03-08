@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -48,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     public RadioGroup radioGroup2;
     public RadioGroup radioGroup3;
     public RadioGroup radioGroup4;
+
+    public Button rebootSysUI;
+    public Button rebootSB;
 
     public ContentResolver cr;
 
@@ -123,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             minClockAOD();
             minClockImm();
             sigOption();
+            reboot();
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
@@ -195,12 +201,46 @@ public class MainActivity extends AppCompatActivity {
                     clockstatImm.setChecked(false);
                     clockaod.setChecked(false);
 
-                    try {
-                        copyZip("qtwhite.zip");
-                        copyFile2("installqt", "qtwhite.zip");
-                    } catch (Exception e) {
-                        Log.e("error", e.getMessage());
-                    }
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                copyZip("qtwhite.zip");
+                                copyFile2("installqt", "qtwhite.zip");
+                                Thread.sleep(2000);
+                                copyZip("sigwhite.zip");
+                                copyFile2("installsig", "sigwhite.zip");
+                            } catch (Exception e) {
+                                Log.e("error", e.getMessage());
+                            }
+                        }
+                    }).start();
+                }
+            }
+        });
+    }
+
+    public void reboot() throws IOException {
+        rebootSysUI = (Button) findViewById(R.id.restart_sysui);
+        rebootSB = (Button) findViewById(R.id.restart_sb);
+
+        rebootSysUI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    sudo("killall com.android.systemui");
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+            }
+        });
+
+        rebootSB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    sudo("killall com.lge.signboard");
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
                 }
             }
         });
@@ -439,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "minclocksui", 0);
 
                         try {
-                            sudo("killall com.android.systemui");
+//                            sudo("killall com.android.systemui");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -452,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "minclocksui", 1);
 
                     try {
-                        sudo("killall com.android.systemui");
+//                        sudo("killall com.android.systemui");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -477,7 +517,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "minclockimm", 0);
 
                         try {
-                            sudo("killall com.android.systemui");
+//                            sudo("killall com.android.systemui");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -490,7 +530,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "minclockimm", 1);
 
                     try {
-                        sudo("killall com.android.systemui");
+//                        sudo("killall com.android.systemui");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -515,7 +555,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "minclockaod", 0);
 
                         try {
-                            sudo("killall com.lge.signboard");
+//                            sudo("killall com.lge.signboard");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -528,7 +568,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "minclockaod", 1);
 
                     try {
-                        sudo("killall com.lge.signboard");
+//                        sudo("killall com.lge.signboard");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -553,7 +593,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "wide_data", 0);
 
                         try {
-                            sudo("killall com.android.systemui");
+//                            sudo("killall com.android.systemui");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -566,7 +606,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "wide_data", 1);
 
                     try {
-                        sudo("killall com.android.systemui");
+//                        sudo("killall com.android.systemui");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -591,7 +631,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "bat_stat_stock", 0);
 
                         try {
-                            sudo("killall com.android.systemui");
+//                            sudo("killall com.android.systemui");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -604,7 +644,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "bat_stat_stock", 1);
 
                     try {
-                        sudo("killall com.android.systemui");
+//                        sudo("killall com.android.systemui");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -630,7 +670,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "battery_min_imm", 0);
 
                         try {
-                            sudo("killall com.android.systemui");
+//                            sudo("killall com.android.systemui");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -643,7 +683,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "battery_min_imm", 1);
 
                     try {
-                        sudo("killall com.android.systemui");
+//                        sudo("killall com.android.systemui");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }
@@ -669,7 +709,7 @@ public class MainActivity extends AppCompatActivity {
                         Settings.System.putInt(cr, "min_bat_aod", 0);
 
                         try {
-                            sudo("killall com.lge.signboard");
+//                            sudo("killall com.lge.signboard");
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -682,7 +722,7 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(cr, "min_bat_aod", 1);
 
                     try {
-                        sudo("killall com.lge.signboard");
+//                        sudo("killall com.lge.signboard");
                     } catch (Exception e) {
                         Log.e("error", e.getMessage());
                     }

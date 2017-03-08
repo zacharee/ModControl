@@ -36,6 +36,15 @@
                 android:textSize="25sp"
                 tools:ignore="ObsoleteLayoutParam,RtlHardcoded" />
 
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/make_your_selection_and_press_the_appropriate_reboot_button"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textColor="#333" />
+
             <LinearLayout
                 android:id="@+id/master"
                 android:layout_width="match_parent"
@@ -46,6 +55,7 @@
                     android:id="@+id/enable_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="@string/enabled"
@@ -55,6 +65,7 @@
                     android:id="@+id/enable_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:checked="false"
@@ -62,6 +73,52 @@
                     android:switchTextAppearance="@style/TextAppearance.AppCompat"
                     android:textSize="14sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/restart_sysui"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="@string/restart_systemui"
+                    tools:ignore="NestedWeights" />
+
+                <Button
+                    android:id="@+id/restart_sb"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="@string/restart_signboard" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/statusbar_immersive_mode" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/aod" />
             </LinearLayout>
 
             <LinearLayout
@@ -403,8 +460,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/minclockaod_label"
