@@ -1,7 +1,5 @@
 package com.zacharee1.modcontrol;
 
-import android.*;
-import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -42,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean minclocksuiBool;
     public boolean minclockaodBool;
     public boolean minclockimmBool;
+    public boolean modInstalledBool;
+
+    public boolean firstStartRoot;
+
+    public LinearLayout needsMod;
 
     public Switch batstat;
     public Switch batstatImm;
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public Switch clockstat;
     public Switch clockstatImm;
     public Switch clockaod;
+    public Switch modInstalledSwitch;
 
     public RadioGroup qtGroup1;
     public RadioGroup qtGroup2;
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     public Button rebootSB;
 
     public ContentResolver cr;
+
+    public SharedPreferences sharedPrefs;
 
     public static final int WRITE_EXTERNAL_STORAGE = 1;
 
@@ -81,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         clockstat = (Switch) findViewById(R.id.minclockstat_switch);
         clockaod = (Switch) findViewById(R.id.minclockaod_switch);
         clockstatImm = (Switch) findViewById(R.id.minclockimm_switch);
+        modInstalledSwitch = (Switch) findViewById(R.id.has_mod_switch);
+
+        needsMod = (LinearLayout) findViewById(R.id.needs_mod);
 
         rebootSysUI = (Button) findViewById(R.id.restart_sysui);
         rebootSB = (Button) findViewById(R.id.restart_sb);
@@ -95,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         reqPerms();
 
-        SharedPreferences sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
+        sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
         cr = getContentResolver();
 
@@ -140,8 +149,18 @@ public class MainActivity extends AppCompatActivity {
             minclockaodBool = true;
         }
 
+        modInstalledSwitch.setChecked(sharedPrefs.getBoolean("hasmod", true));
+        if (sharedPrefs.getBoolean("hasmod", true)) {
+            modInstalledBool = true;
+            needsMod.setVisibility(View.VISIBLE);
+        }
+
+        if (sharedPrefs.getBoolean("firststart", true)) {
+            firstStartRoot = true;
+        }
+
         try {
-            Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
+            if (firstStartRoot) firstStart();
             reboot();
             modEnable();
             qtOption();
@@ -154,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
             minClockImm();
             sigOption();
             aodSigOption();
+            modInstalled();
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
@@ -193,6 +213,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void firstStart() throws IOException {
+        Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
+        firstStartRoot = false;
+        SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+        editor.putBoolean("firststart", false);
+        editor.apply();
+    }
+
     public void modEnable() throws IOException {
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -228,13 +256,15 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("error", e.getMessage());
                         }
                     }
-                    bataod.setChecked(false);
-                    batstat.setChecked(false);
-                    batstatImm.setChecked(false);
-                    wideData.setChecked(false);
-                    clockstat.setChecked(false);
-                    clockstatImm.setChecked(false);
-                    clockaod.setChecked(false);
+                    if (modInstalledBool) {
+                        bataod.setChecked(false);
+                        batstat.setChecked(false);
+                        batstatImm.setChecked(false);
+                        wideData.setChecked(false);
+                        clockstat.setChecked(false);
+                        clockstatImm.setChecked(false);
+                        clockaod.setChecked(false);
+                    }
 
                     new Thread(new Runnable() {
                         public void run() {
@@ -249,6 +279,26 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }).start();
+                }
+            }
+        });
+    }
+
+    public void modInstalled() throws IOException {
+        modInstalledSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("hasmod", true);
+                    editor.apply();
+                    Toast.makeText(getApplicationContext(), "Extra mods enabled", Toast.LENGTH_SHORT).show();
+                    needsMod.setVisibility(View.VISIBLE);
+                } else {
+                    SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("hasmod", false);
+                    editor.apply();
+                    Toast.makeText(getApplicationContext(), "Extra mods disabled", Toast.LENGTH_SHORT).show();
+                    needsMod.setVisibility(View.GONE);
                 }
             }
         });

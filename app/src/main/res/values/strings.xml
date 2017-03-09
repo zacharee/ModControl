@@ -102,4 +102,8 @@
     <string name="aod">AOD, QTools, Sig</string>
     <string name="statusbar_immersive_mode">Statbar, Imm Mode</string>
     <string name="orange">Orange</string>
+    <string name="colored_aod_signature">Colored AOD Signature</string>
+    <string name="mod_installed">Mod Installed</string>
+    <string name="currently_broken_if_enabled_you_ll_get_two_clocks">Currently broken. If enabled, you\'ll get two clocks in the AOD.</string>
+    <string name="only_enable_if_you_have_flashed_my_mod">Only enable if you have flashed my mod!</string>
 </resources>
