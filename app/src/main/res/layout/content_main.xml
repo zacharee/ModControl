@@ -355,44 +355,6 @@
 
                 </RadioGroup>
 
-                <RadioGroup
-                    android:id="@+id/color_sig2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/blue_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#303F9F"
-                        android:checked="false"
-                        android:text="@string/blue"
-                        android:textAlignment="viewStart" />
-
-                    <RadioButton
-                        android:id="@+id/purple_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#7B1FA2"
-                        android:checked="false"
-                        android:text="@string/purple" />
-
-                    <RadioButton
-                        android:id="@+id/orange_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#FF5722"
-                        android:text="@string/orange" />
-
-                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -724,5 +686,47 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <RadioGroup
+        android:id="@+id/color_sig2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="164dp"
+        android:layout_marginTop="318dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/blue_sig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:buttonTint="#303F9F"
+            android:checked="false"
+            android:text="@string/blue"
+            android:textAlignment="viewStart" />
+
+        <RadioButton
+            android:id="@+id/purple_sig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:buttonTint="#7B1FA2"
+            android:checked="false"
+            android:text="@string/purple" />
+
+        <RadioButton
+            android:id="@+id/orange_sig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:buttonTint="#FF5722"
+            android:text="@string/orange" />
+
+    </RadioGroup>
 
 </RelativeLayout>
