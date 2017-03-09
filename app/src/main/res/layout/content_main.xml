@@ -88,6 +88,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="@string/restart_systemui"
+                    android:textSize="12sp"
                     tools:ignore="NestedWeights" />
 
                 <Button
@@ -96,7 +97,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="@string/restart_signboard" />
+                    android:text="@string/restart_signboard"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -344,6 +346,102 @@
 
                     <RadioButton
                         android:id="@+id/orange_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#FF5722"
+                        android:text="@string/orange" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sig_aod"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sig_aod_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:text="Colored AOD Signature"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <RadioGroup
+                    android:id="@+id/color_aod_sig1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/white_aod_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#ccc"
+                        android:checked="false"
+                        android:text="@string/white" />
+
+                    <RadioButton
+                        android:id="@+id/red_aod_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#D32F2F"
+                        android:checked="false"
+                        android:text="@string/red" />
+
+                    <RadioButton
+                        android:id="@+id/green_aod_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#689F38"
+                        android:text="@string/green" />
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/color_aod_sig2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/blue_aod_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#303F9F"
+                        android:checked="false"
+                        android:text="@string/blue"
+                        android:textAlignment="viewStart" />
+
+                    <RadioButton
+                        android:id="@+id/purple_aod_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#7B1FA2"
+                        android:checked="false"
+                        android:text="@string/purple" />
+
+                    <RadioButton
+                        android:id="@+id/orange_aod_sig"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"

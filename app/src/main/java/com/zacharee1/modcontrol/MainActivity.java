@@ -1,8 +1,11 @@
 package com.zacharee1.modcontrol;
 
+import android.*;
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,16 +51,20 @@ public class MainActivity extends AppCompatActivity {
     public Switch clockstatImm;
     public Switch clockaod;
 
-    public RadioGroup radioGroup1;
-    public RadioGroup radioGroup2;
-    public RadioGroup radioGroup3;
-    public RadioGroup radioGroup4;
-    public RadioGroup radioGroup5;
+    public RadioGroup qtGroup1;
+    public RadioGroup qtGroup2;
+    public RadioGroup qtGroup3;
+    public RadioGroup sigGroup1;
+    public RadioGroup sigGroup2;
+    public RadioGroup aodSigGroup1;
+    public RadioGroup aodSigGroup2;
 
     public Button rebootSysUI;
     public Button rebootSB;
 
     public ContentResolver cr;
+
+    public static final int WRITE_EXTERNAL_STORAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +85,15 @@ public class MainActivity extends AppCompatActivity {
         rebootSysUI = (Button) findViewById(R.id.restart_sysui);
         rebootSB = (Button) findViewById(R.id.restart_sb);
 
-        radioGroup1 = (RadioGroup) findViewById(R.id.color_tool1);
-        radioGroup2 = (RadioGroup) findViewById(R.id.color_tool2);
-        radioGroup5 = (RadioGroup) findViewById(R.id.color_tool3);
-        radioGroup3 = (RadioGroup) findViewById(R.id.color_sig1);
-        radioGroup4 = (RadioGroup) findViewById(R.id.color_sig2);
+        qtGroup1 = (RadioGroup) findViewById(R.id.color_tool1);
+        qtGroup2 = (RadioGroup) findViewById(R.id.color_tool2);
+        qtGroup3 = (RadioGroup) findViewById(R.id.color_tool3);
+        sigGroup1 = (RadioGroup) findViewById(R.id.color_sig1);
+        sigGroup2 = (RadioGroup) findViewById(R.id.color_sig2);
+        aodSigGroup1 = (RadioGroup) findViewById(R.id.color_aod_sig1);
+        aodSigGroup2 = (RadioGroup) findViewById(R.id.color_aod_sig2);
+
+        reqPerms();
 
         SharedPreferences sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
@@ -133,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             Runtime.getRuntime().exec(new String[]{"su", "-", "root"});
             reboot();
             modEnable();
-            radEnable();
+            qtOption();
             minBatSUI();
             minBatAOD();
             minBatImm();
@@ -142,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             minClockAOD();
             minClockImm();
             sigOption();
+            aodSigOption();
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
@@ -173,6 +185,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void reqPerms() {
+        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    WRITE_EXTERNAL_STORAGE);
+            return;
+        }
+    }
+
     public void modEnable() throws IOException {
         enableSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -197,11 +217,13 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Restoring defaults...", Toast.LENGTH_SHORT).show();
                     if (!enabled) {
                         try {
-                            clearQTRad(radioGroup1);
-                            clearQTRad(radioGroup2);
-                            clearQTRad(radioGroup5);
-                            clearSigRad(radioGroup3);
-                            clearSigRad(radioGroup4);
+                            clearQTRad(qtGroup1);
+                            clearQTRad(qtGroup2);
+                            clearQTRad(qtGroup3);
+                            clearSigRad(sigGroup1);
+                            clearSigRad(sigGroup2);
+                            clearAODSigRad(aodSigGroup1);
+                            clearAODSigRad(aodSigGroup2);
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());
                         }
@@ -237,34 +259,42 @@ public class MainActivity extends AppCompatActivity {
         rebootSysUI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    sudo("killall com.android.systemui");
-                } catch (Exception e) {
-                    Log.e("error", e.getMessage());
-                }
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            sudo("killall com.android.systemui");
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }).start();
             }
         });
 
         rebootSB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    sudo("killall com.lge.signboard");
-                    sudo("killall com.lge.appwidget.signature");
-                    sudo("killall com.lge.quicktools");
-                } catch (Exception e) {
-                    Log.e("error", e.getMessage());
-                }
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            sudo("killall com.lge.signboard");
+                            sudo("killall com.lge.appwidget.signature");
+                            sudo("killall com.lge.quicktools");
+                        } catch (Exception e) {
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }).start();
             }
         });
     }
 
     public void sigOption() throws IOException {
-        radioGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        sigGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearSigRad(radioGroup4);
+                    clearSigRad(sigGroup2);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -313,11 +343,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        radioGroup4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        sigGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearSigRad(radioGroup3);
+                    clearSigRad(sigGroup1);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -367,13 +397,121 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void radEnable() throws IOException {
-        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    public void aodSigOption() throws IOException {
+        aodSigGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearQTRad(radioGroup2);
-                    clearQTRad(radioGroup5);
+                    clearSigRad(aodSigGroup2);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installsig = "installsigaod";
+                if (checkedId == R.id.red_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsigred.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.white_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsigwhite.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.green_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsiggreen.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearAODSigRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
+
+        aodSigGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearSigRad(aodSigGroup1);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installsig = "installsigaod";
+                if (checkedId == R.id.purple_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsigpurple.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.orange_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsigorange.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                } else if (checkedId == R.id.blue_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsigblue.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearAODSigRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
+    }
+
+    public void qtOption() throws IOException {
+        qtGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearQTRad(qtGroup2);
+                    clearQTRad(qtGroup3);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -422,12 +560,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        qtGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearQTRad(radioGroup1);
-                    clearQTRad(radioGroup5);
+                    clearQTRad(qtGroup1);
+                    clearQTRad(qtGroup3);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -476,12 +614,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        radioGroup5.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        qtGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearQTRad(radioGroup1);
-                    clearQTRad(radioGroup2);
+                    clearQTRad(qtGroup1);
+                    clearQTRad(qtGroup2);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -688,13 +826,19 @@ public class MainActivity extends AppCompatActivity {
     public void clearQTRad(RadioGroup group) throws IOException {
         group.setOnCheckedChangeListener(null);
         group.clearCheck();
-        radEnable();
+        qtOption();
     }
 
     public void clearSigRad(RadioGroup group) throws IOException {
         group.setOnCheckedChangeListener(null);
         group.clearCheck();
         sigOption();
+    }
+
+    public void clearAODSigRad(RadioGroup group) throws IOException {
+        group.setOnCheckedChangeListener(null);
+        group.clearCheck();
+        aodSigOption();
     }
 
     public void copyZip(String targetFile) throws IOException {
