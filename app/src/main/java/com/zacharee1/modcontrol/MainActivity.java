@@ -402,7 +402,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearSigRad(aodSigGroup2);
+                    clearAODSigRad(aodSigGroup2);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -455,7 +455,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
-                    clearSigRad(aodSigGroup1);
+                    clearAODSigRad(aodSigGroup1);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
