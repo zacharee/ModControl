@@ -106,4 +106,9 @@
     <string name="mod_installed">Mod Installed</string>
     <string name="currently_broken_if_enabled_you_ll_get_two_clocks">Currently broken. If enabled, you\'ll get two clocks in the AOD.</string>
     <string name="only_enable_if_you_have_flashed_my_mod">Only enable if you have flashed my mod!</string>
+    <string name="play_store">Play Store</string>
+    <string name="about">About</string>
+    <string name="app_created_by_zacharee1">App created by Zacharee1</string>
+    <string name="xda_thread">XDA Thread</string>
+    <string name="credits">Credits</string>
 </resources>

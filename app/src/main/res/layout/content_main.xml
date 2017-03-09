@@ -49,7 +49,8 @@
                 android:id="@+id/master"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/enable_label"
@@ -86,6 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="@string/mod_installed"
                     android:textSize="20sp" />
@@ -95,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:checked="false"
                     android:switchMinWidth="50dp"
@@ -670,6 +673,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:text="@string/currently_broken_if_enabled_you_ll_get_two_clocks"
                     android:textAlignment="center" />

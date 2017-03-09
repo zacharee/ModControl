@@ -11,7 +11,7 @@ public class CreditsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
-        TextView t2 = (TextView) findViewById(R.id.link1);
-        t2.setMovementMethod(LinkMovementMethod.getInstance());
+//        TextView t2 = (TextView) findViewById(R.id.link1);
+//        t2.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
