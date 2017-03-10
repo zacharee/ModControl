@@ -8,6 +8,12 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,7 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public boolean enabled;
 
     public Switch enableSwitch;
@@ -78,6 +84,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MainFragment fragment = new MainFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.content_main, fragment).commit();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         enableSwitch = (Switch) findViewById(R.id.enable_switch);
         batstat = (Switch) findViewById(R.id.minbatstat_switch);
@@ -180,6 +199,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_main) {
+            MainFragment fragment = new MainFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else if (id == R.id.nav_settings) {
+            SettingsFragment fragment = new SettingsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else if (id == R.id.nav_nomods) {
+            NoModsFragment fragment = new NoModsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else if (id == R.id.nav_mods) {
+            ModsFragment fragment = new ModsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
@@ -209,7 +271,6 @@ public class MainActivity extends AppCompatActivity {
         if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     WRITE_EXTERNAL_STORAGE);
-            return;
         }
     }
 
@@ -748,6 +809,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void minClockAOD() throws IOException {
+        final String installscript = "installaodclock";
         clockaod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -756,12 +818,30 @@ public class MainActivity extends AppCompatActivity {
                         editor.putBoolean("minclockaod", true);
                         editor.apply();
 
+//                        final String file = "aodminclock.zip";
+//                        try {
+//                            copyZip(file);
+//                            copyFile2(installscript, file);
+//                        } catch (Exception e) {
+//                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                            Log.e("error", e.getMessage());
+//                        }
+
                         Settings.System.putInt(cr, "minclockaod", 0);
                     }
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
                     editor.putBoolean("minclockaod", false);
                     editor.apply();
+
+//                    final String file = "aodstockclock.zip";
+//                    try {
+//                        copyZip(file);
+//                        copyFile2(installscript, file);
+//                    } catch (Exception e) {
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                        Log.e("error", e.getMessage());
+//                    }
 
                     Settings.System.putInt(cr, "minclockaod", 1);
                 }

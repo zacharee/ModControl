@@ -111,4 +111,8 @@
     <string name="app_created_by_zacharee1">App created by Zacharee1</string>
     <string name="xda_thread">XDA Thread</string>
     <string name="credits">Credits</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
