@@ -41,17 +41,17 @@
                 android:textColor="#333" />
 
             <LinearLayout
-                android:id="@+id/master"
+                android:id="@+id/enabled"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/enable_label"
+                    android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="@string/enabled"
@@ -60,29 +60,23 @@
                 <Switch
                     android:id="@+id/enable_switch"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:checked="false"
-                    android:switchMinWidth="50dp"
-                    android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                    android:textSize="14sp" />
-
+                    android:switchMinWidth="50dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/has_mod"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/has_mod_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="@string/mod_installed"
                     android:textSize="20sp" />
@@ -91,8 +85,6 @@
                     android:id="@+id/has_mod_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:checked="false"
                     android:switchMinWidth="50dp"
@@ -108,36 +100,6 @@
                 android:layout_marginBottom="20dp"
                 android:text="@string/only_enable_if_you_have_flashed_my_mod"
                 android:textAlignment="center" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/statusbar_immersive_mode" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/aod" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/needs_mod"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
