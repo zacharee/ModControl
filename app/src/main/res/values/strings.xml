@@ -123,4 +123,6 @@
     <string name="settings">Settings</string>
     <string name="share">Share</string>
     <string name="universal_mods">Universal Mods</string>
+    <string name="email">zachary.wander@gmail.com</string>
+    <string name="icon">icon</string>
 </resources>
