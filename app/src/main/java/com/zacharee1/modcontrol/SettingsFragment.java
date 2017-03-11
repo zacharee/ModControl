@@ -28,31 +28,10 @@ public class SettingsFragment extends Fragment {
 
         SharedPreferences sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
-        darkMode = (Switch) view.findViewById(R.id.dark_enabled);
-        darkMode.setChecked(sharedPrefs.getBoolean("darkmode", true));
-
         try {
-            darkMode();
+
         } catch (Exception e) {}
 
         return view;
-    }
-
-    public void darkMode() {
-        darkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    //set styles to dark
-                    SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                    editor.putBoolean("darkmode", true);
-                    editor.apply();
-                } else {
-                    //set light
-                    SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                    editor.putBoolean("darkmode", false);
-                    editor.apply();
-                }
-            }
-        });
     }
 }

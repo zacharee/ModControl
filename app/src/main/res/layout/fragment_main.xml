@@ -14,10 +14,21 @@
         android:paddingTop="16dp"
         tools:ignore="UselessParent">
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lg_v20_mod_control"
+            android:textAlignment="center"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="26sp" />
+
         <LinearLayout
             android:id="@+id/enabled"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
@@ -25,7 +36,7 @@
 
             <Switch
                 android:id="@+id/enable_switch"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:switchMinWidth="50dp"
@@ -39,13 +50,13 @@
             android:id="@+id/has_mod"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <Switch
                 android:id="@+id/has_mod_switch"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="false"
@@ -55,14 +66,13 @@
                 android:textColor="@android:color/tertiary_text_light"
                 android:textSize="20sp"
                 tools:ignore="InefficientWeight" />
-
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
             android:text="@string/only_enable_if_you_have_flashed_my_mod"
             android:textAlignment="center" />
 
