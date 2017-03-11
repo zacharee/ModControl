@@ -20,6 +20,7 @@
             android:switchMinWidth="50dp"
             android:text="Dark Mode"
             android:textAlignment="textStart"
+            android:textColor="@android:color/tertiary_text_light"
             android:textSize="20sp" />
     </LinearLayout>
 

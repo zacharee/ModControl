@@ -5,7 +5,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:id="@+id/mods_frame"
@@ -26,7 +27,7 @@
                     android:id="@+id/minit_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/_3minit"
                     android:textAlignment="center"
                     android:textColor="#000"
@@ -37,14 +38,6 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/minbatstat_label"
-                        android:layout_width="286dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/_3minit_battery_in_statusbar"
-                        android:textSize="20sp" />
-
                     <Switch
                         android:id="@+id/minbatstat_switch"
                         android:layout_width="match_parent"
@@ -54,21 +47,15 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp" />
+                        android:text="@string/_3minit_battery_in_statusbar"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/minbatimm_label"
-                        android:layout_width="284dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/_3minit_battery_in_immersive"
-                        android:textSize="20sp" />
 
                     <Switch
                         android:id="@+id/minbatstat_imm_switch"
@@ -79,21 +66,15 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp" />
+                        android:text="@string/_3minit_battery_in_immersive"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/minbataod_label"
-                        android:layout_width="282dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/_3minit_battery_in_aod"
-                        android:textSize="20sp" />
 
                     <Switch
                         android:id="@+id/minbataod_switch"
@@ -104,7 +85,9 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp" />
+                        android:text="@string/_3minit_battery_in_aod"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -112,14 +95,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/minclockstat_label"
-                        android:layout_width="286dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/_3minit_clock_in_statusbar"
-                        android:textSize="20sp" />
 
                     <Switch
                         android:id="@+id/minclockstat_switch"
@@ -130,21 +105,15 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp" />
+                        android:text="@string/_3minit_clock_in_statusbar"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/minclockimm_label"
-                        android:layout_width="286dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/_3minit_clock_in_immersive"
-                        android:textSize="20sp" />
 
                     <Switch
                         android:id="@+id/minclockimm_switch"
@@ -155,21 +124,15 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp" />
+                        android:text="@string/_3minit_clock_in_immersive"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/minclockaod_label"
-                        android:layout_width="286dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/_3minit_clock_in_aod"
-                        android:textSize="20sp" />
 
                     <Switch
                         android:id="@+id/minclockaod_switch"
@@ -180,7 +143,9 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp" />
+                        android:text="@string/_3minit_clock_in_aod"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -216,14 +181,6 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/signal_label"
-                        android:layout_width="294dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/aosp_signal_icons"
-                        android:textSize="20sp" />
-
                     <Switch
                         android:id="@+id/wide_data"
                         android:layout_width="match_parent"
@@ -233,7 +190,9 @@
                         android:checked="false"
                         android:switchMinWidth="50dp"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:textSize="14sp"
+                        android:text="@string/aosp_signal_icons"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="20sp"
                         tools:ignore="InefficientWeight" />
                 </LinearLayout>
             </LinearLayout>

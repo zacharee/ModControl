@@ -3,77 +3,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.zacharee1.modcontrol.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp">
-
-        <Button
-            android:id="@+id/restart_sysui"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/restart_systemui"
-            android:textSize="12sp"
-            tools:ignore="NestedWeights" />
-
-        <Button
-            android:id="@+id/restart_sb"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/restart_signboard"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="fill_parent"
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@string/statusbar_immersive_mode" />
+            android:text="@string/make_your_selection_and_press_the_appropriate_reboot_button"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@android:color/secondary_text_light" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:text="@string/aod" />
+            android:paddingTop="16dp">
+
+            <Button
+                android:id="@+id/restart_sysui"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/restart_systemui"
+                android:textSize="12sp"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:id="@+id/restart_sb"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/restart_signboard"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/statusbar_immersive_mode"
+                android:textColor="@android:color/tertiary_text_light" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/aod"
+                android:textColor="@android:color/tertiary_text_light" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.75"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="0dp"
+            android:translationZ="0dp" />
+
     </LinearLayout>
 
-    <!--<fragment android:name="com.zacharee1.modcontrol.MainFragment"-->
-        <!--android:id="@+id/mainfrag"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/fragment_main" />-->
-
-    <!--<fragment android:name="com.zacharee1.modcontrol.SettingsFragment"-->
-        <!--android:id="@+id/settingsfrag"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/fragment_settings" />-->
 </LinearLayout>
