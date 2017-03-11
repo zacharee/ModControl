@@ -21,7 +21,6 @@
             android:layout_weight="1"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
-            android:paddingTop="16dp"
             tools:ignore="InefficientWeight">
 
             <Switch

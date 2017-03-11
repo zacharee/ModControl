@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MainFragment fragment = new MainFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().add(R.id.content_main, fragment).commit();
+        findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
 
     }
 
@@ -131,20 +132,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MainFragment fragment = new MainFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         } else if (id == R.id.nav_settings) {
             SettingsFragment fragment = new SettingsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         } else if (id == R.id.nav_nomods) {
             NoModsFragment fragment = new NoModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_mods) {
             ModsFragment fragment = new ModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_credits) {
-
+            CreditsFragment fragment = new CreditsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

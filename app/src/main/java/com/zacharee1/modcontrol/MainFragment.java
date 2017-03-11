@@ -143,6 +143,8 @@ public class MainFragment extends Fragment {
                                 Thread.sleep(2000);
                                 copyZip("sigwhite.zip");
                                 copyFile2("installsig", "sigwhite.zip");
+                                sudo("killall com.android.systemui");
+                                sudo("killall com.lge.signboard");
                             } catch (Exception e) {
                                 Log.e("error", e.getMessage());
                             }

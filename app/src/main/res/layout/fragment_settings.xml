@@ -4,24 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        tools:ignore="UselessParent">
 
-        <Switch
-            android:id="@+id/dark_enabled"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:switchMinWidth="50dp"
-            android:text="Dark Mode"
-            android:textAlignment="textStart"
-            android:textColor="@android:color/tertiary_text_light"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Switch
+                android:id="@+id/dark_enabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:switchMinWidth="50dp"
+                android:text="@string/dark_mode"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/tertiary_text_light"
+                android:textSize="20sp"
+                tools:ignore="InefficientWeight" />
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
