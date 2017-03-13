@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MainFragment fragment = new MainFragment();
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.content_main, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
 
     }
