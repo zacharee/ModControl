@@ -16,16 +16,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
         debug {
             debuggable true
-            signingConfig signingConfigs.config
         }
         Beta {
             debuggable false
             jniDebuggable false
-            signingConfig signingConfigs.config
             renderscriptDebuggable false
             renderscriptOptimLevel 3
             zipAlignEnabled true
