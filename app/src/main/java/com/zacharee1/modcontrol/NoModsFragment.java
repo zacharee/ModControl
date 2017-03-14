@@ -38,8 +38,10 @@ public class NoModsFragment extends Fragment {
     public RadioGroup qtGroup3;
     public RadioGroup sigGroup1;
     public RadioGroup sigGroup2;
+    public RadioGroup sigGroup3;
     public RadioGroup aodSigGroup1;
     public RadioGroup aodSigGroup2;
+    public RadioGroup aodSigGroup3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,8 +63,10 @@ public class NoModsFragment extends Fragment {
         qtGroup3 = (RadioGroup) view.findViewById(R.id.color_tool3);
         sigGroup1 = (RadioGroup) view.findViewById(R.id.color_sig1);
         sigGroup2 = (RadioGroup) view.findViewById(R.id.color_sig2);
+        sigGroup3 = (RadioGroup) view.findViewById(R.id.color_sig3);
         aodSigGroup1 = (RadioGroup) view.findViewById(R.id.color_aod_sig1);
         aodSigGroup2 = (RadioGroup) view.findViewById(R.id.color_aod_sig2);
+        aodSigGroup3 = (RadioGroup) view.findViewById(R.id.color_aod_sig3);
 
         try {
             qtOption();
@@ -211,6 +215,17 @@ public class NoModsFragment extends Fragment {
                             Log.e("error", e.getMessage());
                         }
                     }
+                } else if (checkedId == R.id.yellow_tool) {
+                    if (enabled) {
+                        final String file = "qtyellow.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installqt, file);
+                        } catch (Exception e) {
+                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
                 }
                 if (!enabled) {
                     try {
@@ -229,6 +244,7 @@ public class NoModsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
                     clearSigRad(sigGroup2);
+                    clearSigRad(sigGroup3);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -282,6 +298,7 @@ public class NoModsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
                     clearSigRad(sigGroup1);
+                    clearSigRad(sigGroup3);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -329,6 +346,38 @@ public class NoModsFragment extends Fragment {
                 }
             }
         });
+
+        sigGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearSigRad(sigGroup2);
+                    clearSigRad(sigGroup1);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installsig = "installsig";
+                if (checkedId == R.id.yellow_sig) {
+                    if (enabled) {
+                        final String file = "sigyellow.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearSigRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
     }
 
     public void aodSigOption() throws IOException {
@@ -337,6 +386,7 @@ public class NoModsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
                     clearAODSigRad(aodSigGroup2);
+                    clearAODSigRad(aodSigGroup3);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -390,6 +440,7 @@ public class NoModsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 try {
                     clearAODSigRad(aodSigGroup1);
+                    clearAODSigRad(aodSigGroup3);
                 } catch (Exception e) {
                     Log.e("error", e.getMessage());
                 }
@@ -419,6 +470,38 @@ public class NoModsFragment extends Fragment {
                 } else if (checkedId == R.id.blue_aod_sig) {
                     if (enabled) {
                         final String file = "aodsigblue.zip";
+                        try {
+                            copyZip(file);
+                            copyFile2(installsig, file);
+                        } catch (Exception e) {
+                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("error", e.getMessage());
+                        }
+                    }
+                }
+                if (!enabled) {
+                    try {
+                        clearAODSigRad(group);
+                    } catch (Exception e) {
+                        Log.e("error", e.getMessage());
+                    }
+                }
+            }
+        });
+
+        aodSigGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                try {
+                    clearAODSigRad(aodSigGroup2);
+                    clearAODSigRad(aodSigGroup1);
+                } catch (Exception e) {
+                    Log.e("error", e.getMessage());
+                }
+                final String installsig = "installsigaod";
+                if (checkedId == R.id.purple_aod_sig) {
+                    if (enabled) {
+                        final String file = "aodsigyellow.zip";
                         try {
                             copyZip(file);
                             copyFile2(installsig, file);

@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nomods_frame"
     android:layout_width="match_parent"
@@ -132,14 +133,15 @@
                         android:textAlignment="viewStart" />
 
                     <RadioButton
-                        android:id="@+id/dummy1_tool"
+                        android:id="@+id/yellow_tool"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:buttonTint="#000"
                         android:checked="false"
-                        android:text="@string/suggest_one" />
+                        android:text="Yellow"
+                        app:buttonTint="#FFC107" />
 
                     <RadioButton
                         android:id="@+id/dummy2_tool"
@@ -248,6 +250,49 @@
                         android:text="@string/orange" />
 
                 </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/color_sig3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/yellow_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#303F9F"
+                        android:checked="false"
+                        android:text="Yellow"
+                        android:textAlignment="viewStart"
+                        app:buttonTint="#FFC107" />
+
+                    <RadioButton
+                        android:id="@+id/dummy_sig1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#7B1FA2"
+                        android:checked="false"
+                        android:text="@string/suggest_one"
+                        app:buttonTint="#000" />
+
+                    <RadioButton
+                        android:id="@+id/dummy_sig2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#FF5722"
+                        android:text="@string/suggest_one"
+                        app:buttonTint="#000" />
+
+                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -342,6 +387,49 @@
                         android:layout_weight="1"
                         android:buttonTint="#FF5722"
                         android:text="@string/orange" />
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/color_aod_sig3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/yellow_aod_sig"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#303F9F"
+                        android:checked="false"
+                        android:text="Yellow"
+                        android:textAlignment="viewStart"
+                        app:buttonTint="#FFC107" />
+
+                    <RadioButton
+                        android:id="@+id/dummy_aod_sig1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#7B1FA2"
+                        android:checked="false"
+                        android:text="@string/suggest_one"
+                        app:buttonTint="#000" />
+
+                    <RadioButton
+                        android:id="@+id/dummy_aod_sig2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:buttonTint="#FF5722"
+                        android:text="@string/suggest_one"
+                        app:buttonTint="#000" />
 
                 </RadioGroup>
             </LinearLayout>

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NoModsFragment nomods;
     MainFragment mainf;
     ModsFragment mods;
+
+    public int id;
 
     public boolean modEnabledBool;
     public boolean firstStartRoot;
@@ -105,10 +108,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.e("error", e.getMessage());
         }
 
-        MainFragment fragment = new MainFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+        if (id == 0) {
+            MainFragment fragment = new MainFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG);
+        }
 
     }
 
@@ -126,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        id = item.getItemId();
 
         if (id == R.id.nav_main) {
             MainFragment fragment = new MainFragment();
