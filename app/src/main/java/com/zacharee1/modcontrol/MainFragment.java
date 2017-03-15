@@ -105,9 +105,7 @@ public class MainFragment extends Fragment {
                     NavigationView navView = (NavigationView) activity.findViewById(R.id.nav_view);
                     Menu navMenu = navView.getMenu();
                     navMenu.findItem(R.id.nav_nomods).setVisible(true);
-                    if (activity.sharedPrefs.getBoolean("hasmod", true)) {
-                        navMenu.findItem(R.id.nav_mods).setVisible(true);
-                    }
+                    navMenu.findItem(R.id.nav_mods).setVisible(true);
                 } else {
                     SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
                     editor.putBoolean("enabled", false);
@@ -118,6 +116,19 @@ public class MainFragment extends Fragment {
                     editor.putBoolean("minbatimm", false);
                     editor.putBoolean("minclockimm", false);
                     editor.putBoolean("minclockaod", false);
+
+                    editor.putInt("red", 255);
+                    editor.putInt("green", 255);
+                    editor.putInt("blue", 255);
+
+                    editor.putInt("redsig", 255);
+                    editor.putInt("greensig", 255);
+                    editor.putInt("bluesig", 255);
+
+                    editor.putInt("redaodsig", 255);
+                    editor.putInt("greenaodsig", 255);
+                    editor.putInt("blueaodsig", 255);
+
                     editor.apply();
                     enabled = false;
                     NavigationView navView = (NavigationView) activity.findViewById(R.id.nav_view);
@@ -125,7 +136,7 @@ public class MainFragment extends Fragment {
                     navMenu.findItem(R.id.nav_nomods).setVisible(false);
                     navMenu.findItem(R.id.nav_mods).setVisible(false);
                     Toast.makeText(activity.getApplicationContext(), "Restoring defaults...", Toast.LENGTH_SHORT).show();
-                    nomods.clearAll();
+//                    nomods.clearAll();
 
                     Settings.System.putInt(activity.cr, "wide_data", 1);
                     Settings.System.putInt(activity.cr, "bat_stat_stock", 1);
@@ -135,24 +146,22 @@ public class MainFragment extends Fragment {
                     Settings.System.putInt(activity.cr, "minclockimm", 1);
                     Settings.System.putInt(activity.cr, "minclockaod", 1);
 
+                    Settings.System.putInt(activity.getContentResolver(), "red", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "green", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "blue", 255);
+
+                    Settings.System.putInt(activity.getContentResolver(), "redsig", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greensig", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "bluesig", 255);
+
+                    Settings.System.putInt(activity.getContentResolver(), "redsigaod", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greensigaod", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "bluesigaod", 255);
+
+
                     new Thread(new Runnable() {
                         public void run() {
                             try {
-//                                copyZip("qtwhite.zip");
-//                                copyFile2("installqt", "qtwhite.zip");
-                                Settings.System.putInt(activity.getContentResolver(), "red", 255);
-                                Settings.System.putInt(activity.getContentResolver(), "green", 255);
-                                Settings.System.putInt(activity.getContentResolver(), "blue", 255);
-
-                                Settings.System.putInt(activity.getContentResolver(), "redsig", 255);
-                                Settings.System.putInt(activity.getContentResolver(), "greensig", 255);
-                                Settings.System.putInt(activity.getContentResolver(), "bluesig", 255);
-
-                                Settings.System.putInt(activity.getContentResolver(), "redaodsig", 255);
-                                Settings.System.putInt(activity.getContentResolver(), "greenaodsig", 255);
-                                Settings.System.putInt(activity.getContentResolver(), "blueaodsig", 255);
-//                                copyZip("sigwhite.zip");
-//                                copyFile2("installsig", "sigwhite.zip");
                                 sudo("killall com.android.systemui");
                                 sudo("killall com.lge.signboard");
                             } catch (Exception e) {
@@ -163,99 +172,6 @@ public class MainFragment extends Fragment {
                 }
             }
         });
-    }
-
-    public void copyZip(String targetFile) throws IOException {
-        String targetDirectory = Environment.getExternalStorageDirectory().toString() + "/Zacharee1Mods/";
-        AssetManager assetManager = activity.getAssets1();
-        File modFolder = new File(targetDirectory);
-
-        if (!modFolder.isDirectory()) {
-            boolean result = modFolder.mkdir();
-            if (!result) {
-                throw new IOException("Could not create nonexistent mod folder. Abort.");
-            }
-        }
-        try (
-                InputStream in = assetManager.open(targetFile);
-                OutputStream out = new FileOutputStream(targetDirectory + targetFile)
-        ) {
-            copyFile(in, out);
-        }
-        try (
-                InputStream in =  assetManager.open("zip");
-                OutputStream out = new FileOutputStream(targetDirectory + "zip")
-        ) {
-            copyFile(in, out);
-        }
-    }
-
-    public void copyFile2(final String targetFile, final String zipFile) throws IOException {
-        final String targetDirectory = Environment.getExternalStorageDirectory().toString() + "/Zacharee1Mods/";
-        final AssetManager assetManager = activity.getAssets1();
-        File modFolder = new File(targetDirectory);
-
-        if (!modFolder.isDirectory()) {
-            boolean result = modFolder.mkdir();
-            if (!result) {
-                throw new IOException("Could not create nonexistent mod folder. Abort.");
-            }
-        }
-
-        new Thread(new Runnable() {
-            public void run() {
-                try (
-                        InputStream in = assetManager.open(targetFile);
-                        OutputStream out = new FileOutputStream(targetDirectory + targetFile)
-                ) {
-                    copyFile(in, out);
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                }
-                try (
-                        InputStream in = assetManager.open("zip");
-                        OutputStream out = new FileOutputStream(targetDirectory + "zip")
-                ) {
-                    copyFile(in, out);
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                }
-            }
-        }).start();
-
-        if (!targetFile.contains("restore")) {
-            new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        runScript(targetDirectory, targetFile, zipFile);
-                    } catch (Exception e) {
-                        Log.e("ERROR", e.getMessage());
-                    }
-                }
-            }).start();
-        }
-    }
-
-    public void copyFile(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[10240];
-        int read;
-        while((read = in.read(buffer)) != -1){
-            out.write(buffer, 0, read);
-        }
-    }
-
-    public void runScript(final String targetDirectory, final String targetFile, final String zip) throws IOException{
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    sudo("chmod +x /data/media/0/Zacharee1Mods/" + targetFile);
-                    sudo("chmod 777 /data/media/0/Zacharee1Mods/" + targetFile);
-                    sudo("sh /data/media/0/Zacharee1Mods/" + targetFile + " " + zip);
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                }
-            }
-        }).start();
     }
 
     public void sudo(String...strings) throws IOException {

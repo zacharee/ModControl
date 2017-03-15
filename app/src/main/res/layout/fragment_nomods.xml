@@ -87,29 +87,52 @@
 
                     </LinearLayout>
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="50dp"
+                        <FrameLayout
+                            android:layout_width="100dp"
                             android:layout_height="50dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/bt_on_preview_background" />
+                            android:layout_weight="1">
 
-                        <ImageView
-                            android:id="@+id/colorqt_preview"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:cropToPadding="false"
-                            android:elevation="0dp"
-                            app:srcCompat="@drawable/bt_on_preview" />
-                    </FrameLayout>
+                            <ImageView
+                                android:id="@+id/imageView4"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/bt_on_preview_background" />
+
+                            <ImageView
+                                android:id="@+id/colorqt_preview_on"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:cropToPadding="false"
+                                android:elevation="0dp"
+                                app:srcCompat="@drawable/bt_on_preview" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/imageView6"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                app:srcCompat="@drawable/bt_on_preview_background" />
+
+                            <ImageView
+                                android:id="@+id/colorqt_preview_off"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                app:srcCompat="@drawable/bt_off_preview" />
+                        </FrameLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
