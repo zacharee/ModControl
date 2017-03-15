@@ -138,11 +138,21 @@ public class MainFragment extends Fragment {
                     new Thread(new Runnable() {
                         public void run() {
                             try {
-                                copyZip("qtwhite.zip");
-                                copyFile2("installqt", "qtwhite.zip");
-                                Thread.sleep(2000);
-                                copyZip("sigwhite.zip");
-                                copyFile2("installsig", "sigwhite.zip");
+//                                copyZip("qtwhite.zip");
+//                                copyFile2("installqt", "qtwhite.zip");
+                                Settings.System.putInt(activity.getContentResolver(), "red", 255);
+                                Settings.System.putInt(activity.getContentResolver(), "green", 255);
+                                Settings.System.putInt(activity.getContentResolver(), "blue", 255);
+
+                                Settings.System.putInt(activity.getContentResolver(), "redsig", 255);
+                                Settings.System.putInt(activity.getContentResolver(), "greensig", 255);
+                                Settings.System.putInt(activity.getContentResolver(), "bluesig", 255);
+
+                                Settings.System.putInt(activity.getContentResolver(), "redaodsig", 255);
+                                Settings.System.putInt(activity.getContentResolver(), "greenaodsig", 255);
+                                Settings.System.putInt(activity.getContentResolver(), "blueaodsig", 255);
+//                                copyZip("sigwhite.zip");
+//                                copyFile2("installsig", "sigwhite.zip");
                                 sudo("killall com.android.systemui");
                                 sudo("killall com.lge.signboard");
                             } catch (Exception e) {

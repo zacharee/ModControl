@@ -35,13 +35,146 @@
                     android:textColor="#000"
                     android:textSize="20sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/qt_sliders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/redqt_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#f00"
+                            android:progressTint="#f00"
+                            android:thumbTint="#f00"
+                            android:tickMarkTint="#f00" />
+
+                        <SeekBar
+                            android:id="@+id/greenqt_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#0f0"
+                            android:progressTint="#0f0"
+                            android:thumbTint="#0f0"
+                            android:tickMarkTint="#0f0" />
+
+                        <SeekBar
+                            android:id="@+id/blueqt_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#00f"
+                            android:progressTint="#00f"
+                            android:thumbTint="#00f"
+                            android:tickMarkTint="#00f" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/bt_on_preview_background" />
+
+                        <ImageView
+                            android:id="@+id/colorqt_preview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:cropToPadding="false"
+                            android:elevation="0dp"
+                            app:srcCompat="@drawable/bt_on_preview" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/qt_text_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/red_qt_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/green_qt_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/blue_qt_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/apply_qt_color"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Apply"
+                    android:visibility="gone" />
+
                 <RadioGroup
                     android:id="@+id/color_tool1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/white_tool"
@@ -79,7 +212,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/blue_tool"
@@ -119,7 +253,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/orange_tool"
@@ -173,13 +308,137 @@
                     android:textColor="#000"
                     android:textSize="20sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/sig_sliders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/redsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#f00"
+                            android:progressTint="#f00"
+                            android:thumbTint="#f00"
+                            android:tickMarkTint="#f00" />
+
+                        <SeekBar
+                            android:id="@+id/greensig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#0f0"
+                            android:progressTint="#0f0"
+                            android:thumbTint="#0f0"
+                            android:tickMarkTint="#0f0" />
+
+                        <SeekBar
+                            android:id="@+id/bluesig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#00f"
+                            android:progressTint="#00f"
+                            android:thumbTint="#00f"
+                            android:tickMarkTint="#00f" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/bt_on_preview_background" />
+
+                        <ImageView
+                            android:id="@+id/colorsig_preview"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:elevation="0dp"
+                            android:padding="10dp"
+                            app:srcCompat="@drawable/sig_letter_good" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sig_text_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/red_sig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/green_sig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/blue_sig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
                 <RadioGroup
                     android:id="@+id/color_sig1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/white_sig"
@@ -217,7 +476,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/blue_sig"
@@ -257,7 +517,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/yellow_sig"
@@ -312,13 +573,137 @@
                     android:textColor="#000"
                     android:textSize="20sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/aod_sig_sliders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/redaodsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#f00"
+                            android:progressTint="#f00"
+                            android:thumbTint="#f00"
+                            android:tickMarkTint="#f00" />
+
+                        <SeekBar
+                            android:id="@+id/greenaodsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#0f0"
+                            android:progressTint="#0f0"
+                            android:thumbTint="#0f0"
+                            android:tickMarkTint="#0f0" />
+
+                        <SeekBar
+                            android:id="@+id/blueaodsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#00f"
+                            android:progressTint="#00f"
+                            android:thumbTint="#00f"
+                            android:tickMarkTint="#00f" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/bt_on_preview_background" />
+
+                        <ImageView
+                            android:id="@+id/coloraodsig_preview"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:elevation="0dp"
+                            android:padding="10dp"
+                            app:srcCompat="@drawable/sig_letter_good" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/aodsig_text_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/red_aodsig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/green_aodsig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/blue_aodsig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="0-255" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
                 <RadioGroup
                     android:id="@+id/color_aod_sig1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/white_aod_sig"
@@ -356,7 +741,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/blue_aod_sig"
@@ -396,7 +782,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/yellow_aod_sig"

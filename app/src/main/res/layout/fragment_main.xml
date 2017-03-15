@@ -52,7 +52,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Switch
                 android:id="@+id/has_mod_switch"
@@ -73,8 +74,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/only_enable_if_you_have_flashed_my_mod"
-            android:textAlignment="center" />
+            android:text="IMPORTANT!"
+            android:textAlignment="center"
+            android:textColor="#f00"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="This app requires that you have the corresponding mod installed! Please visit the XDA thread in the About page"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

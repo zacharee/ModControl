@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import java.io.DataOutputStream;
@@ -93,13 +94,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
             Menu navMenu = navView.getMenu();
             navMenu.findItem(R.id.nav_nomods).setVisible(true);
-        }
-
-        if (modEnabledBool) {
-            NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-            Menu navMenu = navView.getMenu();
             navMenu.findItem(R.id.nav_mods).setVisible(true);
         }
+
+//        if (modEnabledBool) {
+//            NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+//            Menu navMenu = navView.getMenu();
+//            navMenu.findItem(R.id.nav_mods).setVisible(true);
+//        }
 
         try {
             if (firstStartRoot) firstStart();
