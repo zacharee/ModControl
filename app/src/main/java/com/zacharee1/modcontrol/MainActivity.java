@@ -110,12 +110,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.e("error", e.getMessage());
         }
 
-        if (id == 0) {
+        id = sharedPrefs.getInt("navkey", 0);
+
+        if (id == R.id.nav_main) {
             MainFragment fragment = new MainFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
-            Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG);
+        } else if (id == R.id.nav_nomods) {
+            NoModsFragment fragment = new NoModsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+        } else if (id == R.id.nav_mods) {
+            ModsFragment fragment = new ModsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+        } else if (id == R.id.nav_settings) {
+            SettingsFragment fragment = new SettingsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+        } else if (id == R.id.nav_credits) {
+            CreditsFragment fragment = new CreditsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+        } else {
+            MainFragment fragment = new MainFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         }
 
     }
@@ -135,6 +161,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         id = item.getItemId();
+
+        SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+        editor.putInt("navkey", id);
+        editor.apply();
 
         if (id == R.id.nav_main) {
             MainFragment fragment = new MainFragment();
