@@ -7,8 +7,8 @@ android {
         applicationId "com.zacharee1.modcontrol"
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 13
-        versionName "3.2b"
+        versionCode 14
+        versionName "3.3b"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

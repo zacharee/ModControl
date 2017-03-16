@@ -87,6 +87,8 @@ public class NoModsFragment extends Fragment {
     public int AODSigColor;
 
     public Button applyQT;
+    public Button applySig;
+    public Button applyAODSig;
 
 //    public RadioGroup qtGroup1;
 //    public RadioGroup qtGroup2;
@@ -148,7 +150,9 @@ public class NoModsFragment extends Fragment {
         SigPreview = (ImageView) view.findViewById(R.id.colorsig_preview);
         AODSigPreview = (ImageView) view.findViewById(R.id.coloraodsig_preview);
 
-//        applyQT = (Button) view.findViewById(R.id.apply_qt_color);
+        applyQT = (Button) view.findViewById(R.id.apply_qt_color);
+        applySig = (Button) view.findViewById(R.id.apply_sig_color);
+        applyAODSig = (Button) view.findViewById(R.id.apply_aod_sig_color);
 
         RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 0)));
         GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 0)));
@@ -228,10 +232,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             redIntQT = Integer.decode(RedQT.getText().toString());
 
-                            Settings.System.putInt(cr, "red", redIntQT);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("red", redIntQT);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "red", redIntQT);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("red", redIntQT);
+//                            editor.apply();
 
                             redQTSeek.setProgress(redIntQT);
 
@@ -266,10 +270,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             greenIntQT = Integer.decode(GreenQT.getText().toString());
 
-                            Settings.System.putInt(cr, "green", greenIntQT);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("green", greenIntQT);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "green", greenIntQT);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("green", greenIntQT);
+//                            editor.apply();
 
                             greenQTSeek.setProgress(greenIntQT);
 
@@ -304,10 +308,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             blueIntQT = Integer.decode(BlueQT.getText().toString());
 
-                            Settings.System.putInt(cr, "blue", blueIntQT);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("blue", blueIntQT);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "blue", blueIntQT);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("blue", blueIntQT);
+//                            editor.apply();
 
                             blueQTSeek.setProgress(blueIntQT);
 
@@ -341,11 +345,11 @@ public class NoModsFragment extends Fragment {
                     if (RedSig.getText().toString().length() > 0) {
                         try {
                             redIntSig = Integer.decode(RedSig.getText().toString());
-
-                            Settings.System.putInt(cr, "redsig", redIntSig);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("redsig", redIntSig);
-                            editor.apply();
+//
+//                            Settings.System.putInt(cr, "redsig", redIntSig);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("redsig", redIntSig);
+//                            editor.apply();
 
                             redSigSeek.setProgress(redIntSig);
 
@@ -379,10 +383,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             greenIntSig = Integer.decode(GreenSig.getText().toString());
 
-                            Settings.System.putInt(cr, "greensig", greenIntSig);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("greensig", greenIntSig);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "greensig", greenIntSig);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("greensig", greenIntSig);
+//                            editor.apply();
 
                             greenSigSeek.setProgress(greenIntSig);
 
@@ -416,10 +420,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             blueIntSig = Integer.decode(BlueSig.getText().toString());
 
-                            Settings.System.putInt(cr, "bluesig", blueIntSig);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("bluesig", blueIntSig);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "bluesig", blueIntSig);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("bluesig", blueIntSig);
+//                            editor.apply();
 
                             blueSigSeek.setProgress(blueIntSig);
 
@@ -453,10 +457,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             redIntAODSig = Integer.decode(RedSigAOD.getText().toString());
 
-                            Settings.System.putInt(cr, "redsigaod", redIntAODSig);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("redsigaod", redIntAODSig);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "redsigaod", redIntAODSig);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("redsigaod", redIntAODSig);
+//                            editor.apply();
 
                             redAODSigSeek.setProgress(redIntAODSig);
 
@@ -490,10 +494,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             greenIntAODSig = Integer.decode(GreenSigAOD.getText().toString());
 
-                            Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("greensigaod", greenIntAODSig);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("greensigaod", greenIntAODSig);
+//                            editor.apply();
 
                             greenAODSigSeek.setProgress(greenIntAODSig);
 
@@ -527,10 +531,10 @@ public class NoModsFragment extends Fragment {
                         try {
                             blueIntAODSig = Integer.decode(BlueSigAOD.getText().toString());
 
-                            Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
-                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                            editor.putInt("bluesigaod", blueIntAODSig);
-                            editor.apply();
+//                            Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
+//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                            editor.putInt("bluesigaod", blueIntAODSig);
+//                            editor.apply();
 
                             blueAODSigSeek.setProgress(blueIntAODSig);
 
@@ -704,34 +708,92 @@ public class NoModsFragment extends Fragment {
     }
 
     public void buttons() throws IOException {
-//        applyQT.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                new Thread(new Runnable() {
-//                    public void run() {
-//                        ContentResolver cr = activity.getContentResolver();
-//
-//                        String redString = RedQT.getText().toString();
-//                        String greenString = GreenQT.getText().toString();
-//                        String blueString = BlueQT.getText().toString();
-//
-//                        redIntQT = Integer.decode(redString);
-//                        greenIntQT = Integer.decode(greenString);
-//                        blueIntQT = Integer.decode(blueString);
-//
-//                        Settings.System.putInt(cr, "red", redIntQT);
-//                        Settings.System.putInt(cr, "green", greenIntQT);
-//                        Settings.System.putInt(cr, "blue", blueIntQT);
-//
-//                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                        editor.putInt("redqt", redIntQT);
-//                        editor.putInt("greenqt", greenIntQT);
-//                        editor.putInt("blueqt", blueIntQT);
-//                        editor.apply();
-//                    }
-//                }).start();
-//            }
-//        });
+        applyQT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        ContentResolver cr = activity.getContentResolver();
+
+                        Settings.System.putInt(cr, "red", redIntQT);
+                        Settings.System.putInt(cr, "green", greenIntQT);
+                        Settings.System.putInt(cr, "blue", blueIntQT);
+
+                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putInt("red", redIntQT);
+                        editor.putInt("green", greenIntQT);
+                        editor.putInt("blue", blueIntQT);
+                        editor.apply();
+
+                        try {
+                            sudo("killall com.lge.signboard");
+                            sudo("killall com.lge.appwidget.signature");
+                            sudo("killall com.lge.quicktools");
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }).start();
+            }
+        });
+
+        applySig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable () {
+                    public void run() {
+                        ContentResolver cr = activity.getContentResolver();
+
+                        Settings.System.putInt(cr, "redsig", redIntSig);
+                        Settings.System.putInt(cr, "greensig", greenIntSig);
+                        Settings.System.putInt(cr, "bluesig", blueIntSig);
+
+                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putInt("redsig", redIntSig);
+                        editor.putInt("greensig", greenIntSig);
+                        editor.putInt("bluesig", blueIntSig);
+                        editor.apply();
+
+                        try {
+                            sudo("killall com.lge.signboard");
+                            sudo("killall com.lge.appwidget.signature");
+                            sudo("killall com.lge.quicktools");
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }).start();
+            }
+        });
+
+        applyAODSig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable () {
+                    public void run() {
+                        ContentResolver cr = activity.getContentResolver();
+
+                        Settings.System.putInt(cr, "redsigaod", redIntAODSig);
+                        Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
+                        Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
+
+                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putInt("redsigaod", redIntAODSig);
+                        editor.putInt("greensigaod", greenIntAODSig);
+                        editor.putInt("bluesigaod", blueIntAODSig);
+                        editor.apply();
+
+                        try {
+                            sudo("killall com.lge.signboard");
+                            sudo("killall com.lge.appwidget.signature");
+                            sudo("killall com.lge.quicktools");
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }).start();
+            }
+        });
     }
 
 //    public void qtOption() throws IOException {
@@ -1291,26 +1353,26 @@ public class NoModsFragment extends Fragment {
 //        }).start();
 //    }
 
-//    public void sudo(String...strings) throws IOException {
-//        try{
-//            Process su = Runtime.getRuntime().exec("su");
-//            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-//
-//            for (String s : strings) {
-//                outputStream.writeBytes(s+"\n");
-//                outputStream.flush();
-//            }
-//
-//            outputStream.writeBytes("exit\n");
-//            outputStream.flush();
-//            try {
-//                su.waitFor();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            outputStream.close();
-//        } catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public void sudo(String...strings) throws IOException {
+        try{
+            Process su = Runtime.getRuntime().exec("su");
+            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+            for (String s : strings) {
+                outputStream.writeBytes(s+"\n");
+                outputStream.flush();
+            }
+
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            try {
+                su.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            outputStream.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }

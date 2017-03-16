@@ -14,10 +14,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="16dp"
+            android:paddingBottom="10dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingTop="16dp" >
+            android:paddingTop="10dp">
 
             <LinearLayout
                 android:id="@+id/qtools"
@@ -139,15 +139,15 @@
                 <LinearLayout
                     android:id="@+id/qt_text_input"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true">
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -159,7 +159,7 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -171,7 +171,7 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -181,16 +181,17 @@
                             android:hint="0-255" />
 
                     </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
 
-                <Button
-                    android:id="@+id/apply_qt_color"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Apply"
-                    android:visibility="gone" />
+                    <Button
+                        android:id="@+id/apply_qt_color"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Apply" />
+
+                </LinearLayout>
 
                 <RadioGroup
                     android:id="@+id/color_tool1"
@@ -414,15 +415,15 @@
                 <LinearLayout
                     android:id="@+id/sig_text_input"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true">
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -434,7 +435,7 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -446,7 +447,7 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -456,6 +457,16 @@
                             android:hint="0-255" />
 
                     </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/apply_sig_color"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Apply" />
+
                 </LinearLayout>
 
                 <RadioGroup
@@ -681,15 +692,15 @@
                 <LinearLayout
                     android:id="@+id/aodsig_text_input"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
                     android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true">
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -697,11 +708,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="0-255" />
+
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -713,7 +725,7 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -723,6 +735,16 @@
                             android:hint="0-255" />
 
                     </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/apply_aod_sig_color"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Apply" />
+
                 </LinearLayout>
 
                 <RadioGroup

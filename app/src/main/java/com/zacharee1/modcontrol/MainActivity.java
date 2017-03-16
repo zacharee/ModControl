@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NoModsFragment fragment = new NoModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         } else if (id == R.id.nav_mods) {
             ModsFragment fragment = new ModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NoModsFragment fragment = new NoModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         } else if (id == R.id.nav_mods) {
             ModsFragment fragment = new ModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
