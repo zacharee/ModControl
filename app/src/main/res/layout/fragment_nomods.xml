@@ -154,7 +154,8 @@
                             android:id="@+id/red_qt_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -166,7 +167,8 @@
                             android:id="@+id/green_qt_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -178,7 +180,8 @@
                             android:id="@+id/blue_qt_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -193,127 +196,127 @@
 
                 </LinearLayout>
 
-                <RadioGroup
-                    android:id="@+id/color_tool1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_tool1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/white_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#ccc"
-                        android:checked="false"
-                        android:text="@string/white" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/white_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#ccc"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/white" />-->
 
-                    <RadioButton
-                        android:id="@+id/red_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#D32F2F"
-                        android:checked="false"
-                        android:text="@string/red" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/red_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#D32F2F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/red" />-->
 
-                    <RadioButton
-                        android:id="@+id/green_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#689F38"
-                        android:text="@string/green" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/green_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#689F38"-->
+                        <!--android:text="@string/green" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
-                <RadioGroup
-                    android:id="@+id/color_tool2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_tool2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/blue_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#303F9F"
-                        android:checked="false"
-                        android:text="@string/blue"
-                        android:textAlignment="viewStart" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/blue_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#303F9F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/blue"-->
+                        <!--android:textAlignment="viewStart" />-->
 
-                    <RadioButton
-                        android:id="@+id/purple_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#7B1FA2"
-                        android:checked="false"
-                        android:text="@string/purple" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/purple_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#7B1FA2"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/purple" />-->
 
-                    <RadioButton
-                        android:id="@+id/multi_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#000"
-                        android:text="@string/multi" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/multi_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#000"-->
+                        <!--android:text="@string/multi" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
-                <RadioGroup
-                    android:id="@+id/color_tool3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_tool3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/orange_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#FF5722"
-                        android:checked="false"
-                        android:text="@string/orange"
-                        android:textAlignment="viewStart" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/orange_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#FF5722"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/orange"-->
+                        <!--android:textAlignment="viewStart" />-->
 
-                    <RadioButton
-                        android:id="@+id/yellow_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#000"
-                        android:checked="false"
-                        android:text="Yellow"
-                        app:buttonTint="#FFC107" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/yellow_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#000"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="Yellow"-->
+                        <!--app:buttonTint="#FFC107" />-->
 
-                    <RadioButton
-                        android:id="@+id/dummy2_tool"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#000"
-                        android:text="@string/suggest_one" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/dummy2_tool"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#000"-->
+                        <!--android:text="@string/suggest_one" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
             </LinearLayout>
 
@@ -430,7 +433,8 @@
                             android:id="@+id/red_sig_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -442,7 +446,8 @@
                             android:id="@+id/green_sig_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -454,7 +459,8 @@
                             android:id="@+id/blue_sig_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -469,129 +475,129 @@
 
                 </LinearLayout>
 
-                <RadioGroup
-                    android:id="@+id/color_sig1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_sig1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/white_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#ccc"
-                        android:checked="false"
-                        android:text="@string/white" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/white_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#ccc"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/white" />-->
 
-                    <RadioButton
-                        android:id="@+id/red_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#D32F2F"
-                        android:checked="false"
-                        android:text="@string/red" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/red_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#D32F2F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/red" />-->
 
-                    <RadioButton
-                        android:id="@+id/green_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#689F38"
-                        android:text="@string/green" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/green_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#689F38"-->
+                        <!--android:text="@string/green" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
-                <RadioGroup
-                    android:id="@+id/color_sig2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_sig2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/blue_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#303F9F"
-                        android:checked="false"
-                        android:text="@string/blue"
-                        android:textAlignment="viewStart" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/blue_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#303F9F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/blue"-->
+                        <!--android:textAlignment="viewStart" />-->
 
-                    <RadioButton
-                        android:id="@+id/purple_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#7B1FA2"
-                        android:checked="false"
-                        android:text="@string/purple" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/purple_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#7B1FA2"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/purple" />-->
 
-                    <RadioButton
-                        android:id="@+id/orange_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#FF5722"
-                        android:text="@string/orange" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/orange_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#FF5722"-->
+                        <!--android:text="@string/orange" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
-                <RadioGroup
-                    android:id="@+id/color_sig3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_sig3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/yellow_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#303F9F"
-                        android:checked="false"
-                        android:text="Yellow"
-                        android:textAlignment="viewStart"
-                        app:buttonTint="#FFC107" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/yellow_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#303F9F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="Yellow"-->
+                        <!--android:textAlignment="viewStart"-->
+                        <!--app:buttonTint="#FFC107" />-->
 
-                    <RadioButton
-                        android:id="@+id/dummy_sig1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#7B1FA2"
-                        android:checked="false"
-                        android:text="@string/suggest_one"
-                        app:buttonTint="#000" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/dummy_sig1"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#7B1FA2"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/suggest_one"-->
+                        <!--app:buttonTint="#000" />-->
 
-                    <RadioButton
-                        android:id="@+id/dummy_sig2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#FF5722"
-                        android:text="@string/suggest_one"
-                        app:buttonTint="#000" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/dummy_sig2"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#FF5722"-->
+                        <!--android:text="@string/suggest_one"-->
+                        <!--app:buttonTint="#000" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
             </LinearLayout>
 
             <LinearLayout
@@ -707,7 +713,8 @@
                             android:id="@+id/red_aodsig_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -720,7 +727,8 @@
                             android:id="@+id/green_aodsig_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -732,7 +740,8 @@
                             android:id="@+id/blue_aodsig_val"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="0-255" />
+                            android:hint="0-255"
+                            android:inputType="phone" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -747,129 +756,129 @@
 
                 </LinearLayout>
 
-                <RadioGroup
-                    android:id="@+id/color_aod_sig1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_aod_sig1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/white_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#ccc"
-                        android:checked="false"
-                        android:text="@string/white" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/white_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#ccc"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/white" />-->
 
-                    <RadioButton
-                        android:id="@+id/red_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#D32F2F"
-                        android:checked="false"
-                        android:text="@string/red" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/red_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#D32F2F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/red" />-->
 
-                    <RadioButton
-                        android:id="@+id/green_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#689F38"
-                        android:text="@string/green" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/green_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#689F38"-->
+                        <!--android:text="@string/green" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
-                <RadioGroup
-                    android:id="@+id/color_aod_sig2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_aod_sig2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/blue_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#303F9F"
-                        android:checked="false"
-                        android:text="@string/blue"
-                        android:textAlignment="viewStart" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/blue_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#303F9F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/blue"-->
+                        <!--android:textAlignment="viewStart" />-->
 
-                    <RadioButton
-                        android:id="@+id/purple_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#7B1FA2"
-                        android:checked="false"
-                        android:text="@string/purple" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/purple_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#7B1FA2"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/purple" />-->
 
-                    <RadioButton
-                        android:id="@+id/orange_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#FF5722"
-                        android:text="@string/orange" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/orange_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#FF5722"-->
+                        <!--android:text="@string/orange" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
 
-                <RadioGroup
-                    android:id="@+id/color_aod_sig3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/color_aod_sig3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
 
-                    <RadioButton
-                        android:id="@+id/yellow_aod_sig"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#303F9F"
-                        android:checked="false"
-                        android:text="Yellow"
-                        android:textAlignment="viewStart"
-                        app:buttonTint="#FFC107" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/yellow_aod_sig"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#303F9F"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="Yellow"-->
+                        <!--android:textAlignment="viewStart"-->
+                        <!--app:buttonTint="#FFC107" />-->
 
-                    <RadioButton
-                        android:id="@+id/dummy_aod_sig1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#7B1FA2"
-                        android:checked="false"
-                        android:text="@string/suggest_one"
-                        app:buttonTint="#000" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/dummy_aod_sig1"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#7B1FA2"-->
+                        <!--android:checked="false"-->
+                        <!--android:text="@string/suggest_one"-->
+                        <!--app:buttonTint="#000" />-->
 
-                    <RadioButton
-                        android:id="@+id/dummy_aod_sig2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:buttonTint="#FF5722"
-                        android:text="@string/suggest_one"
-                        app:buttonTint="#000" />
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/dummy_aod_sig2"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:buttonTint="#FF5722"-->
+                        <!--android:text="@string/suggest_one"-->
+                        <!--app:buttonTint="#000" />-->
 
-                </RadioGroup>
+                <!--</RadioGroup>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
