@@ -14,7 +14,9 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.Settings;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -47,15 +49,15 @@ public class NoModsFragment extends Fragment {
     public boolean enabled;
     public SharedPreferences sharedPrefs;
 
-    public EditText RedQT;
-    public EditText GreenQT;
-    public EditText BlueQT;
-    public EditText RedSig;
-    public EditText GreenSig;
-    public EditText BlueSig;
-    public EditText RedSigAOD;
-    public EditText GreenSigAOD;
-    public EditText BlueSigAOD;
+    public TextInputEditText RedQT;
+    public TextInputEditText GreenQT;
+    public TextInputEditText BlueQT;
+    public TextInputEditText RedSig;
+    public TextInputEditText GreenSig;
+    public TextInputEditText BlueSig;
+    public TextInputEditText RedSigAOD;
+    public TextInputEditText GreenSigAOD;
+    public TextInputEditText BlueSigAOD;
 
     public int redIntQT;
     public int greenIntQT;
@@ -125,15 +127,15 @@ public class NoModsFragment extends Fragment {
 //        aodSigGroup2 = (RadioGroup) view.findViewById(R.id.color_aod_sig2);
 //        aodSigGroup3 = (RadioGroup) view.findViewById(R.id.color_aod_sig3);
 
-        RedQT = (EditText) view.findViewById(R.id.red_qt_val);
-        GreenQT = (EditText) view.findViewById(R.id.green_qt_val);
-        BlueQT = (EditText) view.findViewById(R.id.blue_qt_val);
-        RedSig = (EditText) view.findViewById(R.id.red_sig_val);
-        GreenSig = (EditText) view.findViewById(R.id.green_sig_val);
-        BlueSig = (EditText) view.findViewById(R.id.blue_sig_val);
-        RedSigAOD = (EditText) view.findViewById(R.id.red_aodsig_val);
-        GreenSigAOD = (EditText) view.findViewById(R.id.green_aodsig_val);
-        BlueSigAOD = (EditText) view.findViewById(R.id.blue_aodsig_val);
+        RedQT = (TextInputEditText) view.findViewById(R.id.red_qt_val);
+        GreenQT = (TextInputEditText) view.findViewById(R.id.green_qt_val);
+        BlueQT = (TextInputEditText) view.findViewById(R.id.blue_qt_val);
+        RedSig = (TextInputEditText) view.findViewById(R.id.red_sig_val);
+        GreenSig = (TextInputEditText) view.findViewById(R.id.green_sig_val);
+        BlueSig = (TextInputEditText) view.findViewById(R.id.blue_sig_val);
+        RedSigAOD = (TextInputEditText) view.findViewById(R.id.red_aodsig_val);
+        GreenSigAOD = (TextInputEditText) view.findViewById(R.id.green_aodsig_val);
+        BlueSigAOD = (TextInputEditText) view.findViewById(R.id.blue_aodsig_val);
 
         redQTSeek = (SeekBar) view.findViewById(R.id.redqt_seek);
         greenQTSeek = (SeekBar) view.findViewById(R.id.greenqt_seek);
@@ -153,16 +155,6 @@ public class NoModsFragment extends Fragment {
         applyQT = (Button) view.findViewById(R.id.apply_qt_color);
         applySig = (Button) view.findViewById(R.id.apply_sig_color);
         applyAODSig = (Button) view.findViewById(R.id.apply_aod_sig_color);
-
-        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 0)));
-        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 0)));
-        BlueQT.setText(String.valueOf(sharedPrefs.getInt("blue", 0)));
-        RedSig.setText(String.valueOf(sharedPrefs.getInt("redsig", 0)));
-        GreenSig.setText(String.valueOf(sharedPrefs.getInt("greensig", 0)));
-        BlueSig.setText(String.valueOf(sharedPrefs.getInt("bluesig", 0)));
-        RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 0)));
-        GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 0)));
-        BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 0)));
 
         redQTSeek.setProgress(sharedPrefs.getInt("red", 0));
         greenQTSeek.setProgress(sharedPrefs.getInt("green", 0));
@@ -192,6 +184,16 @@ public class NoModsFragment extends Fragment {
         QTPreviewOff.setColorFilter(QTColor);
         SigPreview.setColorFilter(SigColor);
         AODSigPreview.setColorFilter(AODSigColor);
+
+        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 0)));
+        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 0)));
+        BlueQT.setText(String.valueOf(sharedPrefs.getInt("blue", 0)));
+        RedSig.setText(String.valueOf(sharedPrefs.getInt("redsig", 0)));
+        GreenSig.setText(String.valueOf(sharedPrefs.getInt("greensig", 0)));
+        BlueSig.setText(String.valueOf(sharedPrefs.getInt("bluesig", 0)));
+        RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 0)));
+        GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 0)));
+        BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 0)));
 
         try {
 //            qtOption();

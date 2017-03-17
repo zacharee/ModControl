@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +26,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public boolean enabled;
+
+    Handler mHandler;
 
     NoModsFragment nomods;
     MainFragment mainf;
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mods = new ModsFragment();
         nomods = new NoModsFragment();
         mainf = new MainFragment();
+        mHandler = new Handler();
 
         sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
@@ -166,35 +170,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putInt("navkey", id);
         editor.apply();
 
-        if (id == R.id.nav_main) {
-            MainFragment fragment = new MainFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
-        } else if (id == R.id.nav_settings) {
-            SettingsFragment fragment = new SettingsFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
-        } else if (id == R.id.nav_nomods) {
-            NoModsFragment fragment = new NoModsFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
-        } else if (id == R.id.nav_mods) {
-            ModsFragment fragment = new ModsFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
-        } else if (id == R.id.nav_credits) {
-            CreditsFragment fragment = new CreditsFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        final int mainCont = R.id.content_main;
+
+        if (id == R.id.nav_main) {
+            final MainFragment fragment = new MainFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
+                    findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                }
+            }, 250);
+        } else if (id == R.id.nav_settings) {
+            final SettingsFragment fragment = new SettingsFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
+                    findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                }
+            }, 250);
+        } else if (id == R.id.nav_nomods) {
+            final NoModsFragment fragment = new NoModsFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
+                    findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                }
+            }, 250);
+        } else if (id == R.id.nav_mods) {
+            final ModsFragment fragment = new ModsFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
+                    findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+                }
+            }, 250);
+        } else if (id == R.id.nav_credits) {
+            final CreditsFragment fragment = new CreditsFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
+                    findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                }
+            }, 250);
+        }
         return true;
     }
 
