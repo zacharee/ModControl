@@ -6,10 +6,7 @@ package com.zacharee1.modcontrol;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
@@ -18,16 +15,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static android.content.Context.MODE_PRIVATE;
 
