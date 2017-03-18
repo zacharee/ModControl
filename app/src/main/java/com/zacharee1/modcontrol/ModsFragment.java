@@ -11,8 +11,10 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -22,8 +24,11 @@ public class ModsFragment extends Fragment {
     public View view;
     MainActivity activity;
 
+    public Button debug;
+
     public SharedPreferences sharedPrefs;
     public boolean enabled;
+    public boolean isV20;
 
     public Switch batstat;
     public Switch bataod;
@@ -64,6 +69,8 @@ public class ModsFragment extends Fragment {
         clockaod = (Switch) view.findViewById(R.id.minclockaod_switch);
         clockstatImm = (Switch) view.findViewById(R.id.minclockimm_switch);
 
+        debug = (Button) view.findViewById(R.id.check_db);
+
         batstat.setChecked(sharedPrefs.getBoolean("minbatsui", true));
         if (sharedPrefs.getBoolean("minbatsui", true)) {
             minbatsuiBool = true;
@@ -99,6 +106,14 @@ public class ModsFragment extends Fragment {
             minclockaodBool = true;
         }
 
+        if (sharedPrefs.getBoolean("isv20", true)) {
+            isV20 = true;
+        } else {
+            isV20 = false;
+            view.findViewById(R.id.minbatstat_imm_switch).setVisibility(View.GONE);
+            view.findViewById(R.id.minclockimm_switch).setVisibility(View.GONE);
+        }
+
         try {
             wideData();
             minBatImm();
@@ -107,9 +122,20 @@ public class ModsFragment extends Fragment {
             minClockAOD();
             minClockImm();
             minClockSUI();
+            debug();
         } catch (Exception e) {}
 
         return view;
+    }
+
+    public void debug() {
+        debug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int value = Settings.System.getInt(activity.getContentResolver(), "wide_data", 0);
+                Toast.makeText(activity.getApplicationContext(), value, Toast.LENGTH_LONG);
+            }
+        });
     }
 
     public void wideData() throws IOException {

@@ -31,6 +31,7 @@ public class NoModsFragment extends Fragment {
     MainActivity activity;
 
     public boolean enabled;
+    public boolean isV20;
     public SharedPreferences sharedPrefs;
 
     public TextInputEditText RedQT;
@@ -178,6 +179,14 @@ public class NoModsFragment extends Fragment {
         RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 0)));
         GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 0)));
         BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 0)));
+
+        if (sharedPrefs.getBoolean("isv20", true)) {
+            isV20 = true;
+        } else {
+            isV20 = false;
+            view.findViewById(R.id.qtools).setVisibility(View.GONE);
+            view.findViewById(R.id.sig).setVisibility(View.GONE);
+        }
 
         try {
 //            qtOption();

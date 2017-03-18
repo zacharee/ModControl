@@ -24,27 +24,17 @@
             android:textColor="@android:color/primary_text_light"
             android:textSize="26sp" />
 
-        <LinearLayout
-            android:id="@+id/enabled"
+        <Switch
+            android:id="@+id/enable_switch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            tools:ignore="InefficientWeight">
-
-            <Switch
-                android:id="@+id/enable_switch"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:switchMinWidth="50dp"
-                android:text="@string/enabled"
-                android:textColor="@android:color/tertiary_text_light"
-                android:textSize="20sp"
-                tools:ignore="NestedWeights" />
-        </LinearLayout>
+            android:switchMinWidth="50dp"
+            android:text="@string/enabled"
+            android:textColor="@android:color/tertiary_text_light"
+            android:textSize="20sp"
+            tools:ignore="NestedWeights" />
 
         <LinearLayout
             android:id="@+id/has_mod"
@@ -87,6 +77,46 @@
             android:text="This app requires that you have the corresponding mod installed! Please visit the XDA thread in the About page"
             android:textAlignment="center"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="Model"
+            android:textAlignment="center"
+            android:textColor="@android:color/primary_text_light"
+            android:textSize="20sp" />
+
+        <RadioGroup
+            android:id="@+id/model_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/model_v20"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:gravity="right|center"
+                android:layoutDirection="rtl"
+                android:text="V20" />
+
+            <RadioButton
+                android:id="@+id/model_g5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:text="G5 " />
+
+        </RadioGroup>
 
     </LinearLayout>
 

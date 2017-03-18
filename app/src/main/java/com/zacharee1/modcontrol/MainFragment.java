@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -29,8 +32,12 @@ public class MainFragment extends Fragment {
     public View view;
     public boolean modInstalledBool;
     public boolean enabled;
+    public boolean isV20;
     public Switch enableSwitch;
-    NoModsFragment nomods = new NoModsFragment();
+
+    public RadioGroup modelType;
+    public RadioButton modelG5;
+    public RadioButton modelV20;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +78,11 @@ public class MainFragment extends Fragment {
             }
         });
 
+        modelType = (RadioGroup) view.findViewById(R.id.model_type);
+
+        modelG5 = (RadioButton) view.findViewById(R.id.model_g5);
+        modelV20 = (RadioButton) view.findViewById(R.id.model_v20);
+
         enableSwitch = (Switch) view.findViewById(R.id.enable_switch);
 
         enableSwitch.setChecked(sharedPrefs.getBoolean("enabled", true));
@@ -78,8 +90,17 @@ public class MainFragment extends Fragment {
             enabled = true;
         }
 
+        if (sharedPrefs.getBoolean("isv20", true)) {
+            isV20 = true;
+            modelV20.setChecked(true);
+        } else {
+            isV20 = false;
+            modelG5.setChecked(true);
+        }
+
         try {
             modEnable();
+            modelType();
         } catch (Exception e) {}
 
         return view;
@@ -161,6 +182,23 @@ public class MainFragment extends Fragment {
                             }
                         }
                     }).start();
+                }
+            }
+        });
+    }
+
+    public void modelType() throws IOException {
+        modelType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.model_g5) {
+                    SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("isv20", false);
+                    editor.apply();
+                } else if (checkedId == R.id.model_v20) {
+                    SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("isv20", true);
+                    editor.apply();
                 }
             }
         });

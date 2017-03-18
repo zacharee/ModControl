@@ -24,6 +24,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public boolean enabled;
+    public boolean isV20;
 
     Handler mHandler;
 
@@ -65,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (sharedPrefs.getBoolean("hasmod", true)) {
             modEnabledBool = true;
+        }
+
+        if (sharedPrefs.getBoolean("isv20", true)) {
+            isV20 = true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
                 }
-            }, 250);
+            }, 350);
         } else if (id == R.id.nav_settings) {
             final SettingsFragment fragment = new SettingsFragment();
             final FragmentManager fragmentManager = getFragmentManager();
@@ -192,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
                 }
-            }, 250);
+            }, 350);
         } else if (id == R.id.nav_nomods) {
             final NoModsFragment fragment = new NoModsFragment();
             final FragmentManager fragmentManager = getFragmentManager();
@@ -202,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
                 }
-            }, 250);
+            }, 350);
         } else if (id == R.id.nav_mods) {
             final ModsFragment fragment = new ModsFragment();
             final FragmentManager fragmentManager = getFragmentManager();
@@ -212,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
                 }
-            }, 250);
+            }, 350);
         } else if (id == R.id.nav_credits) {
             final CreditsFragment fragment = new CreditsFragment();
             final FragmentManager fragmentManager = getFragmentManager();
@@ -222,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
                 }
-            }, 250);
+            }, 350);
         }
         return true;
     }
