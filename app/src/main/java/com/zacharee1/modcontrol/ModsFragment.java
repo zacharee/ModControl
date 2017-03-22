@@ -24,8 +24,6 @@ public class ModsFragment extends Fragment {
     public View view;
     MainActivity activity;
 
-    public Button debug;
-
     public SharedPreferences sharedPrefs;
     public boolean enabled;
     public boolean isV20;
@@ -68,8 +66,6 @@ public class ModsFragment extends Fragment {
         clockstat = (Switch) view.findViewById(R.id.minclockstat_switch);
         clockaod = (Switch) view.findViewById(R.id.minclockaod_switch);
         clockstatImm = (Switch) view.findViewById(R.id.minclockimm_switch);
-
-        debug = (Button) view.findViewById(R.id.check_db);
 
         batstat.setChecked(sharedPrefs.getBoolean("minbatsui", true));
         if (sharedPrefs.getBoolean("minbatsui", true)) {
@@ -122,21 +118,11 @@ public class ModsFragment extends Fragment {
             minClockAOD();
             minClockImm();
             minClockSUI();
-            debug();
         } catch (Exception e) {}
 
         return view;
     }
 
-    public void debug() {
-        debug.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int value = Settings.System.getInt(activity.getContentResolver(), "wide_data", 0);
-                Toast.makeText(activity.getApplicationContext(), value, Toast.LENGTH_LONG);
-            }
-        });
-    }
 
     public void wideData() throws IOException {
         wideData.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
