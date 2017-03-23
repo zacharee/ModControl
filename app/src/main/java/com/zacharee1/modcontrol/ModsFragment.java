@@ -55,7 +55,7 @@ public class ModsFragment extends Fragment {
 
         sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
-        if (sharedPrefs.getBoolean("enabled", true)) {
+        if (sharedPrefs.getBoolean("enabled", false)) {
             enabled = true;
         }
 
@@ -67,42 +67,42 @@ public class ModsFragment extends Fragment {
         clockaod = (Switch) view.findViewById(R.id.minclockaod_switch);
         clockstatImm = (Switch) view.findViewById(R.id.minclockimm_switch);
 
-        batstat.setChecked(sharedPrefs.getBoolean("minbatsui", true));
-        if (sharedPrefs.getBoolean("minbatsui", true)) {
+        batstat.setChecked(sharedPrefs.getBoolean("minbatsui", false));
+        if (sharedPrefs.getBoolean("minbatsui", false)) {
             minbatsuiBool = true;
         }
 
-        batstatImm.setChecked(sharedPrefs.getBoolean("minbatimm", true));
-        if (sharedPrefs.getBoolean("minbatimm", true)) {
+        batstatImm.setChecked(sharedPrefs.getBoolean("minbatimm", false));
+        if (sharedPrefs.getBoolean("minbatimm", false)) {
             minbatimmBool = true;
         }
 
-        bataod.setChecked(sharedPrefs.getBoolean("minbataod", true));
-        if (sharedPrefs.getBoolean("minbataod", true)) {
+        bataod.setChecked(sharedPrefs.getBoolean("minbataod", false));
+        if (sharedPrefs.getBoolean("minbataod", false)) {
             minbataodBool = true;
         }
 
-        wideData.setChecked(sharedPrefs.getBoolean("signal_wide", true));
-        if (sharedPrefs.getBoolean("signal_wide", true)) {
+        wideData.setChecked(sharedPrefs.getBoolean("signal_wide", false));
+        if (sharedPrefs.getBoolean("signal_wide", false)) {
             widedataBool = true;
         }
 
-        clockstat.setChecked(sharedPrefs.getBoolean("minclocksui", true));
-        if (sharedPrefs.getBoolean("minclocksui", true)) {
+        clockstat.setChecked(sharedPrefs.getBoolean("minclocksui", false));
+        if (sharedPrefs.getBoolean("minclocksui", false)) {
             minclocksuiBool = true;
         }
 
-        clockstatImm.setChecked(sharedPrefs.getBoolean("minclockimm", true));
-        if (sharedPrefs.getBoolean("minclockimm", true)) {
+        clockstatImm.setChecked(sharedPrefs.getBoolean("minclockimm", false));
+        if (sharedPrefs.getBoolean("minclockimm", false)) {
             minclockimmBool = true;
         }
 
-        clockaod.setChecked(sharedPrefs.getBoolean("minclockaod", true));
-        if (sharedPrefs.getBoolean("minclockaod", true)) {
+        clockaod.setChecked(sharedPrefs.getBoolean("minclockaod", false));
+        if (sharedPrefs.getBoolean("minclockaod", false)) {
             minclockaodBool = true;
         }
 
-        if (sharedPrefs.getBoolean("isv20", true)) {
+        if (sharedPrefs.getBoolean("isv20", false)) {
             isV20 = true;
         } else {
             isV20 = false;

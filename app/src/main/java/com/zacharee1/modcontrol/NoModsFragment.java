@@ -1,7 +1,7 @@
 package com.zacharee1.modcontrol;
 
 /**
- * Created by Zacha on 3/10/2017.
+ * Created by Zacha on 3/1/2017.
  */
 
 import android.app.Fragment;
@@ -141,25 +141,25 @@ public class NoModsFragment extends Fragment {
         applySig = (Button) view.findViewById(R.id.apply_sig_color);
         applyAODSig = (Button) view.findViewById(R.id.apply_aod_sig_color);
 
-        redQTSeek.setProgress(sharedPrefs.getInt("red", 0));
-        greenQTSeek.setProgress(sharedPrefs.getInt("green", 0));
-        blueQTSeek.setProgress(sharedPrefs.getInt("blue", 0));
-        redSigSeek.setProgress(sharedPrefs.getInt("redsig", 0));
-        greenSigSeek.setProgress(sharedPrefs.getInt("greensig", 0));
-        blueSigSeek.setProgress(sharedPrefs.getInt("bluesig", 0));
-        redAODSigSeek.setProgress(sharedPrefs.getInt("redsigaod", 0));
-        greenAODSigSeek.setProgress(sharedPrefs.getInt("greensigaod", 0));
-        blueAODSigSeek.setProgress(sharedPrefs.getInt("bluesigaod", 0));
+        redQTSeek.setProgress(sharedPrefs.getInt("red", 255));
+        greenQTSeek.setProgress(sharedPrefs.getInt("green", 255));
+        blueQTSeek.setProgress(sharedPrefs.getInt("blue", 255));
+        redSigSeek.setProgress(sharedPrefs.getInt("redsig", 255));
+        greenSigSeek.setProgress(sharedPrefs.getInt("greensig", 255));
+        blueSigSeek.setProgress(sharedPrefs.getInt("bluesig", 255));
+        redAODSigSeek.setProgress(sharedPrefs.getInt("redsigaod", 255));
+        greenAODSigSeek.setProgress(sharedPrefs.getInt("greensigaod", 255));
+        blueAODSigSeek.setProgress(sharedPrefs.getInt("bluesigaod", 255));
 
-        redIntQT = sharedPrefs.getInt("red", 0);
-        greenIntQT = sharedPrefs.getInt("green", 0);
-        blueIntQT = sharedPrefs.getInt("blue", 0);
-        redIntSig = sharedPrefs.getInt("redsig", 0);
-        greenIntSig = sharedPrefs.getInt("greensig", 0);
-        blueIntSig = sharedPrefs.getInt("bluesig", 0);
-        redIntAODSig = sharedPrefs.getInt("redsigaod", 0);
-        greenIntAODSig = sharedPrefs.getInt("greensigaod", 0);
-        blueIntAODSig = sharedPrefs.getInt("bluesigaod", 0);
+        redIntQT = sharedPrefs.getInt("red", 255);
+        greenIntQT = sharedPrefs.getInt("green", 255);
+        blueIntQT = sharedPrefs.getInt("blue", 255);
+        redIntSig = sharedPrefs.getInt("redsig", 255);
+        greenIntSig = sharedPrefs.getInt("greensig", 255);
+        blueIntSig = sharedPrefs.getInt("bluesig", 255);
+        redIntAODSig = sharedPrefs.getInt("redsigaod", 255);
+        greenIntAODSig = sharedPrefs.getInt("greensigaod", 255);
+        blueIntAODSig = sharedPrefs.getInt("bluesigaod", 255);
 
         QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
         SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
@@ -170,15 +170,15 @@ public class NoModsFragment extends Fragment {
         SigPreview.setColorFilter(SigColor);
         AODSigPreview.setColorFilter(AODSigColor);
 
-        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 0)));
-        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 0)));
-        BlueQT.setText(String.valueOf(sharedPrefs.getInt("blue", 0)));
-        RedSig.setText(String.valueOf(sharedPrefs.getInt("redsig", 0)));
-        GreenSig.setText(String.valueOf(sharedPrefs.getInt("greensig", 0)));
-        BlueSig.setText(String.valueOf(sharedPrefs.getInt("bluesig", 0)));
-        RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 0)));
-        GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 0)));
-        BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 0)));
+        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 255)));
+        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 255)));
+        BlueQT.setText(String.valueOf(sharedPrefs.getInt("blue", 255)));
+        RedSig.setText(String.valueOf(sharedPrefs.getInt("redsig", 255)));
+        GreenSig.setText(String.valueOf(sharedPrefs.getInt("greensig", 255)));
+        BlueSig.setText(String.valueOf(sharedPrefs.getInt("bluesig", 255)));
+        RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 255)));
+        GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 255)));
+        BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 255)));
 
         if (sharedPrefs.getBoolean("isv20", true)) {
             isV20 = true;

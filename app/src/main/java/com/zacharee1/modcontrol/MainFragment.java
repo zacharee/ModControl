@@ -138,9 +138,9 @@ public class MainFragment extends Fragment {
                     editor.putInt("greensig", 255);
                     editor.putInt("bluesig", 255);
 
-                    editor.putInt("redaodsig", 255);
-                    editor.putInt("greenaodsig", 255);
-                    editor.putInt("blueaodsig", 255);
+                    editor.putInt("redsigaod", 255);
+                    editor.putInt("greensigaod", 255);
+                    editor.putInt("bluesigaod", 255);
 
                     editor.apply();
                     enabled = false;
