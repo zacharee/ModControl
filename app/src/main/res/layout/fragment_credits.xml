@@ -79,8 +79,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ModControl"
-                    android:textSize="14sp" />
+                    android:text="ModControl\nPlay Store" />
 
                 <Button
                     android:id="@+id/play_store_installer"
@@ -88,14 +87,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ModInstaller"
-                    android:textSize="14sp" />
+                    android:text="ModInstaller\nPlay Store" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -104,9 +103,8 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="XDA"
+                    android:text="XDA Thread"
                     android:textSize="14sp" />
             </LinearLayout>
 
