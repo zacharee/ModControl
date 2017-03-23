@@ -11,98 +11,398 @@
         android:layout_height="match_parent"
         tools:ignore="UselessParent">
 
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="10dp">
-
         <LinearLayout
-            android:id="@+id/qtools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/qt_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/colored_quick_toggles"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp">
 
             <LinearLayout
+                android:id="@+id/qtools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/qt_sliders"
+                <TextView
+                    android:id="@+id/qt_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <SeekBar
-                        android:id="@+id/redqt_seek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#f00"
-                        android:progressTint="#f00"
-                        android:thumbTint="#f00"
-                        android:tickMarkTint="#f00" />
-
-                    <SeekBar
-                        android:id="@+id/greenqt_seek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#0f0"
-                        android:progressTint="#0f0"
-                        android:thumbTint="#0f0"
-                        android:tickMarkTint="#0f0" />
-
-                    <SeekBar
-                        android:id="@+id/blueqt_seek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#00f"
-                        android:progressTint="#00f"
-                        android:thumbTint="#00f"
-                        android:tickMarkTint="#00f" />
-
-                </LinearLayout>
+                    android:text="@string/colored_quick_toggles"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
                 <LinearLayout
-                    android:layout_width="106dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/qt_sliders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/redqt_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#f00"
+                            android:progressTint="#f00"
+                            android:thumbTint="#f00"
+                            android:tickMarkTint="#f00" />
+
+                        <SeekBar
+                            android:id="@+id/greenqt_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#0f0"
+                            android:progressTint="#0f0"
+                            android:thumbTint="#0f0"
+                            android:tickMarkTint="#0f0" />
+
+                        <SeekBar
+                            android:id="@+id/blueqt_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#00f"
+                            android:progressTint="#00f"
+                            android:thumbTint="#00f"
+                            android:tickMarkTint="#00f" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="106dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="52dp"
+                            android:layout_height="52dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/imageView4"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/bt_on_preview_background" />
+
+                            <ImageView
+                                android:id="@+id/colorqt_preview_on"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_weight="1"
+                                android:cropToPadding="false"
+                                android:elevation="0dp"
+                                app:srcCompat="@drawable/bt_on_preview" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="52dp"
+                            android:layout_height="52dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/imageView6"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                app:srcCompat="@drawable/bt_on_preview_background" />
+
+                            <ImageView
+                                android:id="@+id/colorqt_preview_off"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                app:srcCompat="@drawable/bt_off_preview" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/qt_text_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/red_qt_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="R / 0-255"
+                            android:inputType="phone" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/green_qt_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="G / 0-255"
+                            android:inputType="phone" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/blue_qt_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="B / 0-255"
+                            android:inputType="phone" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/apply_qt_color"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Apply" />
+
+                </LinearLayout>
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_tool1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/white_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#ccc"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/white" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/red_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#D32F2F"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/red" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/green_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#689F38"-->
+                <!--android:text="@string/green" />-->
+
+                <!--</RadioGroup>-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_tool2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/blue_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#303F9F"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/blue"-->
+                <!--android:textAlignment="viewStart" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/purple_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#7B1FA2"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/purple" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/multi_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#000"-->
+                <!--android:text="@string/multi" />-->
+
+                <!--</RadioGroup>-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_tool3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/orange_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#FF5722"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/orange"-->
+                <!--android:textAlignment="viewStart" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/yellow_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#000"-->
+                <!--android:checked="false"-->
+                <!--android:text="Yellow"-->
+                <!--app:buttonTint="#FFC107" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/dummy2_tool"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#000"-->
+                <!--android:text="@string/suggest_one" />-->
+
+                <!--</RadioGroup>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sig"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sig_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/colored_signature"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/sig_sliders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/redsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#f00"
+                            android:progressTint="#f00"
+                            android:thumbTint="#f00"
+                            android:tickMarkTint="#f00" />
+
+                        <SeekBar
+                            android:id="@+id/greensig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#0f0"
+                            android:progressTint="#0f0"
+                            android:thumbTint="#0f0"
+                            android:tickMarkTint="#0f0" />
+
+                        <SeekBar
+                            android:id="@+id/bluesig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#00f"
+                            android:progressTint="#00f"
+                            android:thumbTint="#00f"
+                            android:tickMarkTint="#00f" />
+
+                    </LinearLayout>
 
                     <FrameLayout
-                        android:layout_width="52dp"
+                        android:layout_width="106dp"
                         android:layout_height="52dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/imageView3"
                             android:layout_width="52dp"
                             android:layout_height="52dp"
                             android:layout_gravity="center_vertical|center_horizontal"
@@ -110,785 +410,485 @@
                             app:srcCompat="@drawable/bt_on_preview_background" />
 
                         <ImageView
-                            android:id="@+id/colorqt_preview_on"
+                            android:id="@+id/colorsig_preview"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:layout_weight="1"
-                            android:cropToPadding="false"
                             android:elevation="0dp"
-                            app:srcCompat="@drawable/bt_on_preview" />
-
+                            android:padding="10dp"
+                            app:srcCompat="@drawable/sig_letter_good" />
                     </FrameLayout>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sig_text_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/red_sig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="R / 0-255"
+                            android:inputType="phone" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/green_sig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="G / 0-255"
+                            android:inputType="phone" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/blue_sig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="B / 0-255"
+                            android:inputType="phone" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/apply_sig_color"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Apply" />
+
+                </LinearLayout>
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_sig1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/white_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#ccc"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/white" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/red_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#D32F2F"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/red" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/green_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#689F38"-->
+                <!--android:text="@string/green" />-->
+
+                <!--</RadioGroup>-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_sig2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/blue_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#303F9F"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/blue"-->
+                <!--android:textAlignment="viewStart" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/purple_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#7B1FA2"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/purple" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/orange_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#FF5722"-->
+                <!--android:text="@string/orange" />-->
+
+                <!--</RadioGroup>-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_sig3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/yellow_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#303F9F"-->
+                <!--android:checked="false"-->
+                <!--android:text="Yellow"-->
+                <!--android:textAlignment="viewStart"-->
+                <!--app:buttonTint="#FFC107" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/dummy_sig1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#7B1FA2"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/suggest_one"-->
+                <!--app:buttonTint="#000" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/dummy_sig2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#FF5722"-->
+                <!--android:text="@string/suggest_one"-->
+                <!--app:buttonTint="#000" />-->
+
+                <!--</RadioGroup>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sig_aod"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sig_aod_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/colored_aod_signature"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/aod_sig_sliders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/redaodsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#f00"
+                            android:progressTint="#f00"
+                            android:thumbTint="#f00"
+                            android:tickMarkTint="#f00" />
+
+                        <SeekBar
+                            android:id="@+id/greenaodsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#0f0"
+                            android:progressTint="#0f0"
+                            android:thumbTint="#0f0"
+                            android:tickMarkTint="#0f0" />
+
+                        <SeekBar
+                            android:id="@+id/blueaodsig_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
+                            android:max="255"
+                            android:progressBackgroundTint="#00f"
+                            android:progressTint="#00f"
+                            android:thumbTint="#00f"
+                            android:tickMarkTint="#00f" />
+
+                    </LinearLayout>
+
                     <FrameLayout
-                        android:layout_width="52dp"
+                        android:layout_width="106dp"
                         android:layout_height="52dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/imageView6"
+                            android:id="@+id/imageView5"
                             android:layout_width="52dp"
                             android:layout_height="52dp"
                             android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_weight="1"
                             app:srcCompat="@drawable/bt_on_preview_background" />
 
                         <ImageView
-                            android:id="@+id/colorqt_preview_off"
+                            android:id="@+id/coloraodsig_preview"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            app:srcCompat="@drawable/bt_off_preview" />
+                            android:layout_weight="1"
+                            android:elevation="0dp"
+                            android:padding="10dp"
+                            app:srcCompat="@drawable/sig_letter_good" />
                     </FrameLayout>
+
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/qt_text_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/red_qt_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="R / 0-255"
-                        android:inputType="phone" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/green_qt_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="G / 0-255"
-                        android:inputType="phone" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/blue_qt_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="B / 0-255"
-                        android:inputType="phone" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/apply_qt_color"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="Apply" />
-
-            </LinearLayout>
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_tool1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/white_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#ccc"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/white" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/red_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#D32F2F"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/red" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/green_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#689F38"-->
-            <!--android:text="@string/green" />-->
-
-            <!--</RadioGroup>-->
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_tool2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/blue_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#303F9F"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/blue"-->
-            <!--android:textAlignment="viewStart" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/purple_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#7B1FA2"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/purple" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/multi_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#000"-->
-            <!--android:text="@string/multi" />-->
-
-            <!--</RadioGroup>-->
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_tool3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/orange_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#FF5722"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/orange"-->
-            <!--android:textAlignment="viewStart" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/yellow_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#000"-->
-            <!--android:checked="false"-->
-            <!--android:text="Yellow"-->
-            <!--app:buttonTint="#FFC107" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/dummy2_tool"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#000"-->
-            <!--android:text="@string/suggest_one" />-->
-
-            <!--</RadioGroup>-->
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/sig"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/sig_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="@string/colored_signature"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/sig_sliders"
+                    android:id="@+id/aodsig_text_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
-                    <SeekBar
-                        android:id="@+id/redsig_seek"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#f00"
-                        android:progressTint="#f00"
-                        android:thumbTint="#f00"
-                        android:tickMarkTint="#f00" />
+                        android:layout_weight="1">
 
-                    <SeekBar
-                        android:id="@+id/greensig_seek"
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/red_aodsig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="R / 0-255"
+                            android:inputType="phone" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#0f0"
-                        android:progressTint="#0f0"
-                        android:thumbTint="#0f0"
-                        android:tickMarkTint="#0f0" />
+                        android:layout_weight="1">
 
-                    <SeekBar
-                        android:id="@+id/bluesig_seek"
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/green_aodsig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="G / 0-255"
+                            android:inputType="phone" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/blue_aodsig_val"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="B / 0-255"
+                            android:inputType="phone" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/apply_aod_sig_color"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#00f"
-                        android:progressTint="#00f"
-                        android:thumbTint="#00f"
-                        android:tickMarkTint="#00f" />
+                        android:text="Apply" />
 
                 </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="106dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_aod_sig1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
 
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/bt_on_preview_background" />
+                <!--<RadioButton-->
+                <!--android:id="@+id/white_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#ccc"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/white" />-->
 
-                    <ImageView
-                        android:id="@+id/colorsig_preview"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_weight="1"
-                        android:elevation="0dp"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/sig_letter_good" />
-                </FrameLayout>
+                <!--<RadioButton-->
+                <!--android:id="@+id/red_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#D32F2F"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/red" />-->
 
+                <!--<RadioButton-->
+                <!--android:id="@+id/green_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#689F38"-->
+                <!--android:text="@string/green" />-->
+
+                <!--</RadioGroup>-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_aod_sig2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/blue_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#303F9F"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/blue"-->
+                <!--android:textAlignment="viewStart" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/purple_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#7B1FA2"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/purple" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/orange_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#FF5722"-->
+                <!--android:text="@string/orange" />-->
+
+                <!--</RadioGroup>-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/color_aod_sig3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/yellow_aod_sig"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#303F9F"-->
+                <!--android:checked="false"-->
+                <!--android:text="Yellow"-->
+                <!--android:textAlignment="viewStart"-->
+                <!--app:buttonTint="#FFC107" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/dummy_aod_sig1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#7B1FA2"-->
+                <!--android:checked="false"-->
+                <!--android:text="@string/suggest_one"-->
+                <!--app:buttonTint="#000" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/dummy_aod_sig2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:buttonTint="#FF5722"-->
+                <!--android:text="@string/suggest_one"-->
+                <!--app:buttonTint="#000" />-->
+
+                <!--</RadioGroup>-->
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sig_text_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/red_sig_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="R / 0-255"
-                        android:inputType="phone" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/green_sig_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="G / 0-255"
-                        android:inputType="phone" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/blue_sig_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="B / 0-255"
-                        android:inputType="phone" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/apply_sig_color"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="Apply" />
-
-            </LinearLayout>
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_sig1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/white_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#ccc"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/white" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/red_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#D32F2F"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/red" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/green_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#689F38"-->
-            <!--android:text="@string/green" />-->
-
-            <!--</RadioGroup>-->
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_sig2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/blue_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#303F9F"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/blue"-->
-            <!--android:textAlignment="viewStart" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/purple_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#7B1FA2"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/purple" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/orange_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#FF5722"-->
-            <!--android:text="@string/orange" />-->
-
-            <!--</RadioGroup>-->
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_sig3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/yellow_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#303F9F"-->
-            <!--android:checked="false"-->
-            <!--android:text="Yellow"-->
-            <!--android:textAlignment="viewStart"-->
-            <!--app:buttonTint="#FFC107" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/dummy_sig1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#7B1FA2"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/suggest_one"-->
-            <!--app:buttonTint="#000" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/dummy_sig2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#FF5722"-->
-            <!--android:text="@string/suggest_one"-->
-            <!--app:buttonTint="#000" />-->
-
-            <!--</RadioGroup>-->
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/sig_aod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/sig_aod_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="@string/colored_aod_signature"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/aod_sig_sliders"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <SeekBar
-                        android:id="@+id/redaodsig_seek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#f00"
-                        android:progressTint="#f00"
-                        android:thumbTint="#f00"
-                        android:tickMarkTint="#f00" />
-
-                    <SeekBar
-                        android:id="@+id/greenaodsig_seek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#0f0"
-                        android:progressTint="#0f0"
-                        android:thumbTint="#0f0"
-                        android:tickMarkTint="#0f0" />
-
-                    <SeekBar
-                        android:id="@+id/blueaodsig_seek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_weight="1"
-                        android:max="255"
-                        android:progressBackgroundTint="#00f"
-                        android:progressTint="#00f"
-                        android:thumbTint="#00f"
-                        android:tickMarkTint="#00f" />
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="106dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/bt_on_preview_background" />
-
-                    <ImageView
-                        android:id="@+id/coloraodsig_preview"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_weight="1"
-                        android:elevation="0dp"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/sig_letter_good" />
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/aodsig_text_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/red_aodsig_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="R / 0-255"
-                        android:inputType="phone" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/green_aodsig_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="G / 0-255"
-                        android:inputType="phone" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/blue_aodsig_val"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="B / 0-255"
-                        android:inputType="phone" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/apply_aod_sig_color"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="Apply" />
-
-            </LinearLayout>
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_aod_sig1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/white_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#ccc"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/white" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/red_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#D32F2F"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/red" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/green_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#689F38"-->
-            <!--android:text="@string/green" />-->
-
-            <!--</RadioGroup>-->
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_aod_sig2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/blue_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#303F9F"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/blue"-->
-            <!--android:textAlignment="viewStart" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/purple_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#7B1FA2"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/purple" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/orange_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#FF5722"-->
-            <!--android:text="@string/orange" />-->
-
-            <!--</RadioGroup>-->
-
-            <!--<RadioGroup-->
-            <!--android:id="@+id/color_aod_sig3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/yellow_aod_sig"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#303F9F"-->
-            <!--android:checked="false"-->
-            <!--android:text="Yellow"-->
-            <!--android:textAlignment="viewStart"-->
-            <!--app:buttonTint="#FFC107" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/dummy_aod_sig1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#7B1FA2"-->
-            <!--android:checked="false"-->
-            <!--android:text="@string/suggest_one"-->
-            <!--app:buttonTint="#000" />-->
-
-            <!--<RadioButton-->
-            <!--android:id="@+id/dummy_aod_sig2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:buttonTint="#FF5722"-->
-            <!--android:text="@string/suggest_one"-->
-            <!--app:buttonTint="#000" />-->
-
-            <!--</RadioGroup>-->
-        </LinearLayout>
-    </LinearLayout>
 </FrameLayout>

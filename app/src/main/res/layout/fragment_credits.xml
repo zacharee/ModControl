@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Most tweaks require you flash a separate mod, but a few will work regardless"
+                android:text="You will have to install the mod to use this app."
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Visit the XDA thread to download the mod"
+                android:text="Visit the XDA thread or the Play Store link to download ModInstaller."
                 android:textAlignment="center"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
@@ -79,16 +79,37 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Play Store" />
+                    android:text="ModControl"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/play_store_installer"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ModInstaller"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/xda_thread"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="XDA" />
+                    android:text="XDA"
+                    android:textSize="14sp" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

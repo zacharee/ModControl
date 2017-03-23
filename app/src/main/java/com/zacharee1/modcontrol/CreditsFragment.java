@@ -21,6 +21,7 @@ public class CreditsFragment extends Fragment {
     MainActivity activity;
 
     Button playStore;
+    Button playStoreInstaller;
     Button XDA;
 
     @Override
@@ -32,6 +33,7 @@ public class CreditsFragment extends Fragment {
         }
 
         playStore = (Button) view.findViewById(R.id.play_store);
+        playStoreInstaller = (Button) view.findViewById(R.id.play_store_installer);
         XDA = (Button) view.findViewById(R.id.xda_thread);
 
         SharedPreferences sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
@@ -52,6 +54,19 @@ public class CreditsFragment extends Fragment {
                     public void run() {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse("market://details?id=com.zacharee1.modcontrol"));
+                        startActivity(intent);
+                    }
+                }).start();
+            }
+        });
+
+        playStoreInstaller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("market://details?id=zacharee1.com.modinstaller"));
                         startActivity(intent);
                     }
                 }).start();
