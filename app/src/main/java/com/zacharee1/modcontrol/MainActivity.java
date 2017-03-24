@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NoModsFragment nomods;
     MainFragment mainf;
     ModsFragment mods;
+    LogFragment logfrag;
 
     public int id;
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mods = new ModsFragment();
         nomods = new NoModsFragment();
         mainf = new MainFragment();
+        logfrag = new LogFragment();
         mHandler = new Handler();
 
         sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
@@ -144,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+        } else if (id == R.id.nav_log) {
+            LogFragment fragment = new LogFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         } else {
             MainFragment fragment = new MainFragment();
             FragmentManager fragmentManager = getFragmentManager();
@@ -220,6 +227,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }, 350);
         } else if (id == R.id.nav_credits) {
             final CreditsFragment fragment = new CreditsFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
+                    findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                }
+            }, 350);
+        } else if (id == R.id.nav_log) {
+            final LogFragment fragment = new LogFragment();
             final FragmentManager fragmentManager = getFragmentManager();
             mHandler.postDelayed(new Runnable() {
                 @Override
