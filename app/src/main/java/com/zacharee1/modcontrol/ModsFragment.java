@@ -35,6 +35,7 @@ public class ModsFragment extends Fragment {
     public Switch clockstat;
     public Switch clockaod;
     public Switch clockstatImm;
+    public Switch poweronplug;
 
     public boolean minbatsuiBool;
     public boolean minbatimmBool;
@@ -43,6 +44,7 @@ public class ModsFragment extends Fragment {
     public boolean minclockimmBool;
     public boolean minclockaodBool;
     public boolean widedataBool;
+    public boolean poweronplugBool;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class ModsFragment extends Fragment {
 
         sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
-        if (sharedPrefs.getBoolean("enabled", false)) {
+        if (sharedPrefs.getBoolean("enabled", true)) {
             enabled = true;
         }
 
@@ -66,6 +68,7 @@ public class ModsFragment extends Fragment {
         clockstat = (Switch) view.findViewById(R.id.minclockstat_switch);
         clockaod = (Switch) view.findViewById(R.id.minclockaod_switch);
         clockstatImm = (Switch) view.findViewById(R.id.minclockimm_switch);
+        poweronplug = (Switch) view.findViewById(R.id.poweron_plug);
 
         batstat.setChecked(sharedPrefs.getBoolean("minbatsui", false));
         if (sharedPrefs.getBoolean("minbatsui", false)) {
@@ -102,6 +105,11 @@ public class ModsFragment extends Fragment {
             minclockaodBool = true;
         }
 
+        poweronplug.setChecked(sharedPrefs.getBoolean("poweronplug", false));
+        if (sharedPrefs.getBoolean("poweronplug", false)) {
+            poweronplugBool = true;
+        }
+
         if (sharedPrefs.getBoolean("isv20", false)) {
             isV20 = true;
         } else {
@@ -118,11 +126,36 @@ public class ModsFragment extends Fragment {
             minClockAOD();
             minClockImm();
             minClockSUI();
+            powerOnPlug();
         } catch (Exception e) {}
 
         return view;
     }
 
+    public void powerOnPlug() throws IOException {
+        poweronplug.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (enabled) {
+                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                        editor.putBoolean("poweronplug", true);
+                        editor.apply();
+
+                        Settings.System.putInt(activity.cr, "usb_plugged", 1);
+                    }
+                } else {
+                    SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+                    editor.putBoolean("poweronplug", false);
+                    editor.apply();
+
+                    Settings.System.putInt(activity.cr, "usb_plugged", 0);
+                }
+                if (!enabled) {
+                    poweronplug.setChecked(false);
+                }
+            }
+        });
+    }
 
     public void wideData() throws IOException {
         wideData.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingTop="16dp"
         tools:ignore="UselessLeaf">
 
         <TextView
@@ -38,19 +38,43 @@
             android:text="/sdcard/Zacharee1Mods/output.log"
             android:textAlignment="center" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/refresh_log"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="Refresh" />
+
+            <Button
+                android:id="@+id/scroll_bottom"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="Scroll Bottom" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
         android:alpha="0.75"
         android:background="@color/colorPrimaryDark"
         android:elevation="0dp"
         android:translationZ="0dp" />
 
     <ScrollView
+        android:id="@+id/log_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -67,7 +91,8 @@
                 android:paddingBottom="16dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:paddingTop="16dp" />
+                android:paddingTop="16dp"
+                android:textIsSelectable="true" />
         </LinearLayout>
     </ScrollView>
 
