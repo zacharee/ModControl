@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,9 +95,16 @@ public class LogFragment extends Fragment {
     public void logView() throws IOException {
         String log = getStringFromFile(Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
         TextView logView = (TextView) view.findViewById(R.id.log_text);
-        final ScrollView scroll = (ScrollView) view.findViewById(R.id.log_scroll);
+        log = log.replace("\n", "<br />");
+        log = log.replace("try", "<font color='#FFA500'>try</font>");
+        log = log.replace("mkdir", "<font color='#FFA500'>mkdir</font>");
+        log = log.replace("cp", "<font color='#FFA500'>cp</font>");
+        log = log.replace("chmod", "<font color='#FFA500'>chmod</font>");
+        log = log.replace("Archive", "<font color='#FFA500'>Archive</font>");
+        log = log.replace("inflating", "<font color='#FFA500'>inflating</font>");
+        Spanned html = Html.fromHtml(log, Html.FROM_HTML_MODE_COMPACT);
 
-        logView.setText(log);
+        logView.setText(html);
 
 //        scroll.post(new Runnable() {
 //            @Override
