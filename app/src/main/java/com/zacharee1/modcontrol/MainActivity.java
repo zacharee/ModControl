@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.app.FragmentManager;
@@ -116,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (firstStartRoot) firstStart();
             reboot();
         } catch (Exception e) {
-            Log.e("error", e.getMessage());
+            Log.e("ModControl/E", e.getMessage());
+            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
         }
 
         id = sharedPrefs.getInt("navkey", 0);
@@ -274,7 +276,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         try {
                             sudo("killall com.android.systemui");
                         } catch (Exception e) {
-                            Log.e("error", e.getMessage());
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
                 }).start();
@@ -291,7 +294,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             sudo("killall com.lge.appwidget.signature");
                             sudo("killall com.lge.quicktools");
                         } catch (Exception e) {
-                            Log.e("error", e.getMessage());
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
                 }).start();
@@ -299,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void sudo(String...strings) throws IOException {
+    public void sudo(String...strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());

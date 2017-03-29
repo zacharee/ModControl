@@ -7,6 +7,7 @@ package com.zacharee1.modcontrol;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -101,7 +102,10 @@ public class MainFragment extends Fragment {
         try {
             modEnable();
             modelType();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Log.e("ModControl/E", e.getMessage());
+            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+        }
 
         return view;
     }
@@ -178,7 +182,8 @@ public class MainFragment extends Fragment {
                                 sudo("killall com.android.systemui");
                                 sudo("killall com.lge.signboard");
                             } catch (Exception e) {
-                                Log.e("error", e.getMessage());
+                                Log.e("ModControl/E", e.getMessage());
+                                sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                             }
                         }
                     }).start();
@@ -204,7 +209,7 @@ public class MainFragment extends Fragment {
         });
     }
 
-    public void sudo(String...strings) throws IOException {
+    public void sudo(String...strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());

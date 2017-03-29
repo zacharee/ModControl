@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="16dp"
+        android:paddingTop="10dp"
         tools:ignore="UselessLeaf">
 
         <TextView
@@ -50,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Refresh" />
+                android:text="Refresh"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/scroll_bottom"
@@ -87,7 +88,6 @@
                 android:id="@+id/log_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:paddingBottom="16dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"

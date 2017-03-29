@@ -28,10 +28,6 @@ public class SettingsFragment extends Fragment {
 
         SharedPreferences sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
-        try {
-
-        } catch (Exception e) {}
-
         return view;
     }
 }

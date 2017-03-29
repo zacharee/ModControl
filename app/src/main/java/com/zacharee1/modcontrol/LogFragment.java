@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,7 +49,8 @@ public class LogFragment extends Fragment {
             buttons();
             logView();
         } catch (Exception e) {
-            Log.e("ModControl", e.getMessage());
+            Log.e("ModControl/E", e.getMessage());
+            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
         }
 
         return view;
@@ -66,7 +68,8 @@ public class LogFragment extends Fragment {
                     logView();
 //                    scroll.fullScroll(View.FOCUS_DOWN);
                 } catch (Exception e) {
-                    Log.e("ModControl", e.getMessage());
+                    Log.e("ModControl/E", e.getMessage());
+                    sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                 }
             }
         });
@@ -81,12 +84,14 @@ public class LogFragment extends Fragment {
                             try {
                                 scroll.fullScroll(View.FOCUS_DOWN);
                             } catch (Exception e) {
-                                Log.e("ModControl", e.getMessage());
+                                Log.e("ModControl/E", e.getMessage());
+                                sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                             }
                         }
                     });
                 } catch (Exception e) {
-                    Log.e("ModControl", e.getMessage());
+                    Log.e("ModControl/E", e.getMessage());
+                    sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                 }
             }
         });
@@ -102,6 +107,12 @@ public class LogFragment extends Fragment {
         log = log.replace("chmod", "<font color='#FFA500'>chmod</font>");
         log = log.replace("Archive", "<font color='#FFA500'>Archive</font>");
         log = log.replace("inflating", "<font color='#FFA500'>inflating</font>");
+        log = log.replace("<br /><br /><br />", "<br />");
+        int ind = log.lastIndexOf("<br />");
+        if( ind>=0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
+        log = log.replace("true", "<font color='#00ff00'>true</font>");
+        log = log.replace("false", "<font color='#ff0000'>false</font>");
+
         Spanned html = Html.fromHtml(log, Html.FROM_HTML_MODE_COMPACT);
 
         logView.setText(html);
@@ -112,7 +123,7 @@ public class LogFragment extends Fragment {
 //                try {
 //                    scroll.fullScroll(View.FOCUS_DOWN);
 //                } catch (Exception e) {
-//                    Log.e("ModControl", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //            }
 //        });
@@ -136,5 +147,28 @@ public class LogFragment extends Fragment {
         //Make sure you close all streams.
         fin.close();
         return ret;
+    }
+
+    public void sudo(String...strings) {
+        try{
+            Process su = Runtime.getRuntime().exec("su");
+            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+            for (String s : strings) {
+                outputStream.writeBytes(s+"\n");
+                outputStream.flush();
+            }
+
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            try {
+                su.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            outputStream.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

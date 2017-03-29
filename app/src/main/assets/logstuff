@@ -1,0 +1,16 @@
+#!/system/bin/sh
+
+LOG="/data/media/0/Zacharee1Mods/output.log"
+sharedP="$1"
+tralse="$2"
+settings="$3"
+tf="$4"
+
+echo "<font color='#FF0000'>##########################################</font>"
+echo "<font color='#00FF00'>$(date)</font>"
+echo " " 
+echo "ModControl/I: <font color='#FFA500'>Setting:</font> $sharedP to $tralse"
+echo " " 
+echo "ModControl/I: <font color='#FFA500'>Setting:</font> $settings to $tf"
+echo "<font color='#FF0000'>##########################################</font>"
+echo "\n"

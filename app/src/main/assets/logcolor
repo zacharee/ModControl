@@ -1,0 +1,21 @@
+#!/system/bin/sh
+
+LOG="/data/media/0/Zacharee1Mods/output.log"
+
+prefR="$1"
+prefG="$2"
+prefB="$3"
+red="$4"
+green="$5"
+blue="$6"
+name="$7" 
+
+echo "<font color='#FF0000'>##########################################</font>"
+echo "<font color='#00FF00'>$(date)</font>"
+echo "<font color='#0000ff'>$name</font>"
+echo " " 
+echo "ModControl/I: <font color='#FFA500'>Setting:</font> <font color='#ff0000'>$prefR</font> to $red"
+echo "ModControl/I: <font color='#FFA500'>Setting:</font> <font color='#00ff00'>$prefG</font> to $green"
+echo "ModControl/I: <font color='#FFA500'>Setting:</font> <font color='#0000ff'>$prefB</font> to $blue"
+echo "<font color='#FF0000'>##########################################</font>"
+echo "\n"

@@ -7,10 +7,11 @@ android {
         applicationId "com.zacharee1.modcontrol"
         minSdkVersion 24
         targetSdkVersion 25
-        versionCode 24
-        versionName "3.13"
+        versionCode 25
+        versionName "3.14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }
     buildTypes {
         release {

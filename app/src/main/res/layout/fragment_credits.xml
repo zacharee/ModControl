@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     tools:context="layout.Credits">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -107,6 +105,40 @@
                     android:text="XDA Thread"
                     android:textSize="14sp" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/debug_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="16dp"
+                android:text="Debug Info"
+                android:textAlignment="center"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/vername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Version Name: "
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/vernum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Version Code: "
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/build_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Build Date: "
+                android:textAlignment="center" />
 
         </LinearLayout>
     </ScrollView>

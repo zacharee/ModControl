@@ -7,21 +7,29 @@ package com.zacharee1.modcontrol;
 import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -192,10 +200,15 @@ public class NoModsFragment extends Fragment {
 //            qtOption();
 //            sigOption();
 //            aodSigOption();
-            buttons();
+            buttons(applyQT, "red", "green", "blue", redIntQT, greenIntQT, blueIntQT, "QuickTools");
+            buttons(applySig, "redsig", "greensig", "bluesig", redIntSig, greenIntSig, blueIntSig, "Signature");
+            buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", redIntAODSig, greenIntAODSig, blueIntAODSig, "\"AOD Signature\"");
             sliders();
             textListeners();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Log.e("ModControl/E", e.getMessage());
+            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+        }
 
         return view;
     }
@@ -242,7 +255,8 @@ public class NoModsFragment extends Fragment {
                             QTPreviewOn.setColorFilter(QTColor);
                             QTPreviewOff.setColorFilter(QTColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -280,7 +294,8 @@ public class NoModsFragment extends Fragment {
                             QTPreviewOn.setColorFilter(QTColor);
                             QTPreviewOff.setColorFilter(QTColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -318,7 +333,8 @@ public class NoModsFragment extends Fragment {
                             QTPreviewOn.setColorFilter(QTColor);
                             QTPreviewOff.setColorFilter(QTColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -355,7 +371,8 @@ public class NoModsFragment extends Fragment {
                             SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
                             SigPreview.setColorFilter(SigColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -392,7 +409,8 @@ public class NoModsFragment extends Fragment {
                             SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
                             SigPreview.setColorFilter(SigColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -429,7 +447,8 @@ public class NoModsFragment extends Fragment {
                             SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
                             SigPreview.setColorFilter(SigColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -466,7 +485,8 @@ public class NoModsFragment extends Fragment {
                             AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
                             AODSigPreview.setColorFilter(AODSigColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -503,7 +523,8 @@ public class NoModsFragment extends Fragment {
                             AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
                             AODSigPreview.setColorFilter(AODSigColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -540,7 +561,8 @@ public class NoModsFragment extends Fragment {
                             AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
                             AODSigPreview.setColorFilter(AODSigColor);
                         } catch (NumberFormatException e) {
-
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                         }
                     }
             }
@@ -702,93 +724,126 @@ public class NoModsFragment extends Fragment {
         });
     }
 
-    public void buttons() throws IOException {
-        applyQT.setOnClickListener(new View.OnClickListener() {
+    public void buttons(final Button button, final String prefR, final String prefG, final String prefB, final int red, final int green, final int blue, final String name) throws IOException {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 new Thread(new Runnable() {
+                    @Override
                     public void run() {
                         ContentResolver cr = activity.getContentResolver();
 
-                        Settings.System.putInt(cr, "red", redIntQT);
-                        Settings.System.putInt(cr, "green", greenIntQT);
-                        Settings.System.putInt(cr, "blue", blueIntQT);
+                        Settings.System.putInt(cr, prefR, red);
+                        Settings.System.putInt(cr, prefG, green);
+                        Settings.System.putInt(cr, prefB, blue);
 
                         SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                        editor.putInt("red", redIntQT);
-                        editor.putInt("green", greenIntQT);
-                        editor.putInt("blue", blueIntQT);
+                        editor.putInt(prefR, red);
+                        editor.putInt(prefG, green);
+                        editor.putInt(prefB, blue);
                         editor.apply();
 
-                        try {
-                            sudo("killall com.lge.signboard");
-                            sudo("killall com.lge.appwidget.signature");
-                            sudo("killall com.lge.quicktools");
-                        } catch (Exception e) {
+                        logger(prefR, prefG, prefB, red, green, blue, name);
 
+                        try {
+                            sudo("killall com.lge.signboard || killall com.lge.appwidget.signature || killall com.lge.quicktools");
+                        } catch (Exception e) {
+                            Log.e("ModControl/E", e.getMessage());
                         }
                     }
                 }).start();
             }
         });
 
-        applySig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable () {
-                    public void run() {
-                        ContentResolver cr = activity.getContentResolver();
-
-                        Settings.System.putInt(cr, "redsig", redIntSig);
-                        Settings.System.putInt(cr, "greensig", greenIntSig);
-                        Settings.System.putInt(cr, "bluesig", blueIntSig);
-
-                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                        editor.putInt("redsig", redIntSig);
-                        editor.putInt("greensig", greenIntSig);
-                        editor.putInt("bluesig", blueIntSig);
-                        editor.apply();
-
-                        try {
-                            sudo("killall com.lge.signboard");
-                            sudo("killall com.lge.appwidget.signature");
-                            sudo("killall com.lge.quicktools");
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }).start();
-            }
-        });
-
-        applyAODSig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable () {
-                    public void run() {
-                        ContentResolver cr = activity.getContentResolver();
-
-                        Settings.System.putInt(cr, "redsigaod", redIntAODSig);
-                        Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
-                        Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
-
-                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                        editor.putInt("redsigaod", redIntAODSig);
-                        editor.putInt("greensigaod", greenIntAODSig);
-                        editor.putInt("bluesigaod", blueIntAODSig);
-                        editor.apply();
-
-                        try {
-                            sudo("killall com.lge.signboard");
-                            sudo("killall com.lge.appwidget.signature");
-                            sudo("killall com.lge.quicktools");
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }).start();
-            }
-        });
+//        applyQT.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new Thread(new Runnable() {
+//                    public void run() {
+//                        ContentResolver cr = activity.getContentResolver();
+//
+//                        Settings.System.putInt(cr, "red", redIntQT);
+//                        Settings.System.putInt(cr, "green", greenIntQT);
+//                        Settings.System.putInt(cr, "blue", blueIntQT);
+//
+//                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                        editor.putInt("red", redIntQT);
+//                        editor.putInt("green", greenIntQT);
+//                        editor.putInt("blue", blueIntQT);
+//                        editor.apply();
+//
+//                        try {
+//                            sudo("killall com.lge.signboard");
+//                            sudo("killall com.lge.appwidget.signature");
+//                            sudo("killall com.lge.quicktools");
+//                        } catch (Exception e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//                }).start();
+//            }
+//        });
+//
+//        applySig.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new Thread(new Runnable () {
+//                    public void run() {
+//                        ContentResolver cr = activity.getContentResolver();
+//
+//                        Settings.System.putInt(cr, "redsig", redIntSig);
+//                        Settings.System.putInt(cr, "greensig", greenIntSig);
+//                        Settings.System.putInt(cr, "bluesig", blueIntSig);
+//
+//                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                        editor.putInt("redsig", redIntSig);
+//                        editor.putInt("greensig", greenIntSig);
+//                        editor.putInt("bluesig", blueIntSig);
+//                        editor.apply();
+//
+//                        try {
+//                            sudo("killall com.lge.signboard");
+//                            sudo("killall com.lge.appwidget.signature");
+//                            sudo("killall com.lge.quicktools");
+//                        } catch (Exception e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//                }).start();
+//            }
+//        });
+//
+//        applyAODSig.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new Thread(new Runnable () {
+//                    public void run() {
+//                        ContentResolver cr = activity.getContentResolver();
+//
+//                        Settings.System.putInt(cr, "redsigaod", redIntAODSig);
+//                        Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
+//                        Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
+//
+//                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                        editor.putInt("redsigaod", redIntAODSig);
+//                        editor.putInt("greensigaod", greenIntAODSig);
+//                        editor.putInt("bluesigaod", blueIntAODSig);
+//                        editor.apply();
+//
+//                        try {
+//                            sudo("killall com.lge.signboard");
+//                            sudo("killall com.lge.appwidget.signature");
+//                            sudo("killall com.lge.quicktools");
+//                        } catch (Exception e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//                }).start();
+//            }
+//        });
     }
 
 //    public void qtOption() throws IOException {
@@ -799,7 +854,7 @@ public class NoModsFragment extends Fragment {
 //                    clearQTRad(qtGroup2);
 //                    clearQTRad(qtGroup3);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installqt = "installqt";
 //                if (checkedId == R.id.red_tool) {
@@ -813,7 +868,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -825,7 +880,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -841,7 +896,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -849,7 +904,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearQTRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -862,7 +917,7 @@ public class NoModsFragment extends Fragment {
 //                    clearQTRad(qtGroup1);
 //                    clearQTRad(qtGroup3);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installqt = "installqt";
 //                if (checkedId == R.id.purple_tool) {
@@ -873,7 +928,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.multi_tool) {
@@ -884,7 +939,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.blue_tool) {
@@ -895,7 +950,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -903,7 +958,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearQTRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -916,7 +971,7 @@ public class NoModsFragment extends Fragment {
 //                    clearQTRad(qtGroup1);
 //                    clearQTRad(qtGroup2);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installqt = "installqt";
 //                if (checkedId == R.id.orange_tool) {
@@ -927,7 +982,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.yellow_tool) {
@@ -938,7 +993,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installqt, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -946,7 +1001,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearQTRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -961,7 +1016,7 @@ public class NoModsFragment extends Fragment {
 //                    clearSigRad(sigGroup2);
 //                    clearSigRad(sigGroup3);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installsig = "installsig";
 //                if (checkedId == R.id.red_sig) {
@@ -972,7 +1027,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.white_sig) {
@@ -983,7 +1038,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.green_sig) {
@@ -994,7 +1049,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -1002,7 +1057,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearSigRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -1015,7 +1070,7 @@ public class NoModsFragment extends Fragment {
 //                    clearSigRad(sigGroup1);
 //                    clearSigRad(sigGroup3);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installsig = "installsig";
 //                if (checkedId == R.id.purple_sig) {
@@ -1026,7 +1081,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.orange_sig) {
@@ -1037,7 +1092,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.blue_sig) {
@@ -1048,7 +1103,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -1056,7 +1111,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearSigRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -1069,7 +1124,7 @@ public class NoModsFragment extends Fragment {
 //                    clearSigRad(sigGroup2);
 //                    clearSigRad(sigGroup1);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installsig = "installsig";
 //                if (checkedId == R.id.yellow_sig) {
@@ -1080,7 +1135,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -1088,7 +1143,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearSigRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -1103,7 +1158,7 @@ public class NoModsFragment extends Fragment {
 //                    clearAODSigRad(aodSigGroup2);
 //                    clearAODSigRad(aodSigGroup3);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installsig = "installsigaod";
 //                if (checkedId == R.id.red_aod_sig) {
@@ -1114,7 +1169,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.white_aod_sig) {
@@ -1125,7 +1180,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.green_aod_sig) {
@@ -1136,7 +1191,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -1144,7 +1199,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearAODSigRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -1157,7 +1212,7 @@ public class NoModsFragment extends Fragment {
 //                    clearAODSigRad(aodSigGroup1);
 //                    clearAODSigRad(aodSigGroup3);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installsig = "installsigaod";
 //                if (checkedId == R.id.purple_aod_sig) {
@@ -1168,7 +1223,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.orange_aod_sig) {
@@ -1179,7 +1234,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                } else if (checkedId == R.id.blue_aod_sig) {
@@ -1190,7 +1245,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -1198,7 +1253,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearAODSigRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -1211,7 +1266,7 @@ public class NoModsFragment extends Fragment {
 //                    clearAODSigRad(aodSigGroup2);
 //                    clearAODSigRad(aodSigGroup1);
 //                } catch (Exception e) {
-//                    Log.e("error", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                final String installsig = "installsigaod";
 //                if (checkedId == R.id.purple_aod_sig) {
@@ -1222,7 +1277,7 @@ public class NoModsFragment extends Fragment {
 //                            copyFile2(installsig, file);
 //                        } catch (Exception e) {
 //                            Toast.makeText(activity.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-//                            Log.e("error", e.getMessage());
+//                            Log.e("ModControl/E", e.getMessage());
 //                        }
 //                    }
 //                }
@@ -1230,7 +1285,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        clearAODSigRad(group);
 //                    } catch (Exception e) {
-//                        Log.e("error", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }
@@ -1300,7 +1355,7 @@ public class NoModsFragment extends Fragment {
 //                ) {
 //                    copyFile(in, out);
 //                } catch (Exception e) {
-//                    Log.e("ERROR", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //                try (
 //                        InputStream in = assetManager.open("zip");
@@ -1308,7 +1363,7 @@ public class NoModsFragment extends Fragment {
 //                ) {
 //                    copyFile(in, out);
 //                } catch (Exception e) {
-//                    Log.e("ERROR", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //            }
 //        }).start();
@@ -1319,7 +1374,7 @@ public class NoModsFragment extends Fragment {
 //                    try {
 //                        runScript(targetDirectory, targetFile, zipFile);
 //                    } catch (Exception e) {
-//                        Log.e("ERROR", e.getMessage());
+//                        Log.e("ModControl/E", e.getMessage());
 //                    }
 //                }
 //            }).start();
@@ -1342,13 +1397,52 @@ public class NoModsFragment extends Fragment {
 //                    sudo("chmod 777 /data/media/0/Zacharee1Mods/" + targetFile);
 //                    sudo("sh /data/media/0/Zacharee1Mods/" + targetFile + " " + zip);
 //                } catch (Exception e) {
-//                    Log.e("ERROR", e.getMessage());
+//                    Log.e("ModControl/E", e.getMessage());
 //                }
 //            }
 //        }).start();
 //    }
 
-    public void sudo(String...strings) throws IOException {
+    public void logger(final String prefR, final String prefG, final String prefB, final int red, final int green, final int blue, final String name) {
+        try {
+            copyFile2("logcolor");
+            sudo("sh /data/media/0/Zacharee1Mods/logcolor " + prefR + " " + prefG + " " + prefB + " " + red + " " + green + " " + blue + " " + name + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
+        } catch (Exception e) {
+            Log.e("ModControl/E", e.getMessage());
+        }
+    }
+
+    public void copyFile2(final String targetFile) throws IOException {
+        final String targetDirectory = Environment.getExternalStorageDirectory().toString() + "/Zacharee1Mods/";
+        final AssetManager assetManager = activity.getAssets();
+        File modFolder = new File(targetDirectory);
+
+        if (!modFolder.isDirectory()) {
+            boolean result = modFolder.mkdir();
+            if (!result) {
+                throw new IOException("Could not create nonexistent mod folder. Abort.");
+            }
+        }
+
+        try (
+                InputStream in = assetManager.open(targetFile);
+                OutputStream out = new FileOutputStream(targetDirectory + targetFile)
+        ) {
+            copyFile(in, out);
+        } catch (Exception e) {
+            Log.e("ModControl/E", e.getMessage());
+        }
+    }
+
+    public void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[10240];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
+
+    public void sudo(String...strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
