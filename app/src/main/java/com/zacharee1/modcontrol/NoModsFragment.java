@@ -200,9 +200,9 @@ public class NoModsFragment extends Fragment {
 //            qtOption();
 //            sigOption();
 //            aodSigOption();
-            buttons(applyQT, "red", "green", "blue", redIntQT, greenIntQT, blueIntQT, "QuickTools");
-            buttons(applySig, "redsig", "greensig", "bluesig", redIntSig, greenIntSig, blueIntSig, "Signature");
-            buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", redIntAODSig, greenIntAODSig, blueIntAODSig, "\"AOD Signature\"");
+            buttons(applyQT, "red", "green", "blue", "QuickTools");
+            buttons(applySig, "redsig", "greensig", "bluesig", "Signature");
+            buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", "\"AOD Signature\"");
             sliders();
             textListeners();
         } catch (Exception e) {
@@ -724,13 +724,31 @@ public class NoModsFragment extends Fragment {
         });
     }
 
-    public void buttons(final Button button, final String prefR, final String prefG, final String prefB, final int red, final int green, final int blue, final String name) throws IOException {
+    public void buttons(final Button button, final String prefR, final String prefG, final String prefB, final String name) throws IOException {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        int red = 255;
+                        int green = 255;
+                        int blue = 255;
+                        if (button == applyQT) {
+                            red = redIntQT;
+                            green = greenIntQT;
+                            blue = blueIntQT;
+                        } else if (button == applySig) {
+                            red = redIntSig;
+                            green = greenIntSig;
+                            blue = blueIntSig;
+                        } else if (button == applyAODSig) {
+                            red = redIntAODSig;
+                            green = greenIntAODSig;
+                            blue = blueIntAODSig;
+                        }
+
                         ContentResolver cr = activity.getContentResolver();
 
                         Settings.System.putInt(cr, prefR, red);
@@ -746,7 +764,15 @@ public class NoModsFragment extends Fragment {
                         logger(prefR, prefG, prefB, red, green, blue, name);
 
                         try {
-                            sudo("killall com.lge.signboard || killall com.lge.appwidget.signature || killall com.lge.quicktools");
+                            if (button == applyQT) {
+                                sudo("killall com.lge.quicktools");
+                            } else if (button == applySig) {
+                                sudo("killall com.lge.signboard");
+                            } else if (button == applyAODSig) {
+                                sudo("killall com.lge.signboard");
+                            } else {
+                                sudo("killall com.lge.quicktools ; killall com.lge.signboard");
+                            }
                         } catch (Exception e) {
                             Log.e("ModControl/E", e.getMessage());
                         }
@@ -1402,6 +1428,7 @@ public class NoModsFragment extends Fragment {
 //            }
 //        }).start();
 //    }
+
 
     public void logger(final String prefR, final String prefG, final String prefB, final int red, final int green, final int blue, final String name) {
         try {
