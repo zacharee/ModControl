@@ -27,7 +27,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View ModInstaller Log"
+            android:text="View ModInstaller/ModControl Log"
             android:textAlignment="center"
             android:textColor="@android:color/tertiary_text_light"
             android:textSize="18sp" />
@@ -51,6 +51,16 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="Refresh"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/delete_log"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="Delete Log"
                 android:textSize="14sp" />
 
             <Button

@@ -5,10 +5,15 @@ package com.zacharee1.modcontrol;
  */
 
 import android.app.Fragment;
+import android.bluetooth.BluetoothA2dp;
 import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
@@ -104,6 +109,50 @@ public class NoModsFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_nomods, container, false);
 
+
+        try {
+//            qtOption();
+//            sigOption();
+//            aodSigOption();
+            setStuffUp();
+            buttons(applyQT, "red", "green", "blue", "QuickTools");
+            buttons(applySig, "redsig", "greensig", "bluesig", "Signature");
+            buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", "\"AOD Signature\"");
+            sliders(redQTSeek, RedQT);
+            sliders(greenQTSeek, GreenQT);
+            sliders(blueQTSeek, BlueQT);
+            sliders(redSigSeek, RedSig);
+            sliders(greenSigSeek, GreenSig);
+            sliders(blueSigSeek, BlueSig);
+            sliders(redAODSigSeek, RedSigAOD);
+            sliders(greenAODSigSeek, GreenSigAOD);
+            sliders(blueAODSigSeek, BlueSigAOD);
+            textListeners(RedQT, redQTSeek);
+            textListeners(GreenQT, greenQTSeek);
+            textListeners(BlueQT, blueQTSeek);
+            textListeners(RedSig, redSigSeek);
+            textListeners(GreenSig, greenSigSeek);
+            textListeners(BlueSig, blueSigSeek);
+            textListeners(RedSigAOD, redAODSigSeek);
+            textListeners(GreenSigAOD, greenAODSigSeek);
+            textListeners(BlueSigAOD, blueAODSigSeek);
+        } catch (Exception e) {
+            Log.e("ModControl/E", e.getMessage());
+            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+        }
+
+        return view;
+    }
+
+//    public void clearAll() {
+//        try {
+//            clearQTRad(qtGroup1);
+//            clearQTRad(qtGroup2);
+//            clearQTRad(qtGroup3);
+//        } catch (Exception e) {}
+//    }
+
+    public void setStuffUp() {
         sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
         if (sharedPrefs.getBoolean("enabled", true)) {
@@ -195,36 +244,10 @@ public class NoModsFragment extends Fragment {
             view.findViewById(R.id.qtools).setVisibility(View.GONE);
             view.findViewById(R.id.sig).setVisibility(View.GONE);
         }
-
-        try {
-//            qtOption();
-//            sigOption();
-//            aodSigOption();
-            buttons(applyQT, "red", "green", "blue", "QuickTools");
-            buttons(applySig, "redsig", "greensig", "bluesig", "Signature");
-            buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", "\"AOD Signature\"");
-            sliders();
-            textListeners();
-        } catch (Exception e) {
-            Log.e("ModControl/E", e.getMessage());
-            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-        }
-
-        return view;
     }
 
-//    public void clearAll() {
-//        try {
-//            clearQTRad(qtGroup1);
-//            clearQTRad(qtGroup2);
-//            clearQTRad(qtGroup3);
-//        } catch (Exception e) {}
-//    }
-
-    public void textListeners() throws IOException {
-        final ContentResolver cr = activity.getContentResolver();
-
-        RedQT.addTextChangedListener(new TextWatcher() {
+    public void textListeners(final TextInputEditText text, final SeekBar seekBar) throws IOException {
+        text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -232,348 +255,410 @@ public class NoModsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                    if (RedQT.getText().toString().length() > 0) {
-                        try {
-                            redIntQT = Integer.decode(RedQT.getText().toString());
+                String val = text.getText().toString();
+                int valInt = Integer.decode(val);
+                if (val.length() > 0); {
+                    try {
 
-//                            Settings.System.putInt(cr, "red", redIntQT);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("red", redIntQT);
-//                            editor.apply();
+                        if (text == RedQT) {
+                            redIntQT = valInt;
+                        } else if (text == GreenQT) {
+                            greenIntQT = valInt;
+                        } else if (text == BlueQT) {
+                            blueIntQT = valInt;
+                        } else if (text == RedSig) {
+                            redIntSig = valInt;
+                        } else if (text == GreenSig) {
+                            greenIntSig = valInt;
+                        } else if (text == BlueSig) {
+                            blueIntSig = valInt;
+                        } else if (text == RedSigAOD) {
+                            redIntAODSig = valInt;
+                        } else if (text == GreenSigAOD) {
+                            greenIntAODSig = valInt;
+                        } else if (text == BlueSigAOD) {
+                            blueIntAODSig = valInt;
+                        }
 
-                            redQTSeek.setProgress(redIntQT);
+                        seekBar.setProgress(valInt);
 
-                            if (RedQT.isFocused()) {
-                                RedQT.setSelection(RedQT.getText().length());
-                            }
+                        if (text.isFocused()) text.setSelection(text.getText().length());
 
+                        if (text == RedQT || text == GreenQT || text == BlueQT) {
                             QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
                             QTPreviewOn.setColorFilter(QTColor);
                             QTPreviewOff.setColorFilter(QTColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+                        } else if (text == RedSig || text == GreenSig || text == BlueSig) {
+                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+                            SigPreview.setColorFilter(SigColor);
+                        } else if (text == RedSigAOD || text == GreenSigAOD || text == BlueSigAOD) {
+                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+                            AODSigPreview.setColorFilter(AODSigColor);
                         }
+                    } catch (Exception e) {
+                        Log.e("ModControl/E", e.getMessage());
+                        sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
                     }
+                }
             }
         });
 
-        GreenQT.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (GreenQT.getText().toString().length() > 0) {
-                        try {
-                            greenIntQT = Integer.decode(GreenQT.getText().toString());
-
-//                            Settings.System.putInt(cr, "green", greenIntQT);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("green", greenIntQT);
-//                            editor.apply();
-
-                            greenQTSeek.setProgress(greenIntQT);
-
-                            if (GreenQT.isFocused()) {
-                                GreenQT.setSelection(GreenQT.getText().length());
-                            }
-
-                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
-                            QTPreviewOn.setColorFilter(QTColor);
-                            QTPreviewOff.setColorFilter(QTColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        BlueQT.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (BlueQT.getText().toString().length() > 0) {
-                        try {
-                            blueIntQT = Integer.decode(BlueQT.getText().toString());
-
-//                            Settings.System.putInt(cr, "blue", blueIntQT);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("blue", blueIntQT);
-//                            editor.apply();
-
-                            blueQTSeek.setProgress(blueIntQT);
-
-                            if (BlueQT.isFocused()) {
-                                BlueQT.setSelection(BlueQT.getText().length());
-                            }
-
-                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
-                            QTPreviewOn.setColorFilter(QTColor);
-                            QTPreviewOff.setColorFilter(QTColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        RedSig.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (RedSig.getText().toString().length() > 0) {
-                        try {
-                            redIntSig = Integer.decode(RedSig.getText().toString());
+//        RedQT.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //
-//                            Settings.System.putInt(cr, "redsig", redIntSig);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("redsig", redIntSig);
-//                            editor.apply();
-
-                            redSigSeek.setProgress(redIntSig);
-
-                            if (RedSig.isFocused()) {
-                                RedSig.setSelection(RedSig.getText().length());
-                            }
-
-                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-                            SigPreview.setColorFilter(SigColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        GreenSig.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (GreenSig.getText().toString().length() > 0) {
-                        try {
-                            greenIntSig = Integer.decode(GreenSig.getText().toString());
-
-//                            Settings.System.putInt(cr, "greensig", greenIntSig);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("greensig", greenIntSig);
-//                            editor.apply();
-
-                            greenSigSeek.setProgress(greenIntSig);
-
-                            if (GreenSig.isFocused()) {
-                                GreenSig.setSelection(GreenSig.getText().length());
-                            }
-
-                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-                            SigPreview.setColorFilter(SigColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        BlueSig.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (BlueSig.getText().toString().length() > 0) {
-                        try {
-                            blueIntSig = Integer.decode(BlueSig.getText().toString());
-
-//                            Settings.System.putInt(cr, "bluesig", blueIntSig);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("bluesig", blueIntSig);
-//                            editor.apply();
-
-                            blueSigSeek.setProgress(blueIntSig);
-
-                            if (BlueSig.isFocused()) {
-                                BlueSig.setSelection(BlueSig.getText().length());
-                            }
-
-                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-                            SigPreview.setColorFilter(SigColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        RedSigAOD.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (RedSigAOD.getText().toString().length() > 0) {
-                        try {
-                            redIntAODSig = Integer.decode(RedSigAOD.getText().toString());
-
-//                            Settings.System.putInt(cr, "redsigaod", redIntAODSig);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("redsigaod", redIntAODSig);
-//                            editor.apply();
-
-                            redAODSigSeek.setProgress(redIntAODSig);
-
-                            if (RedSigAOD.isFocused()) {
-                                RedSigAOD.setSelection(RedSigAOD.getText().length());
-                            }
-
-                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-                            AODSigPreview.setColorFilter(AODSigColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        GreenSigAOD.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (GreenSigAOD.getText().toString().length() > 0) {
-                        try {
-                            greenIntAODSig = Integer.decode(GreenSigAOD.getText().toString());
-
-//                            Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("greensigaod", greenIntAODSig);
-//                            editor.apply();
-
-                            greenAODSigSeek.setProgress(greenIntAODSig);
-
-                            if (GreenSigAOD.isFocused()) {
-                                GreenSigAOD.setSelection(GreenSigAOD.getText().length());
-                            }
-
-                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-                            AODSigPreview.setColorFilter(AODSigColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
-
-        BlueSigAOD.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    if (BlueSigAOD.getText().toString().length() > 0) {
-                        try {
-                            blueIntAODSig = Integer.decode(BlueSigAOD.getText().toString());
-
-//                            Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
-//                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-//                            editor.putInt("bluesigaod", blueIntAODSig);
-//                            editor.apply();
-
-                            blueAODSigSeek.setProgress(blueIntAODSig);
-
-                            if (BlueSigAOD.isFocused()) {
-                                BlueSigAOD.setSelection(BlueSigAOD.getText().length());
-                            }
-
-                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-                            AODSigPreview.setColorFilter(AODSigColor);
-                        } catch (NumberFormatException e) {
-                            Log.e("ModControl/E", e.getMessage());
-                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                        }
-                    }
-            }
-        });
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (RedQT.getText().toString().length() > 0) {
+//                        try {
+//                            redIntQT = Integer.decode(RedQT.getText().toString());
+//
+////                            Settings.System.putInt(cr, "red", redIntQT);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("red", redIntQT);
+////                            editor.apply();
+//
+//                            redQTSeek.setProgress(redIntQT);
+//
+//                            if (RedQT.isFocused()) {
+//                                RedQT.setSelection(RedQT.getText().length());
+//                            }
+//
+//                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
+//                            QTPreviewOn.setColorFilter(QTColor);
+//                            QTPreviewOff.setColorFilter(QTColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        GreenQT.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (GreenQT.getText().toString().length() > 0) {
+//                        try {
+//                            greenIntQT = Integer.decode(GreenQT.getText().toString());
+//
+////                            Settings.System.putInt(cr, "green", greenIntQT);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("green", greenIntQT);
+////                            editor.apply();
+//
+//                            greenQTSeek.setProgress(greenIntQT);
+//
+//                            if (GreenQT.isFocused()) {
+//                                GreenQT.setSelection(GreenQT.getText().length());
+//                            }
+//
+//                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
+//                            QTPreviewOn.setColorFilter(QTColor);
+//                            QTPreviewOff.setColorFilter(QTColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        BlueQT.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (BlueQT.getText().toString().length() > 0) {
+//                        try {
+//                            blueIntQT = Integer.decode(BlueQT.getText().toString());
+//
+////                            Settings.System.putInt(cr, "blue", blueIntQT);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("blue", blueIntQT);
+////                            editor.apply();
+//
+//                            blueQTSeek.setProgress(blueIntQT);
+//
+//                            if (BlueQT.isFocused()) {
+//                                BlueQT.setSelection(BlueQT.getText().length());
+//                            }
+//
+//                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
+//                            QTPreviewOn.setColorFilter(QTColor);
+//                            QTPreviewOff.setColorFilter(QTColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        RedSig.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (RedSig.getText().toString().length() > 0) {
+//                        try {
+//                            redIntSig = Integer.decode(RedSig.getText().toString());
+////
+////                            Settings.System.putInt(cr, "redsig", redIntSig);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("redsig", redIntSig);
+////                            editor.apply();
+//
+//                            redSigSeek.setProgress(redIntSig);
+//
+//                            if (RedSig.isFocused()) {
+//                                RedSig.setSelection(RedSig.getText().length());
+//                            }
+//
+//                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+//                            SigPreview.setColorFilter(SigColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        GreenSig.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (GreenSig.getText().toString().length() > 0) {
+//                        try {
+//                            greenIntSig = Integer.decode(GreenSig.getText().toString());
+//
+////                            Settings.System.putInt(cr, "greensig", greenIntSig);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("greensig", greenIntSig);
+////                            editor.apply();
+//
+//                            greenSigSeek.setProgress(greenIntSig);
+//
+//                            if (GreenSig.isFocused()) {
+//                                GreenSig.setSelection(GreenSig.getText().length());
+//                            }
+//
+//                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+//                            SigPreview.setColorFilter(SigColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        BlueSig.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (BlueSig.getText().toString().length() > 0) {
+//                        try {
+//                            blueIntSig = Integer.decode(BlueSig.getText().toString());
+//
+////                            Settings.System.putInt(cr, "bluesig", blueIntSig);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("bluesig", blueIntSig);
+////                            editor.apply();
+//
+//                            blueSigSeek.setProgress(blueIntSig);
+//
+//                            if (BlueSig.isFocused()) {
+//                                BlueSig.setSelection(BlueSig.getText().length());
+//                            }
+//
+//                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+//                            SigPreview.setColorFilter(SigColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        RedSigAOD.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (RedSigAOD.getText().toString().length() > 0) {
+//                        try {
+//                            redIntAODSig = Integer.decode(RedSigAOD.getText().toString());
+//
+////                            Settings.System.putInt(cr, "redsigaod", redIntAODSig);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("redsigaod", redIntAODSig);
+////                            editor.apply();
+//
+//                            redAODSigSeek.setProgress(redIntAODSig);
+//
+//                            if (RedSigAOD.isFocused()) {
+//                                RedSigAOD.setSelection(RedSigAOD.getText().length());
+//                            }
+//
+//                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+//                            AODSigPreview.setColorFilter(AODSigColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        GreenSigAOD.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (GreenSigAOD.getText().toString().length() > 0) {
+//                        try {
+//                            greenIntAODSig = Integer.decode(GreenSigAOD.getText().toString());
+//
+////                            Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("greensigaod", greenIntAODSig);
+////                            editor.apply();
+//
+//                            greenAODSigSeek.setProgress(greenIntAODSig);
+//
+//                            if (GreenSigAOD.isFocused()) {
+//                                GreenSigAOD.setSelection(GreenSigAOD.getText().length());
+//                            }
+//
+//                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+//                            AODSigPreview.setColorFilter(AODSigColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
+//
+//        BlueSigAOD.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                    if (BlueSigAOD.getText().toString().length() > 0) {
+//                        try {
+//                            blueIntAODSig = Integer.decode(BlueSigAOD.getText().toString());
+//
+////                            Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
+////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+////                            editor.putInt("bluesigaod", blueIntAODSig);
+////                            editor.apply();
+//
+//                            blueAODSigSeek.setProgress(blueIntAODSig);
+//
+//                            if (BlueSigAOD.isFocused()) {
+//                                BlueSigAOD.setSelection(BlueSigAOD.getText().length());
+//                            }
+//
+//                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+//                            AODSigPreview.setColorFilter(AODSigColor);
+//                        } catch (NumberFormatException e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                        }
+//                    }
+//            }
+//        });
     }
 
-    public void sliders() throws IOException {
-        redQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    public void sliders(SeekBar seekBar, final TextInputEditText inputEditText) throws IOException {
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                RedQT.setText(String.valueOf(progress));
+                inputEditText.setText(String.valueOf(progress));
             }
 
             @Override
@@ -587,149 +672,165 @@ public class NoModsFragment extends Fragment {
             }
         });
 
-        greenQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    GreenQT.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        blueQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                BlueQT.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        redSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                RedSig.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        greenSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                GreenSig.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        blueSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                BlueSig.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        redAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                RedSigAOD.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        greenAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                GreenSigAOD.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        blueAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                BlueSigAOD.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+//        redQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                RedQT.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        greenQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                    GreenQT.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        blueQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                BlueQT.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        redSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                RedSig.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        greenSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                GreenSig.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        blueSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                BlueSig.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        redAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                RedSigAOD.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        greenAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                GreenSigAOD.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
+//
+//        blueAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                BlueSigAOD.setText(String.valueOf(progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//        });
     }
 
     public void buttons(final Button button, final String prefR, final String prefG, final String prefB, final String name) throws IOException {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                new Thread(new Runnable() {
+                Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
                         int red = 255;
@@ -763,21 +864,112 @@ public class NoModsFragment extends Fragment {
 
                         logger(prefR, prefG, prefB, red, green, blue, name);
 
-                        try {
-                            if (button == applyQT) {
-                                sudo("killall com.lge.quicktools");
-                            } else if (button == applySig) {
-                                sudo("killall com.lge.signboard");
-                            } else if (button == applyAODSig) {
-                                sudo("killall com.lge.signboard");
-                            } else {
-                                sudo("killall com.lge.quicktools ; killall com.lge.signboard");
-                            }
-                        } catch (Exception e) {
-                            Log.e("ModControl/E", e.getMessage());
+                        if (button == applyQT) {
+                            sudo("killall com.lge.quicktools");
+                        } else if (button == applySig) {
+                            sudo("killall com.lge.signboard");
+////                                Intent intent = new Intent("com.lge.signboard.intent.action.SET_WIDGET_SIGNATURE");
+////                                String flag = "flag_set_widget_signature";
+////
+////                                intent = intent.putExtra(flag, true);
+////
+////                                activity.startActivity(intent);
+//
+//                                String test = "content://com.lge.provider.signboard/signature?notify=true";
+//
+//                                Uri uri = Uri.parse(test);
+//
+//                                ContentValues cv = new ContentValues();
+//
+//                                String value = "value";
+//
+//                                cv.put(value, "TEST");
+//
+//                                String item = "item";
+//                                String[] on = {"screen_on_sharing"};
+//
+//                                cr.update(uri, cv, item, null);
+//
+                        } else if (button == applyAODSig) {
+                            sudo("killall com.lge.signboard");
+                        } else {
+                            sudo("killall com.lge.quicktools ; killall com.lge.signboard");
                         }
                     }
-                }).start();
+                };
+
+                new Thread(runnable).start();
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        int red = 255;
+//                        int green = 255;
+//                        int blue = 255;
+//                        if (button == applyQT) {
+//                            red = redIntQT;
+//                            green = greenIntQT;
+//                            blue = blueIntQT;
+//                        } else if (button == applySig) {
+//                            red = redIntSig;
+//                            green = greenIntSig;
+//                            blue = blueIntSig;
+//                        } else if (button == applyAODSig) {
+//                            red = redIntAODSig;
+//                            green = greenIntAODSig;
+//                            blue = blueIntAODSig;
+//                        }
+//
+//                        ContentResolver cr = activity.getContentResolver();
+//
+//                        Settings.System.putInt(cr, prefR, red);
+//                        Settings.System.putInt(cr, prefG, green);
+//                        Settings.System.putInt(cr, prefB, blue);
+//
+//                        SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//                        editor.putInt(prefR, red);
+//                        editor.putInt(prefG, green);
+//                        editor.putInt(prefB, blue);
+//                        editor.apply();
+//
+//                        logger(prefR, prefG, prefB, red, green, blue, name);
+//
+//                        try {
+//                            if (button == applyQT) {
+//                                sudo("killall com.lge.quicktools");
+//                            } else if (button == applySig) {
+//                                sudo("killall com.lge.signboard");
+//////                                Intent intent = new Intent("com.lge.signboard.intent.action.SET_WIDGET_SIGNATURE");
+//////                                String flag = "flag_set_widget_signature";
+//////
+//////                                intent = intent.putExtra(flag, true);
+//////
+//////                                activity.startActivity(intent);
+////
+////                                String test = "content://com.lge.provider.signboard/signature?notify=true";
+////
+////                                Uri uri = Uri.parse(test);
+////
+////                                ContentValues cv = new ContentValues();
+////
+////                                String value = "value";
+////
+////                                cv.put(value, "TEST");
+////
+////                                String item = "item";
+////                                String[] on = {"screen_on_sharing"};
+////
+////                                cr.update(uri, cv, item, null);
+////
+//                            } else if (button == applyAODSig) {
+//                                sudo("killall com.lge.signboard");
+//                            } else {
+//                                sudo("killall com.lge.quicktools ; killall com.lge.signboard");
+//                            }
+//                        } catch (Exception e) {
+//                            Log.e("ModControl/E", e.getMessage());
+//                        }
+//                    }
+//                }).start();
             }
         });
 
@@ -1428,7 +1620,6 @@ public class NoModsFragment extends Fragment {
 //            }
 //        }).start();
 //    }
-
 
     public void logger(final String prefR, final String prefG, final String prefB, final int red, final int green, final int blue, final String name) {
         try {
