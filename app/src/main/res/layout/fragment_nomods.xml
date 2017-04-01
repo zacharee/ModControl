@@ -51,14 +51,13 @@
 
                         <Spinner
                             android:id="@+id/qt_index"
-                            android:layout_width="match_parent"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
                             android:layout_marginTop="7dp"
                             android:layout_weight="1"
-                            android:gravity="center_horizontal"
                             android:paddingEnd="5dp"
-                            android:paddingStart="5dp" />
+                            android:paddingStart="5dp"
+                            android:spinnerMode="dialog" />
 
                         <SeekBar
                             android:id="@+id/redqt_seek"
@@ -355,7 +354,7 @@
                     android:id="@+id/sig_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/colored_signature"
                     android:textAlignment="center"
@@ -642,7 +641,7 @@
                     android:id="@+id/sig_aod_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="@string/colored_aod_signature"
                     android:textAlignment="center"

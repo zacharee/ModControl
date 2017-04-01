@@ -555,9 +555,9 @@ public class NoModsFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 String val = text.getText().toString();
-                int valInt = Integer.decode(val);
                 if (val.length() > 0); {
                     try {
+                        int valInt = Integer.decode(val);
                         if (text == RedQT) {
                             switch (qtIndex) {
                                 case 0:

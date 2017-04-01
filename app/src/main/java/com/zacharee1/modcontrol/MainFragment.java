@@ -134,9 +134,21 @@ public class MainFragment extends Fragment {
                     editor.putBoolean("minclockimm", false);
                     editor.putBoolean("minclockaod", false);
 
-                    editor.putInt("red", 255);
-                    editor.putInt("green", 255);
-                    editor.putInt("blue", 255);
+                    editor.putInt("redqt_0", 255);
+                    editor.putInt("greenqt_0", 255);
+                    editor.putInt("blueqt_0", 255);
+                    editor.putInt("redqt_1", 255);
+                    editor.putInt("greenqt_1", 255);
+                    editor.putInt("blueqt_1", 255);
+                    editor.putInt("redqt_2", 255);
+                    editor.putInt("greenqt_2", 255);
+                    editor.putInt("blueqt_2", 255);
+                    editor.putInt("redqt_3", 255);
+                    editor.putInt("greenqt_3", 255);
+                    editor.putInt("blueqt_3", 255);
+                    editor.putInt("redqt_4", 255);
+                    editor.putInt("greenqt_4", 255);
+                    editor.putInt("blueqt_4", 255);
 
                     editor.putInt("redsig", 255);
                     editor.putInt("greensig", 255);
@@ -145,6 +157,9 @@ public class MainFragment extends Fragment {
                     editor.putInt("redsigaod", 255);
                     editor.putInt("greensigaod", 255);
                     editor.putInt("bluesigaod", 255);
+
+                    editor.putBoolean("poweronplug", false);
+                    editor.putBoolean("chargewarning", false);
 
                     editor.apply();
                     enabled = false;
@@ -163,9 +178,21 @@ public class MainFragment extends Fragment {
                     Settings.System.putInt(activity.cr, "minclockimm", 1);
                     Settings.System.putInt(activity.cr, "minclockaod", 1);
 
-                    Settings.System.putInt(activity.getContentResolver(), "red", 255);
-                    Settings.System.putInt(activity.getContentResolver(), "green", 255);
-                    Settings.System.putInt(activity.getContentResolver(), "blue", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "redqt_0", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greenqt_0", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "blueqt_0", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "redqt_1", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greenqt_1", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "blueqt_1", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "redqt_2", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greenqt_2", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "blueqt_2", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "redqt_3", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greenqt_3", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "blueqt_3", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "redqt_4", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "greenqt_4", 255);
+                    Settings.System.putInt(activity.getContentResolver(), "blueqt_4", 255);
 
                     Settings.System.putInt(activity.getContentResolver(), "redsig", 255);
                     Settings.System.putInt(activity.getContentResolver(), "greensig", 255);
@@ -175,12 +202,13 @@ public class MainFragment extends Fragment {
                     Settings.System.putInt(activity.getContentResolver(), "greensigaod", 255);
                     Settings.System.putInt(activity.getContentResolver(), "bluesigaod", 255);
 
+                    Settings.System.putInt(activity.getContentResolver(), "poweronplug", 0);
+                    Settings.System.putInt(activity.getContentResolver(), "chargewarning", 1);
 
                     new Thread(new Runnable() {
                         public void run() {
                             try {
-                                sudo("killall com.android.systemui");
-                                sudo("killall com.lge.signboard");
+                                sudo("killall com.android.systemui ; killall com.lge.signboard ; killall com.lge.quicktools");
                             } catch (Exception e) {
                                 Log.e("ModControl/E", e.getMessage());
                                 sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
