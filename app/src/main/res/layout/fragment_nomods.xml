@@ -49,12 +49,23 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
+                        <Spinner
+                            android:id="@+id/qt_index"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="7dp"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:paddingEnd="5dp"
+                            android:paddingStart="5dp" />
+
                         <SeekBar
                             android:id="@+id/redqt_seek"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="6dp"
                             android:layout_weight="1"
                             android:hapticFeedbackEnabled="false"
                             android:max="255"
@@ -82,7 +93,7 @@
                             android:id="@+id/blueqt_seek"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
+                            android:layout_marginBottom="7dp"
                             android:layout_weight="1"
                             android:hapticFeedbackEnabled="false"
                             android:max="255"
@@ -145,6 +156,7 @@
                                 app:srcCompat="@drawable/bt_off_preview" />
 
                         </FrameLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>

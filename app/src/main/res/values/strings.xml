@@ -126,4 +126,13 @@
     <string name="email">zachary.wander@gmail.com</string>
     <string name="icon">icon</string>
     <string name="dark_mode">Dark Mode</string>
+
+    <string-array name="qt_index_options">
+        <item>1st Toggle</item>
+        <item>2nd Toggle</item>
+        <item>3rd Toggle</item>
+        <item>4th Toggle</item>
+        <item>5th Toggle</item>
+        <item>All Toggles</item>
+    </string-array>
 </resources>

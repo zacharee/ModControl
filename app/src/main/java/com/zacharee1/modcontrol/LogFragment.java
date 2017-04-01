@@ -43,15 +43,11 @@ public class LogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_log, container, false);
-
         ctx = getContext();
 
         if ( getActivity() instanceof MainActivity){
             activity = (MainActivity) getActivity();
         }
-
-        SharedPreferences sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
-
 
         try {
             buttons();
@@ -75,7 +71,6 @@ public class LogFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     logView();
-//                    scroll.fullScroll(View.FOCUS_DOWN);
                 } catch (Exception e) {
                     Log.e("ModControl/E", e.getMessage());
                     sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
@@ -146,24 +141,13 @@ public class LogFragment extends Fragment {
         log = log.replace("inflating", "<font color='#FFA500'>inflating</font>");
         log = log.replace("<br /><br /><br />", "<br />");
         int ind = log.lastIndexOf("<br />");
-        if( ind>=0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
+        if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
         log = log.replace("true", "<font color='#00ff00'>true</font>");
         log = log.replace("false", "<font color='#ff0000'>false</font>");
 
         Spanned html = Html.fromHtml(log, Html.FROM_HTML_MODE_COMPACT);
 
         logView.setText(html);
-
-//        scroll.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    scroll.fullScroll(View.FOCUS_DOWN);
-//                } catch (Exception e) {
-//                    Log.e("ModControl/E", e.getMessage());
-//                }
-//            }
-//        });
     }
 
     public static String convertStreamToString(InputStream is) throws IOException {

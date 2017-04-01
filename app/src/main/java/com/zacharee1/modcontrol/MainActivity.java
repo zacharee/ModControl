@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
         }
-
     }
 
     @Override
