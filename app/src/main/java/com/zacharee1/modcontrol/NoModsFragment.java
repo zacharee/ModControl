@@ -14,12 +14,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
+import android.provider.CalendarContract;
 import android.provider.Settings;
+import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -56,57 +59,62 @@ public class NoModsFragment extends Fragment {
     public boolean isV20;
     public SharedPreferences sharedPrefs;
 
-    public TextInputEditText RedQT;
-    public TextInputEditText GreenQT;
-    public TextInputEditText BlueQT;
-    public TextInputEditText RedSig;
-    public TextInputEditText GreenSig;
-    public TextInputEditText BlueSig;
-    public TextInputEditText RedSigAOD;
-    public TextInputEditText GreenSigAOD;
-    public TextInputEditText BlueSigAOD;
+//    public TextInputEditText RedQT;
+//    public TextInputEditText GreenQT;
+//    public TextInputEditText BlueQT;
+//    public TextInputEditText RedSig;
+//    public TextInputEditText GreenSig;
+//    public TextInputEditText BlueSig;
+//    public TextInputEditText RedSigAOD;
+//    public TextInputEditText GreenSigAOD;
+//    public TextInputEditText BlueSigAOD;
 
-    public int redIntQT_0;
-    public int greenIntQT_0;
-    public int blueIntQT_0;
-    public int redIntQT_1;
-    public int greenIntQT_1;
-    public int blueIntQT_1;
-    public int redIntQT_2;
-    public int greenIntQT_2;
-    public int blueIntQT_2;
-    public int redIntQT_3;
-    public int greenIntQT_3;
-    public int blueIntQT_3;
-    public int redIntQT_4;
-    public int greenIntQT_4;
-    public int blueIntQT_4;
-    public int redIntQT_5;
-    public int greenIntQT_5;
-    public int blueIntQT_5;
-    public int redIntSig;
-    public int greenIntSig;
-    public int blueIntSig;
-    public int redIntAODSig;
-    public int greenIntAODSig;
-    public int blueIntAODSig;
+//    public int redIntQT_0;
+//    public int greenIntQT_0;
+//    public int blueIntQT_0;
+//    public int redIntQT_1;
+//    public int greenIntQT_1;
+//    public int blueIntQT_1;
+//    public int redIntQT_2;
+//    public int greenIntQT_2;
+//    public int blueIntQT_2;
+//    public int redIntQT_3;
+//    public int greenIntQT_3;
+//    public int blueIntQT_3;
+//    public int redIntQT_4;
+//    public int greenIntQT_4;
+//    public int blueIntQT_4;
+//    public int redIntQT_5;
+//    public int greenIntQT_5;
+//    public int blueIntQT_5;
+//    public int redIntSig;
+//    public int greenIntSig;
+//    public int blueIntSig;
+//    public int redIntAODSig;
+//    public int greenIntAODSig;
+//    public int blueIntAODSig;
 
     public Spinner qtIndexSpinner;
 
-    public SeekBar redQTSeek;
-    public SeekBar greenQTSeek;
-    public SeekBar blueQTSeek;
-    public SeekBar redSigSeek;
-    public SeekBar greenSigSeek;
-    public SeekBar blueSigSeek;
-    public SeekBar redAODSigSeek;
-    public SeekBar greenAODSigSeek;
-    public SeekBar blueAODSigSeek;
+//    public SeekBar redQTSeek;
+//    public SeekBar greenQTSeek;
+//    public SeekBar blueQTSeek;
+//    public SeekBar redSigSeek;
+//    public SeekBar greenSigSeek;
+//    public SeekBar blueSigSeek;
+//    public SeekBar redAODSigSeek;
+//    public SeekBar greenAODSigSeek;
+//    public SeekBar blueAODSigSeek;
 
     public ImageView QTPreviewOn;
     public ImageView QTPreviewOff;
     public ImageView SigPreview;
     public ImageView AODSigPreview;
+
+    public Button QTPreviewOnB;
+    public Button QTPreviewOffB;
+    public Button SigPreviewB;
+    public Button SigAodPreviewB;
 
     public int QTColor;
     public int SigColor;
@@ -143,28 +151,34 @@ public class NoModsFragment extends Fragment {
 //            aodSigOption();
             setStuffUp();
             applyQT();
-            handleQTPage();
             buttons(applySig, "redsig", "greensig", "bluesig", "Signature");
             buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", "\"AOD Signature\"");
-            colorPick();
+            colorPick((Button)view.findViewById(R.id.color_pick_qt));
+            colorPick((Button)view.findViewById(R.id.color_pick_qt_1));
+            colorPick((Button)view.findViewById(R.id.color_pick_qt_2));
+            colorPick((Button)view.findViewById(R.id.color_pick_sig));
+            colorPick((Button)view.findViewById(R.id.color_pick_sig_aod));
+            colorPick((Button)view.findViewById(R.id.color_pick_sig_1));
+            colorPick((Button)view.findViewById(R.id.color_pick_sig_aod_1));
+            handleQTPage();
 //            sliders(redQTSeek, RedQT);
 //            sliders(greenQTSeek, GreenQT);
 //            sliders(blueQTSeek, BlueQT);
-            sliders(redSigSeek, RedSig);
-            sliders(greenSigSeek, GreenSig);
-            sliders(blueSigSeek, BlueSig);
-            sliders(redAODSigSeek, RedSigAOD);
-            sliders(greenAODSigSeek, GreenSigAOD);
-            sliders(blueAODSigSeek, BlueSigAOD);
+//            sliders(redSigSeek, RedSig);
+//            sliders(greenSigSeek, GreenSig);
+//            sliders(blueSigSeek, BlueSig);
+//            sliders(redAODSigSeek, RedSigAOD);
+//            sliders(greenAODSigSeek, GreenSigAOD);
+//            sliders(blueAODSigSeek, BlueSigAOD);
 //            textListeners(RedQT, redQTSeek);
 //            textListeners(GreenQT, greenQTSeek);
 //            textListeners(BlueQT, blueQTSeek);
-            textListeners(RedSig, redSigSeek);
-            textListeners(GreenSig, greenSigSeek);
-            textListeners(BlueSig, blueSigSeek);
-            textListeners(RedSigAOD, redAODSigSeek);
-            textListeners(GreenSigAOD, greenAODSigSeek);
-            textListeners(BlueSigAOD, blueAODSigSeek);
+//            textListeners(RedSig, redSigSeek);
+//            textListeners(GreenSig, greenSigSeek);
+//            textListeners(BlueSig, blueSigSeek);
+//            textListeners(RedSigAOD, redAODSigSeek);
+//            textListeners(GreenSigAOD, greenAODSigSeek);
+//            textListeners(BlueSigAOD, blueAODSigSeek);
         } catch (Exception e) {
             Log.e("ModControl/E", e.getMessage());
             sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
@@ -182,47 +196,59 @@ public class NoModsFragment extends Fragment {
 //    }
 
 
-    public void colorPick() throws IOException {
-        Button colorPick = (Button) view.findViewById(R.id.color_pick);
-        colorPick.setOnClickListener(new View.OnClickListener() {
+    public void colorPick(final Button button) throws IOException {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    int dialogID = -1;
-                    int color = Color.argb(255, 255, 255, 255);
-                    switch (qtIndex) {
-                        case 0:
-                            dialogID = activity.DIALOG_ID_0;
-                            color = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
-                            break;
-                        case 1:
-                            dialogID = activity.DIALOG_ID_1;
-                            color = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
-                            break;
-                        case 2:
-                            dialogID = activity.DIALOG_ID_2;
-                            color = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
-                            break;
-                        case 3:
-                            dialogID = activity.DIALOG_ID_3;
-                            color = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
-                            break;
-                        case 4:
-                            dialogID = activity.DIALOG_ID_4;
-                            color = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
-                            break;
-                        case 5:
-                            dialogID = activity.DIALOG_ID_5;
-                            color = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
-                            break;
-                    }
-                    ColorPickerDialog.newBuilder()
-                            .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
-                            .setAllowPresets(true)
-                            .setDialogId(dialogID)
-                            .setColor(color)
-                            .setShowAlphaSlider(false)
-                            .show(activity);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int dialogID = -1;
+                            int color = Color.argb(255, 255, 255, 255);
+                            if (button == view.findViewById(R.id.color_pick_qt) || button == view.findViewById(R.id.color_pick_qt_1) || button == view.findViewById(R.id.color_pick_qt_2)) {
+                                switch (qtIndex) {
+                                    case 0:
+                                        dialogID = activity.DIALOG_ID_0;
+                                        color = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
+                                        break;
+                                    case 1:
+                                        dialogID = activity.DIALOG_ID_1;
+                                        color = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
+                                        break;
+                                    case 2:
+                                        dialogID = activity.DIALOG_ID_2;
+                                        color = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
+                                        break;
+                                    case 3:
+                                        dialogID = activity.DIALOG_ID_3;
+                                        color = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
+                                        break;
+                                    case 4:
+                                        dialogID = activity.DIALOG_ID_4;
+                                        color = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
+                                        break;
+                                    case 5:
+                                        dialogID = activity.DIALOG_ID_5;
+                                        color = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
+                                        break;
+                                }
+                            } else if (button == view.findViewById(R.id.color_pick_sig) || button == view.findViewById(R.id.color_pick_sig_1)) {
+                                dialogID = activity.DIALOG_ID_6;
+                                color = Color.argb(255, sharedPrefs.getInt("redsig", 255), sharedPrefs.getInt("greensig", 255), sharedPrefs.getInt("bluesig", 255));
+                            } else if (button == view.findViewById(R.id.color_pick_sig_aod) || button == view.findViewById(R.id.color_pick_sig_aod_1)) {
+                                dialogID = activity.DIALOG_ID_7;
+                                color = Color.argb(255, sharedPrefs.getInt("redsigaod", 255), sharedPrefs.getInt("greensigaod", 255), sharedPrefs.getInt("bluesigaod", 255));
+                            }
+                            ColorPickerDialog.newBuilder()
+                                    .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
+                                    .setAllowPresets(true)
+                                    .setDialogId(dialogID)
+                                    .setColor(color)
+                                    .setShowAlphaSlider(false)
+                                    .show(activity);
+                        }
+                    }).start();
                 } catch (Exception e) {
                     Log.e("err", e.getMessage());
                 }
@@ -270,8 +296,6 @@ public class NoModsFragment extends Fragment {
 //                        blueQTSeek.setProgress(blueIntQT_0);
 
                         QTColor = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 1:
@@ -284,8 +308,6 @@ public class NoModsFragment extends Fragment {
 //                        blueQTSeek.setProgress(blueIntQT_1);
 
                         QTColor = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 2:
@@ -298,8 +320,6 @@ public class NoModsFragment extends Fragment {
 //                        blueQTSeek.setProgress(blueIntQT_2);
 
                         QTColor = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 3:
@@ -312,8 +332,6 @@ public class NoModsFragment extends Fragment {
 //                        blueQTSeek.setProgress(blueIntQT_3);
 
                         QTColor = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 4:
@@ -326,24 +344,24 @@ public class NoModsFragment extends Fragment {
 //                        blueQTSeek.setProgress(blueIntQT_4);
 
                         QTColor = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 5:
-                        RedQT.setText(String.valueOf(redIntQT_5));
-                        GreenQT.setText(String.valueOf(greenIntQT_5));
-                        BlueQT.setText(String.valueOf(blueIntQT_5));
-
-                        redQTSeek.setProgress(redIntQT_5);
-                        greenQTSeek.setProgress(greenIntQT_5);
-                        blueQTSeek.setProgress(blueIntQT_5);
+//                        RedQT.setText(String.valueOf(redIntQT_5));
+//                        GreenQT.setText(String.valueOf(greenIntQT_5));
+//                        BlueQT.setText(String.valueOf(blueIntQT_5));
+//
+//                        redQTSeek.setProgress(redIntQT_5);
+//                        greenQTSeek.setProgress(greenIntQT_5);
+//                        blueQTSeek.setProgress(blueIntQT_5);
 
                         QTColor = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
                         break;
                 }
+                QTPreviewOn.setColorFilter(QTColor);
+                QTPreviewOnB.setBackgroundTintList(ColorStateList.valueOf(QTColor));
+                QTPreviewOff.setColorFilter(QTColor);
+                QTPreviewOffB.setBackgroundTintList(ColorStateList.valueOf(QTColor));
             }
 
             @Override
@@ -508,15 +526,15 @@ public class NoModsFragment extends Fragment {
 //        aodSigGroup2 = (RadioGroup) view.findViewById(R.id.color_aod_sig2);
 //        aodSigGroup3 = (RadioGroup) view.findViewById(R.id.color_aod_sig3);
 
-        RedQT = (TextInputEditText) view.findViewById(R.id.red_qt_val);
-        GreenQT = (TextInputEditText) view.findViewById(R.id.green_qt_val);
-        BlueQT = (TextInputEditText) view.findViewById(R.id.blue_qt_val);
-        RedSig = (TextInputEditText) view.findViewById(R.id.red_sig_val);
-        GreenSig = (TextInputEditText) view.findViewById(R.id.green_sig_val);
-        BlueSig = (TextInputEditText) view.findViewById(R.id.blue_sig_val);
-        RedSigAOD = (TextInputEditText) view.findViewById(R.id.red_aodsig_val);
-        GreenSigAOD = (TextInputEditText) view.findViewById(R.id.green_aodsig_val);
-        BlueSigAOD = (TextInputEditText) view.findViewById(R.id.blue_aodsig_val);
+//        RedQT = (TextInputEditText) view.findViewById(R.id.red_qt_val);
+//        GreenQT = (TextInputEditText) view.findViewById(R.id.green_qt_val);
+//        BlueQT = (TextInputEditText) view.findViewById(R.id.blue_qt_val);
+//        RedSig = (TextInputEditText) view.findViewById(R.id.red_sig_val);
+//        GreenSig = (TextInputEditText) view.findViewById(R.id.green_sig_val);
+//        BlueSig = (TextInputEditText) view.findViewById(R.id.blue_sig_val);
+//        RedSigAOD = (TextInputEditText) view.findViewById(R.id.red_aodsig_val);
+//        GreenSigAOD = (TextInputEditText) view.findViewById(R.id.green_aodsig_val);
+//        BlueSigAOD = (TextInputEditText) view.findViewById(R.id.blue_aodsig_val);
 
         qtIndexSpinner = (Spinner) view.findViewById(R.id.qt_index);
 
@@ -525,100 +543,109 @@ public class NoModsFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         qtIndexSpinner.setAdapter(adapter);
 
-        redQTSeek = (SeekBar) view.findViewById(R.id.redqt_seek);
-        greenQTSeek = (SeekBar) view.findViewById(R.id.greenqt_seek);
-        blueQTSeek = (SeekBar) view.findViewById(R.id.blueqt_seek);
-        redSigSeek = (SeekBar) view.findViewById(R.id.redsig_seek);
-        greenSigSeek = (SeekBar) view.findViewById(R.id.greensig_seek);
-        blueSigSeek = (SeekBar) view.findViewById(R.id.bluesig_seek);
-        redAODSigSeek = (SeekBar) view.findViewById(R.id.redaodsig_seek);
-        greenAODSigSeek = (SeekBar) view.findViewById(R.id.greenaodsig_seek);
-        blueAODSigSeek = (SeekBar) view.findViewById(R.id.blueaodsig_seek);
+//        redQTSeek = (SeekBar) view.findViewById(R.id.redqt_seek);
+//        greenQTSeek = (SeekBar) view.findViewById(R.id.greenqt_seek);
+//        blueQTSeek = (SeekBar) view.findViewById(R.id.blueqt_seek);
+//        redSigSeek = (SeekBar) view.findViewById(R.id.redsig_seek);
+//        greenSigSeek = (SeekBar) view.findViewById(R.id.greensig_seek);
+//        blueSigSeek = (SeekBar) view.findViewById(R.id.bluesig_seek);
+//        redAODSigSeek = (SeekBar) view.findViewById(R.id.redaodsig_seek);
+//        greenAODSigSeek = (SeekBar) view.findViewById(R.id.greenaodsig_seek);
+//        blueAODSigSeek = (SeekBar) view.findViewById(R.id.blueaodsig_seek);
 
         QTPreviewOn = (ImageView) view.findViewById(R.id.colorqt_preview_on);
         QTPreviewOff = (ImageView) view.findViewById(R.id.colorqt_preview_off);
         SigPreview = (ImageView) view.findViewById(R.id.colorsig_preview);
         AODSigPreview = (ImageView) view.findViewById(R.id.coloraodsig_preview);
 
+        QTPreviewOnB = (Button) view.findViewById(R.id.color_pick_qt_1);
+        QTPreviewOffB = (Button) view.findViewById(R.id.color_pick_qt_2);
+        SigPreviewB = (Button) view.findViewById(R.id.color_pick_sig_1);
+        SigAodPreviewB = (Button) view.findViewById(R.id.color_pick_sig_aod_1);
+
         applyQT = (Button) view.findViewById(R.id.apply_qt_color);
         applySig = (Button) view.findViewById(R.id.apply_sig_color);
         applyAODSig = (Button) view.findViewById(R.id.apply_aod_sig_color);
 
-        redQTSeek.setProgress(sharedPrefs.getInt("red", 255));
-        greenQTSeek.setProgress(sharedPrefs.getInt("green", 255));
-        blueQTSeek.setProgress(sharedPrefs.getInt("blue", 255));
-        redSigSeek.setProgress(sharedPrefs.getInt("redsig", 255));
-        greenSigSeek.setProgress(sharedPrefs.getInt("greensig", 255));
-        blueSigSeek.setProgress(sharedPrefs.getInt("bluesig", 255));
-        redAODSigSeek.setProgress(sharedPrefs.getInt("redsigaod", 255));
-        greenAODSigSeek.setProgress(sharedPrefs.getInt("greensigaod", 255));
-        blueAODSigSeek.setProgress(sharedPrefs.getInt("bluesigaod", 255));
+//        redQTSeek.setProgress(sharedPrefs.getInt("red", 255));
+//        greenQTSeek.setProgress(sharedPrefs.getInt("green", 255));
+//        blueQTSeek.setProgress(sharedPrefs.getInt("blue", 255));
+//        redSigSeek.setProgress(sharedPrefs.getInt("redsig", 255));
+//        greenSigSeek.setProgress(sharedPrefs.getInt("greensig", 255));
+//        blueSigSeek.setProgress(sharedPrefs.getInt("bluesig", 255));
+//        redAODSigSeek.setProgress(sharedPrefs.getInt("redsigaod", 255));
+//        greenAODSigSeek.setProgress(sharedPrefs.getInt("greensigaod", 255));
+//        blueAODSigSeek.setProgress(sharedPrefs.getInt("bluesigaod", 255));
 
-        redIntQT_0 = sharedPrefs.getInt("redqt_0", 255);
-        greenIntQT_0 = sharedPrefs.getInt("greenqt_0", 255);
-        blueIntQT_0 = sharedPrefs.getInt("blueqt_0", 255);
-        redIntQT_1 = sharedPrefs.getInt("redqt_1", 255);
-        greenIntQT_1 = sharedPrefs.getInt("greenqt_1", 255);
-        blueIntQT_1 = sharedPrefs.getInt("blueqt_1", 255);
-        redIntQT_2 = sharedPrefs.getInt("redqt_2", 255);
-        greenIntQT_2 = sharedPrefs.getInt("greenqt_2", 255);
-        blueIntQT_2 = sharedPrefs.getInt("blueqt_2", 255);
-        redIntQT_3 = sharedPrefs.getInt("redqt_3", 255);
-        greenIntQT_3 = sharedPrefs.getInt("greenqt_3", 255);
-        blueIntQT_3 = sharedPrefs.getInt("blueqt_3", 255);
-        redIntQT_4 = sharedPrefs.getInt("redqt_4", 255);
-        greenIntQT_4 = sharedPrefs.getInt("greenqt_4", 255);
-        blueIntQT_4 = sharedPrefs.getInt("blueqt_4", 255);
-        redIntQT_5 = sharedPrefs.getInt("redqt_5", 255);
-        greenIntQT_5 = sharedPrefs.getInt("greenqt_5", 255);
-        blueIntQT_5 = sharedPrefs.getInt("blueqt_5", 255);
-        redIntSig = sharedPrefs.getInt("redsig", 255);
-        greenIntSig = sharedPrefs.getInt("greensig", 255);
-        blueIntSig = sharedPrefs.getInt("bluesig", 255);
-        redIntAODSig = sharedPrefs.getInt("redsigaod", 255);
-        greenIntAODSig = sharedPrefs.getInt("greensigaod", 255);
-        blueIntAODSig = sharedPrefs.getInt("bluesigaod", 255);
+//        redIntQT_0 = sharedPrefs.getInt("redqt_0", 255);
+//        greenIntQT_0 = sharedPrefs.getInt("greenqt_0", 255);
+//        blueIntQT_0 = sharedPrefs.getInt("blueqt_0", 255);
+//        redIntQT_1 = sharedPrefs.getInt("redqt_1", 255);
+//        greenIntQT_1 = sharedPrefs.getInt("greenqt_1", 255);
+//        blueIntQT_1 = sharedPrefs.getInt("blueqt_1", 255);
+//        redIntQT_2 = sharedPrefs.getInt("redqt_2", 255);
+//        greenIntQT_2 = sharedPrefs.getInt("greenqt_2", 255);
+//        blueIntQT_2 = sharedPrefs.getInt("blueqt_2", 255);
+//        redIntQT_3 = sharedPrefs.getInt("redqt_3", 255);
+//        greenIntQT_3 = sharedPrefs.getInt("greenqt_3", 255);
+//        blueIntQT_3 = sharedPrefs.getInt("blueqt_3", 255);
+//        redIntQT_4 = sharedPrefs.getInt("redqt_4", 255);
+//        greenIntQT_4 = sharedPrefs.getInt("greenqt_4", 255);
+//        blueIntQT_4 = sharedPrefs.getInt("blueqt_4", 255);
+//        redIntQT_5 = sharedPrefs.getInt("redqt_5", 255);
+//        greenIntQT_5 = sharedPrefs.getInt("greenqt_5", 255);
+//        blueIntQT_5 = sharedPrefs.getInt("blueqt_5", 255);
+//        redIntSig = sharedPrefs.getInt("redsig", 255);
+//        greenIntSig = sharedPrefs.getInt("greensig", 255);
+//        blueIntSig = sharedPrefs.getInt("bluesig", 255);
+//        redIntAODSig = sharedPrefs.getInt("redsigaod", 255);
+//        greenIntAODSig = sharedPrefs.getInt("greensigaod", 255);
+//        blueIntAODSig = sharedPrefs.getInt("bluesigaod", 255);
 
         qtIndex = sharedPrefs.getInt("qtIndex", 5);
         qtIndexSpinner.setSelection(qtIndex);
 
         switch (qtIndex) {
             case 0:
-                QTColor = Color.argb(255, redIntQT_0, greenIntQT_0, blueIntQT_0);
+                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
                 break;
             case 1:
-                QTColor = Color.argb(255, redIntQT_1, greenIntQT_1, blueIntQT_1);
+                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
                 break;
             case 2:
-                QTColor = Color.argb(255, redIntQT_2, greenIntQT_2, blueIntQT_2);
+                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
                 break;
             case 3:
-                QTColor = Color.argb(255, redIntQT_3, greenIntQT_3, blueIntQT_3);
+                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
                 break;
             case 4:
-                QTColor = Color.argb(255, redIntQT_4, greenIntQT_4, blueIntQT_4);
+                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
                 break;
             case 5:
-                QTColor = Color.argb(255, redIntQT_5, greenIntQT_5, blueIntQT_5);
+                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
                 break;
         }
-        SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-        AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+        SigColor = Color.argb(255, sharedPrefs.getInt("redsig", 255), sharedPrefs.getInt("greensig", 255), sharedPrefs.getInt("bluesig", 255));
+        AODSigColor = Color.argb(255, sharedPrefs.getInt("redsigaod", 255), sharedPrefs.getInt("greensigaod", 255), sharedPrefs.getInt("bluesigaod", 255));
 
         QTPreviewOn.setColorFilter(QTColor);
+        QTPreviewOnB.setBackgroundTintList(ColorStateList.valueOf(QTColor));
         QTPreviewOff.setColorFilter(QTColor);
+        QTPreviewOffB.setBackgroundTintList(ColorStateList.valueOf(QTColor));
         SigPreview.setColorFilter(SigColor);
+        SigPreviewB.setBackgroundTintList(ColorStateList.valueOf(SigColor));
         AODSigPreview.setColorFilter(AODSigColor);
+        SigAodPreviewB.setBackgroundTintList(ColorStateList.valueOf(AODSigColor));
 
-        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 255)));
-        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 255)));
-        BlueQT.setText(String.valueOf(sharedPrefs.getInt("blue", 255)));
-        RedSig.setText(String.valueOf(sharedPrefs.getInt("redsig", 255)));
-        GreenSig.setText(String.valueOf(sharedPrefs.getInt("greensig", 255)));
-        BlueSig.setText(String.valueOf(sharedPrefs.getInt("bluesig", 255)));
-        RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 255)));
-        GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 255)));
-        BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 255)));
+//        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 255)));
+//        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 255)));
+//        BlueQT.setText(String.valueOf(sharedPrefs.getInt("blue", 255)));
+//        RedSig.setText(String.valueOf(sharedPrefs.getInt("redsig", 255)));
+//        GreenSig.setText(String.valueOf(sharedPrefs.getInt("greensig", 255)));
+//        BlueSig.setText(String.valueOf(sharedPrefs.getInt("bluesig", 255)));
+//        RedSigAOD.setText(String.valueOf(sharedPrefs.getInt("redsigaod", 255)));
+//        GreenSigAOD.setText(String.valueOf(sharedPrefs.getInt("greensigaod", 255)));
+//        BlueSigAOD.setText(String.valueOf(sharedPrefs.getInt("bluesigaod", 255)));
 
         if (sharedPrefs.getBoolean("isv20", true)) {
             isV20 = true;
@@ -629,155 +656,8 @@ public class NoModsFragment extends Fragment {
         }
     }
 
-    public void textListeners(final TextInputEditText text, final SeekBar seekBar) throws IOException {
-        text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String val = text.getText().toString();
-                if (val.length() > 0); {
-                    try {
-                        int valInt = Integer.decode(val);
-                        if (text == RedQT) {
-                            switch (qtIndex) {
-                                case 0:
-                                    redIntQT_0 = valInt;
-                                    break;
-
-                                case 1:
-                                    redIntQT_1 = valInt;
-                                    break;
-
-                                case 2:
-                                    redIntQT_2 = valInt;
-                                    break;
-
-                                case 3:
-                                    redIntQT_3 = valInt;
-                                    break;
-
-                                case 4:
-                                    redIntQT_4 = valInt;
-                                    break;
-
-                                case 5:
-                                    redIntQT_5 = valInt;
-                                    break;
-                            }
-                        } else if (text == GreenQT) {
-                            switch (qtIndex) {
-                                case 0:
-                                    greenIntQT_0 = valInt;
-                                    break;
-
-                                case 1:
-                                    greenIntQT_1 = valInt;
-                                    break;
-
-                                case 2:
-                                    greenIntQT_2 = valInt;
-                                    break;
-
-                                case 3:
-                                    greenIntQT_3 = valInt;
-                                    break;
-
-                                case 4:
-                                    greenIntQT_4 = valInt;
-                                    break;
-
-                                case 5:
-                                    greenIntQT_5 = valInt;
-                                    break;
-                            }
-                        } else if (text == BlueQT) {
-                            switch (qtIndex) {
-                                case 0:
-                                    blueIntQT_0 = valInt;
-                                    break;
-
-                                case 1:
-                                    blueIntQT_1 = valInt;
-                                    break;
-
-                                case 2:
-                                    blueIntQT_2 = valInt;
-                                    break;
-
-                                case 3:
-                                    blueIntQT_3 = valInt;
-                                    break;
-
-                                case 4:
-                                    blueIntQT_4 = valInt;
-                                    break;
-
-                                case 5:
-                                    blueIntQT_5 = valInt;
-                                    break;
-                            }
-                        } else if (text == RedSig) {
-                            redIntSig = valInt;
-                        } else if (text == GreenSig) {
-                            greenIntSig = valInt;
-                        } else if (text == BlueSig) {
-                            blueIntSig = valInt;
-                        } else if (text == RedSigAOD) {
-                            redIntAODSig = valInt;
-                        } else if (text == GreenSigAOD) {
-                            greenIntAODSig = valInt;
-                        } else if (text == BlueSigAOD) {
-                            blueIntAODSig = valInt;
-                        }
-
-                        seekBar.setProgress(valInt);
-
-                        if (text.isFocused()) text.setSelection(text.getText().length());
-
-                        switch (qtIndex) {
-                            case 0:
-                                QTColor = Color.argb(255, redIntQT_0, greenIntQT_0, blueIntQT_0);
-                                break;
-                            case 1:
-                                QTColor = Color.argb(255, redIntQT_1, greenIntQT_1, blueIntQT_1);
-                                break;
-                            case 2:
-                                QTColor = Color.argb(255, redIntQT_2, greenIntQT_2, blueIntQT_2);
-                                break;
-                            case 3:
-                                QTColor = Color.argb(255, redIntQT_3, greenIntQT_3, blueIntQT_3);
-                                break;
-                            case 4:
-                                QTColor = Color.argb(255, redIntQT_4, greenIntQT_4, blueIntQT_4);
-                                break;
-                            case 5:
-                                QTColor = Color.argb(255, redIntQT_5, greenIntQT_5, blueIntQT_5);
-                                break;
-                        }
-                        QTPreviewOn.setColorFilter(QTColor);
-                        QTPreviewOff.setColorFilter(QTColor);
-                        SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-                        SigPreview.setColorFilter(SigColor);
-                        AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-                        AODSigPreview.setColorFilter(AODSigColor);
-                    } catch (Exception e) {
-                        Log.e("ModControl/E", e.getMessage());
-                        sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-                    }
-                }
-            }
-        });
-
-//        RedQT.addTextChangedListener(new TextWatcher() {
+//    public void textListeners(final TextInputEditText text, final SeekBar seekBar) throws IOException {
+//        text.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 //
@@ -785,366 +665,496 @@ public class NoModsFragment extends Fragment {
 //
 //            @Override
 //            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
 //            }
 //
 //            @Override
 //            public void afterTextChanged(Editable s) {
-//                    if (RedQT.getText().toString().length() > 0) {
-//                        try {
-//                            redIntQT = Integer.decode(RedQT.getText().toString());
+//                String val = text.getText().toString();
+//                if (val.length() > 0); {
+//                    try {
+//                        int valInt = Integer.decode(val);
+//                        if (text == RedQT) {
+//                            switch (qtIndex) {
+//                                case 0:
+////                                    redIntQT_0 = valInt;
+//                                    break;
 //
-////                            Settings.System.putInt(cr, "red", redIntQT);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("red", redIntQT);
-////                            editor.apply();
+//                                case 1:
+////                                    redIntQT_1 = valInt;
+//                                    break;
 //
-//                            redQTSeek.setProgress(redIntQT);
+//                                case 2:
+////                                    redIntQT_2 = valInt;
+//                                    break;
 //
-//                            if (RedQT.isFocused()) {
-//                                RedQT.setSelection(RedQT.getText().length());
+//                                case 3:
+////                                    redIntQT_3 = valInt;
+//                                    break;
+//
+//                                case 4:
+////                                    redIntQT_4 = valInt;
+//                                    break;
+//
+//                                case 5:
+////                                    redIntQT_5 = valInt;
+//                                    break;
 //                            }
+//                        } else if (text == GreenQT) {
+//                            switch (qtIndex) {
+//                                case 0:
+////                                    greenIntQT_0 = valInt;
+//                                    break;
 //
-//                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
-//                            QTPreviewOn.setColorFilter(QTColor);
-//                            QTPreviewOff.setColorFilter(QTColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+//                                case 1:
+////                                    greenIntQT_1 = valInt;
+//                                    break;
+//
+//                                case 2:
+////                                    greenIntQT_2 = valInt;
+//                                    break;
+//
+//                                case 3:
+////                                    greenIntQT_3 = valInt;
+//                                    break;
+//
+//                                case 4:
+////                                    greenIntQT_4 = valInt;
+//                                    break;
+//
+//                                case 5:
+////                                    greenIntQT_5 = valInt;
+//                                    break;
+//                            }
+//                        } else if (text == BlueQT) {
+//                            switch (qtIndex) {
+//                                case 0:
+////                                    blueIntQT_0 = valInt;
+//                                    break;
+//
+//                                case 1:
+////                                    blueIntQT_1 = valInt;
+//                                    break;
+//
+//                                case 2:
+////                                    blueIntQT_2 = valInt;
+//                                    break;
+//
+//                                case 3:
+////                                    blueIntQT_3 = valInt;
+//                                    break;
+//
+//                                case 4:
+////                                    blueIntQT_4 = valInt;
+//                                    break;
+//
+//                                case 5:
+////                                    blueIntQT_5 = valInt;
+//                                    break;
+//                            }
+//                        } else if (text == RedSig) {
+//                            redIntSig = valInt;
+//                        } else if (text == GreenSig) {
+//                            greenIntSig = valInt;
+//                        } else if (text == BlueSig) {
+//                            blueIntSig = valInt;
+//                        } else if (text == RedSigAOD) {
+//                            redIntAODSig = valInt;
+//                        } else if (text == GreenSigAOD) {
+//                            greenIntAODSig = valInt;
+//                        } else if (text == BlueSigAOD) {
+//                            blueIntAODSig = valInt;
 //                        }
+//
+//                        seekBar.setProgress(valInt);
+//
+//                        if (text.isFocused()) text.setSelection(text.getText().length());
+//
+//                        switch (qtIndex) {
+//                            case 0:
+//                                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
+//                                break;
+//                            case 1:
+//                                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
+//                                break;
+//                            case 2:
+//                                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
+//                                break;
+//                            case 3:
+//                                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
+//                                break;
+//                            case 4:
+//                                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
+//                                break;
+//                            case 5:
+//                                QTColor = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
+//                                break;
+//                        }
+//                        QTPreviewOn.setColorFilter(QTColor);
+//                        QTPreviewOff.setColorFilter(QTColor);
+//                        SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+//                        SigPreview.setColorFilter(SigColor);
+//                        AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+//                        AODSigPreview.setColorFilter(AODSigColor);
+//                    } catch (Exception e) {
+//                        Log.e("ModControl/E", e.getMessage());
+//                        sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
 //                    }
+//                }
 //            }
 //        });
 //
-//        GreenQT.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (GreenQT.getText().toString().length() > 0) {
-//                        try {
-//                            greenIntQT = Integer.decode(GreenQT.getText().toString());
-//
-////                            Settings.System.putInt(cr, "green", greenIntQT);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("green", greenIntQT);
-////                            editor.apply();
-//
-//                            greenQTSeek.setProgress(greenIntQT);
-//
-//                            if (GreenQT.isFocused()) {
-//                                GreenQT.setSelection(GreenQT.getText().length());
-//                            }
-//
-//                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
-//                            QTPreviewOn.setColorFilter(QTColor);
-//                            QTPreviewOff.setColorFilter(QTColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        BlueQT.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (BlueQT.getText().toString().length() > 0) {
-//                        try {
-//                            blueIntQT = Integer.decode(BlueQT.getText().toString());
-//
-////                            Settings.System.putInt(cr, "blue", blueIntQT);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("blue", blueIntQT);
-////                            editor.apply();
-//
-//                            blueQTSeek.setProgress(blueIntQT);
-//
-//                            if (BlueQT.isFocused()) {
-//                                BlueQT.setSelection(BlueQT.getText().length());
-//                            }
-//
-//                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
-//                            QTPreviewOn.setColorFilter(QTColor);
-//                            QTPreviewOff.setColorFilter(QTColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        RedSig.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (RedSig.getText().toString().length() > 0) {
-//                        try {
-//                            redIntSig = Integer.decode(RedSig.getText().toString());
+////        RedQT.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 ////
-////                            Settings.System.putInt(cr, "redsig", redIntSig);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("redsig", redIntSig);
-////                            editor.apply();
-//
-//                            redSigSeek.setProgress(redIntSig);
-//
-//                            if (RedSig.isFocused()) {
-//                                RedSig.setSelection(RedSig.getText().length());
-//                            }
-//
-//                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-//                            SigPreview.setColorFilter(SigColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        GreenSig.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (GreenSig.getText().toString().length() > 0) {
-//                        try {
-//                            greenIntSig = Integer.decode(GreenSig.getText().toString());
-//
-////                            Settings.System.putInt(cr, "greensig", greenIntSig);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("greensig", greenIntSig);
-////                            editor.apply();
-//
-//                            greenSigSeek.setProgress(greenIntSig);
-//
-//                            if (GreenSig.isFocused()) {
-//                                GreenSig.setSelection(GreenSig.getText().length());
-//                            }
-//
-//                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-//                            SigPreview.setColorFilter(SigColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        BlueSig.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (BlueSig.getText().toString().length() > 0) {
-//                        try {
-//                            blueIntSig = Integer.decode(BlueSig.getText().toString());
-//
-////                            Settings.System.putInt(cr, "bluesig", blueIntSig);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("bluesig", blueIntSig);
-////                            editor.apply();
-//
-//                            blueSigSeek.setProgress(blueIntSig);
-//
-//                            if (BlueSig.isFocused()) {
-//                                BlueSig.setSelection(BlueSig.getText().length());
-//                            }
-//
-//                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
-//                            SigPreview.setColorFilter(SigColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        RedSigAOD.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (RedSigAOD.getText().toString().length() > 0) {
-//                        try {
-//                            redIntAODSig = Integer.decode(RedSigAOD.getText().toString());
-//
-////                            Settings.System.putInt(cr, "redsigaod", redIntAODSig);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("redsigaod", redIntAODSig);
-////                            editor.apply();
-//
-//                            redAODSigSeek.setProgress(redIntAODSig);
-//
-//                            if (RedSigAOD.isFocused()) {
-//                                RedSigAOD.setSelection(RedSigAOD.getText().length());
-//                            }
-//
-//                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-//                            AODSigPreview.setColorFilter(AODSigColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        GreenSigAOD.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (GreenSigAOD.getText().toString().length() > 0) {
-//                        try {
-//                            greenIntAODSig = Integer.decode(GreenSigAOD.getText().toString());
-//
-////                            Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("greensigaod", greenIntAODSig);
-////                            editor.apply();
-//
-//                            greenAODSigSeek.setProgress(greenIntAODSig);
-//
-//                            if (GreenSigAOD.isFocused()) {
-//                                GreenSigAOD.setSelection(GreenSigAOD.getText().length());
-//                            }
-//
-//                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-//                            AODSigPreview.setColorFilter(AODSigColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-//
-//        BlueSigAOD.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                    if (BlueSigAOD.getText().toString().length() > 0) {
-//                        try {
-//                            blueIntAODSig = Integer.decode(BlueSigAOD.getText().toString());
-//
-////                            Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
-////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-////                            editor.putInt("bluesigaod", blueIntAODSig);
-////                            editor.apply();
-//
-//                            blueAODSigSeek.setProgress(blueIntAODSig);
-//
-//                            if (BlueSigAOD.isFocused()) {
-//                                BlueSigAOD.setSelection(BlueSigAOD.getText().length());
-//                            }
-//
-//                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
-//                            AODSigPreview.setColorFilter(AODSigColor);
-//                        } catch (NumberFormatException e) {
-//                            Log.e("ModControl/E", e.getMessage());
-//                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
-//                        }
-//                    }
-//            }
-//        });
-    }
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (RedQT.getText().toString().length() > 0) {
+////                        try {
+////                            redIntQT = Integer.decode(RedQT.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "red", redIntQT);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("red", redIntQT);
+//////                            editor.apply();
+////
+////                            redQTSeek.setProgress(redIntQT);
+////
+////                            if (RedQT.isFocused()) {
+////                                RedQT.setSelection(RedQT.getText().length());
+////                            }
+////
+////                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
+////                            QTPreviewOn.setColorFilter(QTColor);
+////                            QTPreviewOff.setColorFilter(QTColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        GreenQT.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (GreenQT.getText().toString().length() > 0) {
+////                        try {
+////                            greenIntQT = Integer.decode(GreenQT.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "green", greenIntQT);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("green", greenIntQT);
+//////                            editor.apply();
+////
+////                            greenQTSeek.setProgress(greenIntQT);
+////
+////                            if (GreenQT.isFocused()) {
+////                                GreenQT.setSelection(GreenQT.getText().length());
+////                            }
+////
+////                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
+////                            QTPreviewOn.setColorFilter(QTColor);
+////                            QTPreviewOff.setColorFilter(QTColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        BlueQT.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (BlueQT.getText().toString().length() > 0) {
+////                        try {
+////                            blueIntQT = Integer.decode(BlueQT.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "blue", blueIntQT);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("blue", blueIntQT);
+//////                            editor.apply();
+////
+////                            blueQTSeek.setProgress(blueIntQT);
+////
+////                            if (BlueQT.isFocused()) {
+////                                BlueQT.setSelection(BlueQT.getText().length());
+////                            }
+////
+////                            QTColor = Color.argb(255, redIntQT, greenIntQT, blueIntQT);
+////                            QTPreviewOn.setColorFilter(QTColor);
+////                            QTPreviewOff.setColorFilter(QTColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        RedSig.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (RedSig.getText().toString().length() > 0) {
+////                        try {
+////                            redIntSig = Integer.decode(RedSig.getText().toString());
+//////
+//////                            Settings.System.putInt(cr, "redsig", redIntSig);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("redsig", redIntSig);
+//////                            editor.apply();
+////
+////                            redSigSeek.setProgress(redIntSig);
+////
+////                            if (RedSig.isFocused()) {
+////                                RedSig.setSelection(RedSig.getText().length());
+////                            }
+////
+////                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+////                            SigPreview.setColorFilter(SigColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        GreenSig.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (GreenSig.getText().toString().length() > 0) {
+////                        try {
+////                            greenIntSig = Integer.decode(GreenSig.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "greensig", greenIntSig);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("greensig", greenIntSig);
+//////                            editor.apply();
+////
+////                            greenSigSeek.setProgress(greenIntSig);
+////
+////                            if (GreenSig.isFocused()) {
+////                                GreenSig.setSelection(GreenSig.getText().length());
+////                            }
+////
+////                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+////                            SigPreview.setColorFilter(SigColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        BlueSig.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (BlueSig.getText().toString().length() > 0) {
+////                        try {
+////                            blueIntSig = Integer.decode(BlueSig.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "bluesig", blueIntSig);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("bluesig", blueIntSig);
+//////                            editor.apply();
+////
+////                            blueSigSeek.setProgress(blueIntSig);
+////
+////                            if (BlueSig.isFocused()) {
+////                                BlueSig.setSelection(BlueSig.getText().length());
+////                            }
+////
+////                            SigColor = Color.argb(255, redIntSig, greenIntSig, blueIntSig);
+////                            SigPreview.setColorFilter(SigColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        RedSigAOD.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (RedSigAOD.getText().toString().length() > 0) {
+////                        try {
+////                            redIntAODSig = Integer.decode(RedSigAOD.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "redsigaod", redIntAODSig);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("redsigaod", redIntAODSig);
+//////                            editor.apply();
+////
+////                            redAODSigSeek.setProgress(redIntAODSig);
+////
+////                            if (RedSigAOD.isFocused()) {
+////                                RedSigAOD.setSelection(RedSigAOD.getText().length());
+////                            }
+////
+////                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+////                            AODSigPreview.setColorFilter(AODSigColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        GreenSigAOD.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (GreenSigAOD.getText().toString().length() > 0) {
+////                        try {
+////                            greenIntAODSig = Integer.decode(GreenSigAOD.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "greensigaod", greenIntAODSig);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("greensigaod", greenIntAODSig);
+//////                            editor.apply();
+////
+////                            greenAODSigSeek.setProgress(greenIntAODSig);
+////
+////                            if (GreenSigAOD.isFocused()) {
+////                                GreenSigAOD.setSelection(GreenSigAOD.getText().length());
+////                            }
+////
+////                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+////                            AODSigPreview.setColorFilter(AODSigColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+////
+////        BlueSigAOD.addTextChangedListener(new TextWatcher() {
+////            @Override
+////            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+////
+////            }
+////
+////            @Override
+////            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+////            }
+////
+////            @Override
+////            public void afterTextChanged(Editable s) {
+////                    if (BlueSigAOD.getText().toString().length() > 0) {
+////                        try {
+////                            blueIntAODSig = Integer.decode(BlueSigAOD.getText().toString());
+////
+//////                            Settings.System.putInt(cr, "bluesigaod", blueIntAODSig);
+//////                            SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+//////                            editor.putInt("bluesigaod", blueIntAODSig);
+//////                            editor.apply();
+////
+////                            blueAODSigSeek.setProgress(blueIntAODSig);
+////
+////                            if (BlueSigAOD.isFocused()) {
+////                                BlueSigAOD.setSelection(BlueSigAOD.getText().length());
+////                            }
+////
+////                            AODSigColor = Color.argb(255, redIntAODSig, greenIntAODSig, blueIntAODSig);
+////                            AODSigPreview.setColorFilter(AODSigColor);
+////                        } catch (NumberFormatException e) {
+////                            Log.e("ModControl/E", e.getMessage());
+////                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+////                        }
+////                    }
+////            }
+////        });
+//    }
 
-    public void sliders(SeekBar seekBar, final TextInputEditText inputEditText) throws IOException {
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                inputEditText.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-//        redQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//    public void sliders(SeekBar seekBar, final TextInputEditText inputEditText) throws IOException {
+//
+//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 //            @Override
 //            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                RedQT.setText(String.valueOf(progress));
+//                inputEditText.setText(String.valueOf(progress));
 //            }
 //
 //            @Override
@@ -1158,142 +1168,159 @@ public class NoModsFragment extends Fragment {
 //            }
 //        });
 //
-//        greenQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                    GreenQT.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        blueQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                BlueQT.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        redSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                RedSig.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        greenSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                GreenSig.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        blueSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                BlueSig.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        redAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                RedSigAOD.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        greenAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                GreenSigAOD.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//
-//        blueAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                BlueSigAOD.setText(String.valueOf(progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-    }
+////        redQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                RedQT.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        greenQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                    GreenQT.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        blueQTSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                BlueQT.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        redSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                RedSig.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        greenSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                GreenSig.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        blueSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                BlueSig.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        redAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                RedSigAOD.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        greenAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                GreenSigAOD.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+////
+////        blueAODSigSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+////            @Override
+////            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+////                BlueSigAOD.setText(String.valueOf(progress));
+////            }
+////
+////            @Override
+////            public void onStartTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////
+////            @Override
+////            public void onStopTrackingTouch(SeekBar seekBar) {
+////
+////            }
+////        });
+//    }
 
     public void buttons(final Button button, final String prefR, final String prefG, final String prefB, final String name) throws IOException {
         button.setOnClickListener(new View.OnClickListener() {
@@ -1302,18 +1329,9 @@ public class NoModsFragment extends Fragment {
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
-                        int red = 255;
-                        int green = 255;
-                        int blue = 255;
-                        if (button == applySig) {
-                            red = redIntSig;
-                            green = greenIntSig;
-                            blue = blueIntSig;
-                        } else if (button == applyAODSig) {
-                            red = redIntAODSig;
-                            green = greenIntAODSig;
-                            blue = blueIntAODSig;
-                        }
+                        int red = sharedPrefs.getInt(prefR, 255);
+                        int green = sharedPrefs.getInt(prefG, 255);
+                        int blue = sharedPrefs.getInt(prefB, 255);
 
                         ContentResolver cr = activity.getContentResolver();
 
@@ -1329,31 +1347,7 @@ public class NoModsFragment extends Fragment {
 
                         logger(prefR, prefG, prefB, red, green, blue, name);
 
-                        if (button == applySig) {
-                            sudo("killall com.lge.signboard");
-////                                Intent intent = new Intent("com.lge.signboard.intent.action.SET_WIDGET_SIGNATURE");
-////                                String flag = "flag_set_widget_signature";
-////
-////                                intent = intent.putExtra(flag, true);
-////
-////                                activity.startActivity(intent);
-//
-//                                String test = "content://com.lge.provider.signboard/signature?notify=true";
-//
-//                                Uri uri = Uri.parse(test);
-//
-//                                ContentValues cv = new ContentValues();
-//
-//                                String value = "value";
-//
-//                                cv.put(value, "TEST");
-//
-//                                String item = "item";
-//                                String[] on = {"screen_on_sharing"};
-//
-//                                cr.update(uri, cv, item, null);
-//
-                        } else if (button == applyAODSig) {
+                        if (button == applySig || button == applyAODSig) {
                             sudo("killall com.lge.signboard");
                         } else {
                             sudo("killall com.lge.quicktools ; killall com.lge.signboard");

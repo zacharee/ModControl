@@ -1,0 +1,35 @@
+#!/system/bin/sh
+
+FILE=/system/build.prop
+TMPFILE=$FILE.tmp
+
+line1="$1"
+line2=
+
+line1Arg="$2"
+lline2Arg=
+
+lineNum=
+
+prop=$line1     
+arg=$line1Arg
+
+mount -o rw,remount /system
+
+echo "<font color='#FF0000'>##########################################</font>"
+echo "<font color='#00FF00'>$(date)</font>"
+echo "<font color='#0000ff'>$line1=</font>$line1Arg"
+echo " " 
+
+if grep -Fq $prop $FILE ; then  
+	lineNum=`sed -n "/${prop}/=" $FILE`   
+	echo "Found key at line: $lineNum"
+	sed -i "${lineNum} c${prop}=${arg}" $FILE   
+else
+	echo "$prop does not exist in build.prop"   
+	echo "appending to end of build.prop"
+	echo $prop=$arg >> $FILE
+fi
+
+echo "<font color='#FF0000'>##########################################</font>"
+echo "\n"

@@ -140,10 +140,10 @@ public class LogFragment extends Fragment {
         log = log.replace("Archive", "<font color='#FFA500'>Archive</font>");
         log = log.replace("inflating", "<font color='#FFA500'>inflating</font>");
         log = log.replace("<br /><br /><br />", "<br />");
-        int ind = log.lastIndexOf("<br />");
-        if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
         log = log.replace("true", "<font color='#00ff00'>true</font>");
         log = log.replace("false", "<font color='#ff0000'>false</font>");
+        int ind = log.lastIndexOf("<br />");
+        if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
 
         Spanned html = Html.fromHtml(log, Html.FROM_HTML_MODE_COMPACT);
 

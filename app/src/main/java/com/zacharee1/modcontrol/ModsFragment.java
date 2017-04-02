@@ -45,6 +45,7 @@ public class ModsFragment extends Fragment {
     public Switch clockstatImm;
     public Switch poweronplug;
     public Switch chargewarning;
+    public Switch ssCap;
 
     public boolean minbatsuiBool;
     public boolean minbatimmBool;
@@ -55,6 +56,7 @@ public class ModsFragment extends Fragment {
     public boolean widedataBool;
     public boolean poweronplugBool;
     public boolean chargewarningBool;
+    public boolean ssCapBool;
 
     public Button rebootSysUI;
     public Button rebootSB;
@@ -83,6 +85,7 @@ public class ModsFragment extends Fragment {
         clockstatImm = (Switch) view.findViewById(R.id.minclockimm_switch);
         poweronplug = (Switch) view.findViewById(R.id.poweron_plug);
         chargewarning = (Switch) view.findViewById(R.id.warn_charge);
+        ssCap = (Switch) view.findViewById(R.id.sb_shot);
 
         rebootSysUI = (Button) view.findViewById(R.id.restart_sysui);
         rebootSB = (Button) view.findViewById(R.id.restart_sb);
@@ -132,6 +135,11 @@ public class ModsFragment extends Fragment {
             chargewarningBool = true;
         }
 
+        ssCap.setChecked(sharedPrefs.getBoolean("sb_shot", false));
+        if (sharedPrefs.getBoolean("sb_shot", false)) {
+            ssCapBool = true;
+        }
+
         if (sharedPrefs.getBoolean("isv20", false)) {
             isV20 = true;
         } else {
@@ -160,6 +168,7 @@ public class ModsFragment extends Fragment {
             setSwitchListener(clockstat, "minclocksui", "minclocksui");
             setSwitchListener(clockstatImm, "minclockimm", "minclockimm");
             setSwitchListener(clockaod, "minclockaod", "minclockaod");
+            buildProp(ssCap, "sys.capture_signboard.enabled");
             reboot();
         } catch (Exception e) {
             Log.e("ModControl/E", e.getMessage());
@@ -167,6 +176,32 @@ public class ModsFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public void buildProp(Switch toggle, final String key) throws IOException {
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String value;
+                SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+
+                if (isChecked) {
+                    value = "true";
+                    editor.putBoolean("sb_shot", true);
+                } else {
+                    value = "false";
+                    editor.putBoolean("sb_shot", false);
+                }
+
+                editor.apply();
+
+                try {
+                    copyFile2("buildprop");
+                } catch (Exception e) {}
+                sudo("sh /data/media/0/Zacharee1Mods/buildprop " + key + " " + value + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
+            }
+        });
+
     }
 
     public void reboot() throws IOException {
