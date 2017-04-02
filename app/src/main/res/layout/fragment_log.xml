@@ -102,6 +102,7 @@
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
+                android:textAlignment="center"
                 android:textIsSelectable="true" />
         </LinearLayout>
     </ScrollView>
