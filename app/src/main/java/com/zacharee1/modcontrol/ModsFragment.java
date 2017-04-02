@@ -56,6 +56,9 @@ public class ModsFragment extends Fragment {
     public boolean poweronplugBool;
     public boolean chargewarningBool;
 
+    public Button rebootSysUI;
+    public Button rebootSB;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -80,6 +83,9 @@ public class ModsFragment extends Fragment {
         clockstatImm = (Switch) view.findViewById(R.id.minclockimm_switch);
         poweronplug = (Switch) view.findViewById(R.id.poweron_plug);
         chargewarning = (Switch) view.findViewById(R.id.warn_charge);
+
+        rebootSysUI = (Button) view.findViewById(R.id.restart_sysui);
+        rebootSB = (Button) view.findViewById(R.id.restart_sb);
 
         batstat.setChecked(sharedPrefs.getBoolean("minbatsui", false));
         if (sharedPrefs.getBoolean("minbatsui", false)) {
@@ -154,12 +160,48 @@ public class ModsFragment extends Fragment {
             setSwitchListener(clockstat, "minclocksui", "minclocksui");
             setSwitchListener(clockstatImm, "minclockimm", "minclockimm");
             setSwitchListener(clockaod, "minclockaod", "minclockaod");
+            reboot();
         } catch (Exception e) {
             Log.e("ModControl/E", e.getMessage());
             sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
         }
 
         return view;
+    }
+
+    public void reboot() throws IOException {
+
+        rebootSysUI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            sudo("killall com.android.systemui");
+                        } catch (Exception e) {
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+                        }
+                    }
+                }).start();
+            }
+        });
+
+        rebootSB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            sudo("killall com.lge.signboard ; killall com.lge.quicktools");
+                        } catch (Exception e) {
+                            Log.e("ModControl/E", e.getMessage());
+                            sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
+                        }
+                    }
+                }).start();
+            }
+        });
     }
 
     public void logger(final String sharedP, final String settings, final boolean tralse, int tf) {

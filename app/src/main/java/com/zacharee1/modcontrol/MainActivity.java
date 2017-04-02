@@ -19,11 +19,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.jrummyapps.android.colorpicker.ColorPickerDialogListener;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ColorPickerDialogListener {
+    public static final int DIALOG_ID_0 = 0;
+    public static final int DIALOG_ID_1 = 1;
+    public static final int DIALOG_ID_2 = 2;
+    public static final int DIALOG_ID_3 = 3;
+    public static final int DIALOG_ID_4 = 4;
+    public static final int DIALOG_ID_5 = 5;
     public boolean enabled;
     public boolean isV20;
 
@@ -128,37 +137,102 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
         } else if (id == R.id.nav_nomods) {
             NoModsFragment fragment = new NoModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
         } else if (id == R.id.nav_mods) {
             ModsFragment fragment = new ModsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
         } else if (id == R.id.nav_settings) {
             SettingsFragment fragment = new SettingsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
         } else if (id == R.id.nav_credits) {
             CreditsFragment fragment = new CreditsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_log) {
             LogFragment fragment = new LogFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
         } else {
             MainFragment fragment = new MainFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+            findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
         }
+    }
+
+    @Override public void onColorSelected(int dialogId, int color) {
+        String colorString = Integer.toHexString(color);
+        int colorRed = Integer.decode("0x" + colorString.substring(2, 4));
+        int colorGreen = Integer.decode("0x" + colorString.substring(4, 6));
+        int colorBlue = Integer.decode("0x" + colorString.substring(6));
+        SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
+        switch (dialogId) {
+            case DIALOG_ID_0:
+                // We got result from the dialog that is shown when clicking on the icon in the action bar.
+                Toast.makeText(MainActivity.this, "Selected Color 0: " + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("redqt_0", colorRed);
+                editor.putInt("greenqt_0", colorGreen);
+                editor.putInt("blueqt_0", colorBlue);
+                break;
+            case DIALOG_ID_1:
+                Toast.makeText(MainActivity.this, "Selected Color 1: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("redqt_1", colorRed);
+                editor.putInt("greenqt_1", colorGreen);
+                editor.putInt("blueqt_1", colorBlue);
+                break;
+            case DIALOG_ID_2:
+                Toast.makeText(MainActivity.this, "Selected Color 2: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("redqt_2", colorRed);
+                editor.putInt("greenqt_2", colorGreen);
+                editor.putInt("blueqt_2", colorBlue);
+                break;
+            case DIALOG_ID_3:
+                Toast.makeText(MainActivity.this, "Selected Color 3: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("redqt_3", colorRed);
+                editor.putInt("greenqt_3", colorGreen);
+                editor.putInt("blueqt_3", colorBlue);
+                break;
+            case DIALOG_ID_4:
+                Toast.makeText(MainActivity.this, "Selected Color 4: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("redqt_4", colorRed);
+                editor.putInt("greenqt_4", colorGreen);
+                editor.putInt("blueqt_4", colorBlue);
+                break;
+            case DIALOG_ID_5:
+                Toast.makeText(MainActivity.this, "Selected Color 5: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("redqt_5", colorRed);
+                editor.putInt("greenqt_5", colorGreen);
+                editor.putInt("blueqt_5", colorBlue);
+                break;
+        }
+        editor.apply();
+
+        NoModsFragment fragment = new NoModsFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+        findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
+    }
+
+    @Override public void onDialogDismissed(int dialogId) {
+
     }
 
     @Override
@@ -194,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                    findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
                 }
             }, 350);
         } else if (id == R.id.nav_settings) {
@@ -204,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                    findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
                 }
             }, 350);
         } else if (id == R.id.nav_nomods) {
@@ -214,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                    findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
                 }
             }, 350);
         } else if (id == R.id.nav_mods) {
@@ -223,7 +300,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void run() {
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
-                    findViewById(R.id.reboot_buttons).setVisibility(View.VISIBLE);
+                    findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                    findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
                 }
             }, 350);
         } else if (id == R.id.nav_credits) {
@@ -234,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                    findViewById(R.id.floatingActionButton).setVisibility(View.VISIBLE);
                 }
             }, 350);
         } else if (id == R.id.nav_log) {
@@ -244,6 +323,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     fragmentManager.beginTransaction().replace(mainCont, fragment).commit();
                     findViewById(R.id.reboot_buttons).setVisibility(View.GONE);
+                    findViewById(R.id.floatingActionButton).setVisibility(View.GONE);
                 }
             }, 350);
         }

@@ -36,6 +36,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.jrummyapps:colorpicker:2.1.6'
+//    compile "com.github.danielnilsson9:color-picker-view:1.4.0@aar"
+//    compile 'com.rarepebble:colorpicker:2.2.0'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

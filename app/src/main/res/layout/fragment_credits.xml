@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/credits_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="layout.Credits">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -142,4 +142,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </FrameLayout>

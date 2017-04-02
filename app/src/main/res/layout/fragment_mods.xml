@@ -1,260 +1,372 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/reboot_buttons"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <LinearLayout
-            android:id="@+id/mods_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="10dp">
 
-            <LinearLayout
-                android:id="@+id/minit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
+                android:id="@+id/restart_sysui"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                tools:ignore="InefficientWeight">
+                android:text="@string/restart_systemui"
+                android:textSize="12sp"
+                tools:ignore="NestedWeights" />
 
-                <TextView
-                    android:id="@+id/minit_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/_3minit"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+            <Button
+                android:id="@+id/restart_sb"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/restart_signboard"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/minbatstat_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/_3minit_battery_in_statusbar"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/minbatstat_imm_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/_3minit_battery_in_immersive"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/minbataod_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/_3minit_battery_in_aod"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/minclockstat_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/_3minit_clock_in_statusbar"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/minclockimm_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/_3minit_clock_in_immersive"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/minclockaod_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/_3minit_clock_in_aod"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/statusbar_immersive_mode"
+                android:textColor="@android:color/tertiary_text_light" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/aod"
+                android:textColor="@android:color/tertiary_text_light" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.75"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="0dp"
+            android:translationZ="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
+
+            <LinearLayout
+                android:id="@+id/mods_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="@string/currently_broken_if_enabled_you_ll_get_two_clocks"
-                android:textAlignment="center" />
-
-            <LinearLayout
-                android:id="@+id/signal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/statbar_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Statusbar"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/wide_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="@string/aosp_signal_icons"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp"
-                        tools:ignore="InefficientWeight" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/misc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/misc_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Misc"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Switch
-                        android:id="@+id/poweron_plug"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="Wake on Plug"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp"
-                        tools:ignore="InefficientWeight" />
-
-                </LinearLayout>
+                android:orientation="vertical"
+                android:padding="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <Switch
-                        android:id="@+id/warn_charge"
+                    <LinearLayout
+                        android:id="@+id/minit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        tools:ignore="InefficientWeight">
+
+                        <TextView
+                            android:id="@+id/minit_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_3minit"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/minbatstat_switch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/_3minit_battery_in_statusbar"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/minbatstat_imm_switch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/_3minit_battery_in_immersive"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/minbataod_switch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/_3minit_battery_in_aod"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/minclockstat_switch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/_3minit_clock_in_statusbar"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/minclockimm_switch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/_3minit_clock_in_immersive"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/minclockaod_switch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/_3minit_clock_in_aod"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
-                        android:checked="false"
-                        android:switchMinWidth="50dp"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                        android:text="Slow Charger Warning"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="20sp"
-                        tools:ignore="InefficientWeight" />
+                        android:text="@string/currently_broken_if_enabled_you_ll_get_two_clocks"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
+                        android:id="@+id/signal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/statbar_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Statusbar"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/wide_data"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="@string/aosp_signal_icons"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp"
+                                tools:ignore="InefficientWeight" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/misc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/misc_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Misc"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/poweron_plug"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="Wake on Plug"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp"
+                                tools:ignore="InefficientWeight" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/warn_charge"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="Slow Charger Warning"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp"
+                                tools:ignore="InefficientWeight" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <Switch
+                                android:id="@+id/sb_shot"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:checked="false"
+                                android:switchMinWidth="50dp"
+                                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                                android:text="SignBoard in Screenshot"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="20sp"
+                                tools:ignore="InefficientWeight" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</FrameLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

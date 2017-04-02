@@ -4,6 +4,8 @@ package com.zacharee1.modcontrol;
  * Created by Zacha on 3/1/2017.
  */
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.bluetooth.BluetoothA2dp;
 import android.content.ContentResolver;
@@ -16,6 +18,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
@@ -32,12 +35,15 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.jrummyapps.android.colorpicker.ColorPickerDialog;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -131,7 +137,6 @@ public class NoModsFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_nomods, container, false);
 
-
         try {
 //            qtOption();
 //            sigOption();
@@ -141,18 +146,19 @@ public class NoModsFragment extends Fragment {
             handleQTPage();
             buttons(applySig, "redsig", "greensig", "bluesig", "Signature");
             buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", "\"AOD Signature\"");
-            sliders(redQTSeek, RedQT);
-            sliders(greenQTSeek, GreenQT);
-            sliders(blueQTSeek, BlueQT);
+            colorPick();
+//            sliders(redQTSeek, RedQT);
+//            sliders(greenQTSeek, GreenQT);
+//            sliders(blueQTSeek, BlueQT);
             sliders(redSigSeek, RedSig);
             sliders(greenSigSeek, GreenSig);
             sliders(blueSigSeek, BlueSig);
             sliders(redAODSigSeek, RedSigAOD);
             sliders(greenAODSigSeek, GreenSigAOD);
             sliders(blueAODSigSeek, BlueSigAOD);
-            textListeners(RedQT, redQTSeek);
-            textListeners(GreenQT, greenQTSeek);
-            textListeners(BlueQT, blueQTSeek);
+//            textListeners(RedQT, redQTSeek);
+//            textListeners(GreenQT, greenQTSeek);
+//            textListeners(BlueQT, blueQTSeek);
             textListeners(RedSig, redSigSeek);
             textListeners(GreenSig, greenSigSeek);
             textListeners(BlueSig, blueSigSeek);
@@ -175,11 +181,76 @@ public class NoModsFragment extends Fragment {
 //        } catch (Exception e) {}
 //    }
 
+
+    public void colorPick() throws IOException {
+        Button colorPick = (Button) view.findViewById(R.id.color_pick);
+        colorPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    int dialogID = -1;
+                    int color = Color.argb(255, 255, 255, 255);
+                    switch (qtIndex) {
+                        case 0:
+                            dialogID = activity.DIALOG_ID_0;
+                            color = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
+                            break;
+                        case 1:
+                            dialogID = activity.DIALOG_ID_1;
+                            color = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
+                            break;
+                        case 2:
+                            dialogID = activity.DIALOG_ID_2;
+                            color = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
+                            break;
+                        case 3:
+                            dialogID = activity.DIALOG_ID_3;
+                            color = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
+                            break;
+                        case 4:
+                            dialogID = activity.DIALOG_ID_4;
+                            color = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
+                            break;
+                        case 5:
+                            dialogID = activity.DIALOG_ID_5;
+                            color = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
+                            break;
+                    }
+                    ColorPickerDialog.newBuilder()
+                            .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
+                            .setAllowPresets(true)
+                            .setDialogId(dialogID)
+                            .setColor(color)
+                            .setShowAlphaSlider(false)
+                            .show(activity);
+                } catch (Exception e) {
+                    Log.e("err", e.getMessage());
+                }
+            }
+
+        });
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void handleQTPage() {
         qtIndexSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = String.valueOf(parent.getItemAtPosition(position));
+            public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 qtIndex = position;
 
                 Log.i("ModControl/I: ", String.valueOf(qtIndex));
@@ -190,71 +261,71 @@ public class NoModsFragment extends Fragment {
 
                 switch (qtIndex) {
                     case 0:
-                        RedQT.setText(String.valueOf(redIntQT_0));
-                        GreenQT.setText(String.valueOf(greenIntQT_0));
-                        BlueQT.setText(String.valueOf(blueIntQT_0));
+//                        RedQT.setText(String.valueOf(sharedPrefs.getInt("redqt_0", 255) + sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255)));
+//                        GreenQT.setText(String.valueOf(greenIntQT_0));
+//                        BlueQT.setText(String.valueOf(blueIntQT_0));
+//
+//                        redQTSeek.setProgress(redIntQT_0);
+//                        greenQTSeek.setProgress(greenIntQT_0);
+//                        blueQTSeek.setProgress(blueIntQT_0);
 
-                        redQTSeek.setProgress(redIntQT_0);
-                        greenQTSeek.setProgress(greenIntQT_0);
-                        blueQTSeek.setProgress(blueIntQT_0);
-
-                        QTColor = Color.argb(255, redIntQT_0, greenIntQT_0, blueIntQT_0);
+                        QTColor = Color.argb(255, sharedPrefs.getInt("redqt_0", 255), sharedPrefs.getInt("greenqt_0", 255), sharedPrefs.getInt("blueqt_0", 255));
                         QTPreviewOn.setColorFilter(QTColor);
                         QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 1:
-                        RedQT.setText(String.valueOf(redIntQT_1));
-                        GreenQT.setText(String.valueOf(greenIntQT_1));
-                        BlueQT.setText(String.valueOf(blueIntQT_1));
+//                        RedQT.setText(String.valueOf(redIntQT_1));
+//                        GreenQT.setText(String.valueOf(greenIntQT_1));
+//                        BlueQT.setText(String.valueOf(blueIntQT_1));
+//
+//                        redQTSeek.setProgress(redIntQT_1);
+//                        greenQTSeek.setProgress(greenIntQT_1);
+//                        blueQTSeek.setProgress(blueIntQT_1);
 
-                        redQTSeek.setProgress(redIntQT_1);
-                        greenQTSeek.setProgress(greenIntQT_1);
-                        blueQTSeek.setProgress(blueIntQT_1);
-
-                        QTColor = Color.argb(255, redIntQT_1, greenIntQT_1, blueIntQT_1);
+                        QTColor = Color.argb(255, sharedPrefs.getInt("redqt_1", 255), sharedPrefs.getInt("greenqt_1", 255), sharedPrefs.getInt("blueqt_1", 255));
                         QTPreviewOn.setColorFilter(QTColor);
                         QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 2:
-                        RedQT.setText(String.valueOf(redIntQT_2));
-                        GreenQT.setText(String.valueOf(greenIntQT_2));
-                        BlueQT.setText(String.valueOf(blueIntQT_2));
+//                        RedQT.setText(String.valueOf(redIntQT_2));
+//                        GreenQT.setText(String.valueOf(greenIntQT_2));
+//                        BlueQT.setText(String.valueOf(blueIntQT_2));
+//
+//                        redQTSeek.setProgress(redIntQT_2);
+//                        greenQTSeek.setProgress(greenIntQT_2);
+//                        blueQTSeek.setProgress(blueIntQT_2);
 
-                        redQTSeek.setProgress(redIntQT_2);
-                        greenQTSeek.setProgress(greenIntQT_2);
-                        blueQTSeek.setProgress(blueIntQT_2);
-
-                        QTColor = Color.argb(255, redIntQT_2, greenIntQT_2, blueIntQT_2);
+                        QTColor = Color.argb(255, sharedPrefs.getInt("redqt_2", 255), sharedPrefs.getInt("greenqt_2", 255), sharedPrefs.getInt("blueqt_2", 255));
                         QTPreviewOn.setColorFilter(QTColor);
                         QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 3:
-                        RedQT.setText(String.valueOf(redIntQT_3));
-                        GreenQT.setText(String.valueOf(greenIntQT_3));
-                        BlueQT.setText(String.valueOf(blueIntQT_3));
+//                        RedQT.setText(String.valueOf(redIntQT_3));
+//                        GreenQT.setText(String.valueOf(greenIntQT_3));
+//                        BlueQT.setText(String.valueOf(blueIntQT_3));
+//
+//                        redQTSeek.setProgress(redIntQT_3);
+//                        greenQTSeek.setProgress(greenIntQT_3);
+//                        blueQTSeek.setProgress(blueIntQT_3);
 
-                        redQTSeek.setProgress(redIntQT_3);
-                        greenQTSeek.setProgress(greenIntQT_3);
-                        blueQTSeek.setProgress(blueIntQT_3);
-
-                        QTColor = Color.argb(255, redIntQT_3, greenIntQT_3, blueIntQT_3);
+                        QTColor = Color.argb(255, sharedPrefs.getInt("redqt_3", 255), sharedPrefs.getInt("greenqt_3", 255), sharedPrefs.getInt("blueqt_3", 255));
                         QTPreviewOn.setColorFilter(QTColor);
                         QTPreviewOff.setColorFilter(QTColor);
                         break;
 
                     case 4:
-                        RedQT.setText(String.valueOf(redIntQT_4));
-                        GreenQT.setText(String.valueOf(greenIntQT_4));
-                        BlueQT.setText(String.valueOf(blueIntQT_4));
+//                        RedQT.setText(String.valueOf(redIntQT_4));
+//                        GreenQT.setText(String.valueOf(greenIntQT_4));
+//                        BlueQT.setText(String.valueOf(blueIntQT_4));
+//
+//                        redQTSeek.setProgress(redIntQT_4);
+//                        greenQTSeek.setProgress(greenIntQT_4);
+//                        blueQTSeek.setProgress(blueIntQT_4);
 
-                        redQTSeek.setProgress(redIntQT_4);
-                        greenQTSeek.setProgress(greenIntQT_4);
-                        blueQTSeek.setProgress(blueIntQT_4);
-
-                        QTColor = Color.argb(255, redIntQT_4, greenIntQT_4, blueIntQT_4);
+                        QTColor = Color.argb(255, sharedPrefs.getInt("redqt_4", 255), sharedPrefs.getInt("greenqt_4", 255), sharedPrefs.getInt("blueqt_4", 255));
                         QTPreviewOn.setColorFilter(QTColor);
                         QTPreviewOff.setColorFilter(QTColor);
                         break;
@@ -268,7 +339,7 @@ public class NoModsFragment extends Fragment {
                         greenQTSeek.setProgress(greenIntQT_5);
                         blueQTSeek.setProgress(blueIntQT_5);
 
-                        QTColor = Color.argb(255, redIntQT_5, greenIntQT_5, blueIntQT_5);
+                        QTColor = Color.argb(255, sharedPrefs.getInt("redqt_5", 255), sharedPrefs.getInt("greenqt_5", 255), sharedPrefs.getInt("blueqt_5", 255));
                         QTPreviewOn.setColorFilter(QTColor);
                         QTPreviewOff.setColorFilter(QTColor);
                         break;
@@ -291,108 +362,125 @@ public class NoModsFragment extends Fragment {
                     public void run() {
                         ContentResolver cr = activity.getContentResolver();
                         SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE).edit();
-                        Log.i("qtIndex", String.valueOf(qtIndex));
+                        int redQT_0 = sharedPrefs.getInt("redqt_0", 255);
+                        int greenQT_0 = sharedPrefs.getInt("greenqt_0", 255);
+                        int blueQT_0 = sharedPrefs.getInt("blueqt_0", 255);
+                        int redQT_1 = sharedPrefs.getInt("redqt_1", 255);
+                        int greenQT_1 = sharedPrefs.getInt("greenqt_1", 255);
+                        int blueQT_1 = sharedPrefs.getInt("blueqt_1", 255);
+                        int redQT_2 = sharedPrefs.getInt("redqt_2", 255);
+                        int greenQT_2 = sharedPrefs.getInt("greenqt_2", 255);
+                        int blueQT_2 = sharedPrefs.getInt("blueqt_2", 255);
+                        int redQT_3 = sharedPrefs.getInt("redqt_3", 255);
+                        int greenQT_3 = sharedPrefs.getInt("greenqt_3", 255);
+                        int blueQT_3 = sharedPrefs.getInt("blueqt_3", 255);
+                        int redQT_4 = sharedPrefs.getInt("redqt_4", 255);
+                        int greenQT_4 = sharedPrefs.getInt("greenqt_4", 255);
+                        int blueQT_4 = sharedPrefs.getInt("blueqt_4", 255);
+                        int redQT_5 = sharedPrefs.getInt("redqt_5", 255);
+                        int greenQT_5 = sharedPrefs.getInt("greenqt_5", 255);
+                        int blueQT_5 = sharedPrefs.getInt("blueqt_5", 255);
                         switch (qtIndex) {
                             case 0:
-                                Settings.System.putInt(cr, "redqt_0", redIntQT_0);
-                                Settings.System.putInt(cr, "greenqt_0", greenIntQT_0);
-                                Settings.System.putInt(cr, "blueqt_0", blueIntQT_0);
-                                editor.putInt("redqt_0", redIntQT_0);
-                                editor.putInt("greenqt_0", greenIntQT_0);
-                                editor.putInt("blueqt_0", blueIntQT_0);
+                                Settings.System.putInt(cr, "redqt_0", redQT_0);
+                                Settings.System.putInt(cr, "greenqt_0", greenQT_0);
+                                Settings.System.putInt(cr, "blueqt_0", blueQT_0);
+//                                editor.putInt("redqt_0", redIntQT_0);
+//                                editor.putInt("greenqt_0", greenIntQT_0);
+//                                editor.putInt("blueqt_0", blueIntQT_0);
 
-                                logger("redqt_0", "greenqt_0", "blueqt_0", redIntQT_0, greenIntQT_0, blueIntQT_0, "QuickTools");
+                                logger("redqt_0", "greenqt_0", "blueqt_0", redQT_0, greenQT_0, blueQT_0, "QuickTools");
                                 break;
 
                             case 1:
-                                Settings.System.putInt(cr, "redqt_1", redIntQT_1);
-                                Settings.System.putInt(cr, "greenqt_1", greenIntQT_1);
-                                Settings.System.putInt(cr, "blueqt_1", blueIntQT_1);
-                                editor.putInt("redqt_1", redIntQT_1);
-                                editor.putInt("greenqt_1", greenIntQT_1);
-                                editor.putInt("blueqt_1", blueIntQT_1);
+                                Settings.System.putInt(cr, "redqt_1", redQT_1);
+                                Settings.System.putInt(cr, "greenqt_1", greenQT_1);
+                                Settings.System.putInt(cr, "blueqt_1", blueQT_1);
+//                                editor.putInt("redqt_1", redIntQT_1);
+//                                editor.putInt("greenqt_1", greenIntQT_1);
+//                                editor.putInt("blueqt_1", blueIntQT_1);
 
-                                logger("redqt_1", "greenqt_1", "blueqt_1", redIntQT_1, greenIntQT_1, blueIntQT_1, "QuickTools");
+                                logger("redqt_1", "greenqt_1", "blueqt_1", redQT_1, greenQT_1, blueQT_1, "QuickTools");
                                 break;
 
                             case 2:
-                                Settings.System.putInt(cr, "redqt_2", redIntQT_2);
-                                Settings.System.putInt(cr, "greenqt_2", greenIntQT_2);
-                                Settings.System.putInt(cr, "blueqt_2", blueIntQT_2);
-                                editor.putInt("redqt_2", redIntQT_2);
-                                editor.putInt("greenqt_2", greenIntQT_2);
-                                editor.putInt("blueqt_2", blueIntQT_2);
+                                Settings.System.putInt(cr, "redqt_2", redQT_2);
+                                Settings.System.putInt(cr, "greenqt_2", greenQT_2);
+                                Settings.System.putInt(cr, "blueqt_2", blueQT_2);
+//                                editor.putInt("redqt_2", redIntQT_2);
+//                                editor.putInt("greenqt_2", greenIntQT_2);
+//                                editor.putInt("blueqt_2", blueIntQT_2);
 
-                                logger("redqt_2", "greenqt_2", "blueqt_2", redIntQT_2, greenIntQT_2, blueIntQT_2, "QuickTools");
+                                logger("redqt_2", "greenqt_2", "blueqt_2", redQT_2, greenQT_2, blueQT_2, "QuickTools");
                                 break;
 
                             case 3:
-                                Settings.System.putInt(cr, "redqt_3", redIntQT_3);
-                                Settings.System.putInt(cr, "greenqt_3", greenIntQT_3);
-                                Settings.System.putInt(cr, "blueqt_3", blueIntQT_3);
-                                editor.putInt("redqt_3", redIntQT_3);
-                                editor.putInt("greenqt_3", greenIntQT_3);
-                                editor.putInt("blueqt_3", blueIntQT_3);
+                                Settings.System.putInt(cr, "redqt_3", redQT_3);
+                                Settings.System.putInt(cr, "greenqt_3", greenQT_3);
+                                Settings.System.putInt(cr, "blueqt_3", blueQT_3);
+//                                editor.putInt("redqt_3", redIntQT_3);
+//                                editor.putInt("greenqt_3", greenIntQT_3);
+//                                editor.putInt("blueqt_3", blueIntQT_3);
 
-                                logger("redqt_3", "greenqt_3", "blueqt_3", redIntQT_3, greenIntQT_3, blueIntQT_3, "QuickTools");
+                                logger("redqt_3", "greenqt_3", "blueqt_3", redQT_3, greenQT_3, blueQT_3, "QuickTools");
                                 break;
 
                             case 4:
-                                Settings.System.putInt(cr, "redqt_4", redIntQT_4);
-                                Settings.System.putInt(cr, "greenqt_4", greenIntQT_4);
-                                Settings.System.putInt(cr, "blueqt_4", blueIntQT_4);
-                                editor.putInt("redqt_4", redIntQT_4);
-                                editor.putInt("greenqt_4", greenIntQT_4);
-                                editor.putInt("blueqt_4", blueIntQT_4);
+                                Settings.System.putInt(cr, "redqt_4", redQT_4);
+                                Settings.System.putInt(cr, "greenqt_4", greenQT_4);
+                                Settings.System.putInt(cr, "blueqt_4", blueQT_4);
+//                                editor.putInt("redqt_4", redIntQT_4);
+//                                editor.putInt("greenqt_4", greenIntQT_4);
+//                                editor.putInt("blueqt_4", blueIntQT_4);
 
-                                logger("redqt_4", "greenqt_4", "blueqt_4", redIntQT_4, greenIntQT_4, blueIntQT_4, "QuickTools");
+                                logger("redqt_4", "greenqt_4", "blueqt_4", redQT_4, greenQT_4, blueQT_4, "QuickTools");
                                 break;
 
                             case 5:
-                                Settings.System.putInt(cr, "redqt_0", redIntQT_5);
-                                Settings.System.putInt(cr, "greenqt_0", greenIntQT_5);
-                                Settings.System.putInt(cr, "blueqt_0", blueIntQT_5);
-                                editor.putInt("redqt_0", redIntQT_5);
-                                editor.putInt("greenqt_0", greenIntQT_5);
-                                editor.putInt("blueqt_0", blueIntQT_5);
+                                Settings.System.putInt(cr, "redqt_0", redQT_5);
+                                Settings.System.putInt(cr, "greenqt_0", greenQT_5);
+                                Settings.System.putInt(cr, "blueqt_0", blueQT_5);
+//                                editor.putInt("redqt_0", redIntQT_5);
+//                                editor.putInt("greenqt_0", greenIntQT_5);
+//                                editor.putInt("blueqt_0", blueIntQT_5);
 
-                                logger("redqt_0", "greenqt_0", "blueqt_0", redIntQT_5, greenIntQT_5, blueIntQT_5, "QuickTools");
+                                logger("redqt_0", "greenqt_0", "blueqt_0", redQT_5, greenQT_5, blueQT_5, "QuickTools");
 
-                                Settings.System.putInt(cr, "redqt_1", redIntQT_5);
-                                Settings.System.putInt(cr, "greenqt_1", greenIntQT_5);
-                                Settings.System.putInt(cr, "blueqt_1", blueIntQT_5);
-                                editor.putInt("redqt_1", redIntQT_5);
-                                editor.putInt("greenqt_1", greenIntQT_5);
-                                editor.putInt("blueqt_1", blueIntQT_5);
+                                Settings.System.putInt(cr, "redqt_1", redQT_5);
+                                Settings.System.putInt(cr, "greenqt_1", greenQT_5);
+                                Settings.System.putInt(cr, "blueqt_1", blueQT_5);
+//                                editor.putInt("redqt_1", redIntQT_5);
+//                                editor.putInt("greenqt_1", greenIntQT_5);
+//                                editor.putInt("blueqt_1", blueIntQT_5);
 
-                                logger("redqt_1", "greenqt_1", "blueqt_1", redIntQT_5, greenIntQT_5, blueIntQT_5, "QuickTools");
+                                logger("redqt_1", "greenqt_1", "blueqt_1", redQT_5, greenQT_5, blueQT_5, "QuickTools");
 
-                                Settings.System.putInt(cr, "redqt_2", redIntQT_5);
-                                Settings.System.putInt(cr, "greenqt_2", greenIntQT_5);
-                                Settings.System.putInt(cr, "blueqt_2", blueIntQT_5);
-                                editor.putInt("redqt_2", redIntQT_5);
-                                editor.putInt("greenqt_2", greenIntQT_5);
-                                editor.putInt("blueqt_2", blueIntQT_5);
+                                Settings.System.putInt(cr, "redqt_2", redQT_5);
+                                Settings.System.putInt(cr, "greenqt_2", greenQT_5);
+                                Settings.System.putInt(cr, "blueqt_2", blueQT_5);
+//                                editor.putInt("redqt_2", redIntQT_5);
+//                                editor.putInt("greenqt_2", greenIntQT_5);
+//                                editor.putInt("blueqt_2", blueIntQT_5);
 
-                                logger("redqt_2", "greenqt_2", "blueqt_2", redIntQT_5, greenIntQT_5, blueIntQT_5, "QuickTools");
+                                logger("redqt_2", "greenqt_2", "blueqt_2", redQT_5, greenQT_5, blueQT_5, "QuickTools");
 
-                                Settings.System.putInt(cr, "redqt_3", redIntQT_5);
-                                Settings.System.putInt(cr, "greenqt_3", greenIntQT_5);
-                                Settings.System.putInt(cr, "blueqt_3", blueIntQT_5);
-                                editor.putInt("redqt_3", redIntQT_5);
-                                editor.putInt("greenqt_3", greenIntQT_5);
-                                editor.putInt("blueqt_3", blueIntQT_5);
+                                Settings.System.putInt(cr, "redqt_3", redQT_5);
+                                Settings.System.putInt(cr, "greenqt_3", greenQT_5);
+                                Settings.System.putInt(cr, "blueqt_3", blueQT_5);
+//                                editor.putInt("redqt_3", redIntQT_5);
+//                                editor.putInt("greenqt_3", greenIntQT_5);
+//                                editor.putInt("blueqt_3", blueIntQT_5);
 
-                                logger("redqt_3", "greenqt_3", "blueqt_3", redIntQT_5, greenIntQT_5, blueIntQT_5, "QuickTools");
+                                logger("redqt_3", "greenqt_3", "blueqt_3", redQT_5, greenQT_5, blueQT_5, "QuickTools");
 
-                                Settings.System.putInt(cr, "redqt_4", redIntQT_5);
-                                Settings.System.putInt(cr, "greenqt_4", greenIntQT_5);
-                                Settings.System.putInt(cr, "blueqt_4", blueIntQT_5);
-                                editor.putInt("redqt_4", redIntQT_5);
-                                editor.putInt("greenqt_4", greenIntQT_5);
-                                editor.putInt("blueqt_4", blueIntQT_5);
+                                Settings.System.putInt(cr, "redqt_4", redQT_5);
+                                Settings.System.putInt(cr, "greenqt_4", greenQT_5);
+                                Settings.System.putInt(cr, "blueqt_4", blueQT_5);
+//                                editor.putInt("redqt_4", redIntQT_5);
+//                                editor.putInt("greenqt_4", greenIntQT_5);
+//                                editor.putInt("blueqt_4", blueIntQT_5);
 
-                                logger("redqt_4", "greenqt_4", "blueqt_4", redIntQT_5, greenIntQT_5, blueIntQT_5, "QuickTools");
+                                logger("redqt_4", "greenqt_4", "blueqt_4", redQT_5, greenQT_5, blueQT_5, "QuickTools");
                                 break;
                         }
                         editor.apply();
@@ -492,6 +580,7 @@ public class NoModsFragment extends Fragment {
         blueIntAODSig = sharedPrefs.getInt("bluesigaod", 255);
 
         qtIndex = sharedPrefs.getInt("qtIndex", 5);
+        qtIndexSpinner.setSelection(qtIndex);
 
         switch (qtIndex) {
             case 0:
