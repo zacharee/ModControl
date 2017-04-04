@@ -142,9 +142,13 @@ public class LogFragment extends Fragment {
         log = log.replace("<br /><br /><br />", "<br />");
         log = log.replace("true", "<font color='#00ff00'>true</font>");
         log = log.replace("false", "<font color='#ff0000'>false</font>");
+        log = log.replace("cd", "<font color='#FFA500'>cd</font>");
+        log = log.replace("mode", "<font color='#FFA500'>mode</font>");
         log = log.replace("ModControl/E/storage/emulated/0/Zacharee1Mods/output.log (No such file or directory)<br />", "\0");
         int ind = log.lastIndexOf("<br />");
         if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
+        ind = log.lastIndexOf("\n");
+        if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("\n".length()), "").toString();
 
         Spanned html = Html.fromHtml(log, Html.FROM_HTML_MODE_COMPACT);
 

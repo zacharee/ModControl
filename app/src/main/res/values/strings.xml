@@ -135,4 +135,12 @@
         <item>5th Toggle</item>
         <item>All Toggles</item>
     </string-array>
+    <string-array name="navbar_index_options">
+        <item>Back Button</item>
+        <item>Home Button</item>
+        <item>Menu Button</item>
+        <item>4th Toggle</item>
+        <item>5th Toggle</item>
+        <item>All Toggles</item>
+    </string-array>
 </resources>

@@ -7,9 +7,17 @@ package com.zacharee1.modcontrol;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -170,6 +178,7 @@ public class ModsFragment extends Fragment {
             setSwitchListener(clockaod, "minclockaod", "minclockaod");
             buildProp(ssCap, "sys.capture_signboard.enabled");
             reboot();
+
         } catch (Exception e) {
             Log.e("ModControl/E", e.getMessage());
             sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
@@ -198,7 +207,7 @@ public class ModsFragment extends Fragment {
                 try {
                     copyFile2("buildprop");
                 } catch (Exception e) {}
-                sudo("sh /data/media/0/Zacharee1Mods/buildprop " + key + " " + value + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
+                sudo("busybox sh /data/media/0/Zacharee1Mods/buildprop " + key + " " + value + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
             }
         });
 
@@ -242,7 +251,7 @@ public class ModsFragment extends Fragment {
     public void logger(final String sharedP, final String settings, final boolean tralse, int tf) {
         try {
             copyFile2("logstuff");
-            sudo("sh /data/media/0/Zacharee1Mods/logstuff " + sharedP + " " + tralse + " " + settings + " " + tf + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
+            sudo("busybox sh /data/media/0/Zacharee1Mods/logstuff " + sharedP + " " + tralse + " " + settings + " " + tf + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
         } catch (Exception e) {
             Log.e("ModControl/E", e.getMessage());
         }

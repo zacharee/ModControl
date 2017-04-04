@@ -2081,7 +2081,7 @@ public class NoModsFragment extends Fragment {
     public void logger(final String prefR, final String prefG, final String prefB, final int red, final int green, final int blue, final String name) {
         try {
             copyFile2("logcolor");
-            sudo("sh /data/media/0/Zacharee1Mods/logcolor " + prefR + " " + prefG + " " + prefB + " " + red + " " + green + " " + blue + " " + name + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
+            sudo("busybox sh /data/media/0/Zacharee1Mods/logcolor " + prefR + " " + prefG + " " + prefB + " " + red + " " + green + " " + blue + " " + name + " >> /data/media/0/Zacharee1Mods/output.log 2>&1");
         } catch (Exception e) {
             Log.e("ModControl/E", e.getMessage());
         }
