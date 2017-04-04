@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int DIALOG_ID_5 = 5;
     public static final int DIALOG_ID_6 = 6;
     public static final int DIALOG_ID_7 = 7;
+    public static final int DIALOG_ID_8 = 8;
     public boolean enabled;
     public boolean isV20;
 
@@ -279,16 +280,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editor.putInt("blueqt_5", colorBlue);
                 break;
             case DIALOG_ID_6:
-                Toast.makeText(MainActivity.this, "Selected Color 5: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Selected Color 6: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
                 editor.putInt("redsig", colorRed);
                 editor.putInt("greensig", colorGreen);
                 editor.putInt("bluesig", colorBlue);
                 break;
             case DIALOG_ID_7:
-                Toast.makeText(MainActivity.this, "Selected Color 5: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Selected Color 7: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
                 editor.putInt("redsigaod", colorRed);
                 editor.putInt("greensigaod", colorGreen);
                 editor.putInt("bluesigaod", colorBlue);
+                break;
+            case DIALOG_ID_8:
+                Toast.makeText(MainActivity.this, "Selected Color 8: #" + colorRed + colorGreen + colorBlue, Toast.LENGTH_SHORT).show();
+                editor.putInt("rednav_0", colorRed);
+                editor.putInt("greennav_0", colorGreen);
+                editor.putInt("bluenav_0", colorBlue);
                 break;
         }
         editor.apply();

@@ -115,14 +115,17 @@ public class NoModsFragment extends Fragment {
     public Button QTPreviewOffB;
     public Button SigPreviewB;
     public Button SigAodPreviewB;
+    public Button NavPreviewB;
 
     public int QTColor;
     public int SigColor;
     public int AODSigColor;
+    public int NavColor;
 
     public Button applyQT;
     public Button applySig;
     public Button applyAODSig;
+    public Button applyNav;
 
     public int qtIndex;
 
@@ -153,6 +156,7 @@ public class NoModsFragment extends Fragment {
             applyQT();
             buttons(applySig, "redsig", "greensig", "bluesig", "Signature");
             buttons(applyAODSig, "redsigaod", "greensigaod", "bluesigaod", "\"AOD Signature\"");
+            buttons(applyNav, "rednav_0", "greennav_0", "bluenav_0", "NavBar");
             colorPick((Button)view.findViewById(R.id.color_pick_qt));
             colorPick((Button)view.findViewById(R.id.color_pick_qt_1));
             colorPick((Button)view.findViewById(R.id.color_pick_qt_2));
@@ -160,6 +164,7 @@ public class NoModsFragment extends Fragment {
             colorPick((Button)view.findViewById(R.id.color_pick_sig_aod));
             colorPick((Button)view.findViewById(R.id.color_pick_sig_1));
             colorPick((Button)view.findViewById(R.id.color_pick_sig_aod_1));
+            colorPick(NavPreviewB);
             handleQTPage();
 //            sliders(redQTSeek, RedQT);
 //            sliders(greenQTSeek, GreenQT);
@@ -239,6 +244,9 @@ public class NoModsFragment extends Fragment {
                             } else if (button == view.findViewById(R.id.color_pick_sig_aod) || button == view.findViewById(R.id.color_pick_sig_aod_1)) {
                                 dialogID = activity.DIALOG_ID_7;
                                 color = Color.argb(255, sharedPrefs.getInt("redsigaod", 255), sharedPrefs.getInt("greensigaod", 255), sharedPrefs.getInt("bluesigaod", 255));
+                            } else if (button == NavPreviewB) {
+                                dialogID = activity.DIALOG_ID_8;
+                                color = Color.argb(255, sharedPrefs.getInt("rednav_0", 255), sharedPrefs.getInt("greennav_0", 255), sharedPrefs.getInt("bluenav_0", 255));
                             }
                             ColorPickerDialog.newBuilder()
                                     .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
@@ -562,10 +570,12 @@ public class NoModsFragment extends Fragment {
         QTPreviewOffB = (Button) view.findViewById(R.id.color_pick_qt_2);
         SigPreviewB = (Button) view.findViewById(R.id.color_pick_sig_1);
         SigAodPreviewB = (Button) view.findViewById(R.id.color_pick_sig_aod_1);
+        NavPreviewB = (Button) view.findViewById(R.id.navbar_pick_1);
 
         applyQT = (Button) view.findViewById(R.id.apply_qt_color);
         applySig = (Button) view.findViewById(R.id.apply_sig_color);
         applyAODSig = (Button) view.findViewById(R.id.apply_aod_sig_color);
+        applyNav = (Button) view.findViewById(R.id.apply_navbar_color);
 
 //        redQTSeek.setProgress(sharedPrefs.getInt("red", 255));
 //        greenQTSeek.setProgress(sharedPrefs.getInt("green", 255));
@@ -627,6 +637,7 @@ public class NoModsFragment extends Fragment {
         }
         SigColor = Color.argb(255, sharedPrefs.getInt("redsig", 255), sharedPrefs.getInt("greensig", 255), sharedPrefs.getInt("bluesig", 255));
         AODSigColor = Color.argb(255, sharedPrefs.getInt("redsigaod", 255), sharedPrefs.getInt("greensigaod", 255), sharedPrefs.getInt("bluesigaod", 255));
+        NavColor = Color.argb(255, sharedPrefs.getInt("rednav_0", 255), sharedPrefs.getInt("greennav_0", 255), sharedPrefs.getInt("bluenav_0", 255));
 
         QTPreviewOn.setColorFilter(QTColor);
         QTPreviewOnB.setBackgroundTintList(ColorStateList.valueOf(QTColor));
@@ -636,6 +647,7 @@ public class NoModsFragment extends Fragment {
         SigPreviewB.setBackgroundTintList(ColorStateList.valueOf(SigColor));
         AODSigPreview.setColorFilter(AODSigColor);
         SigAodPreviewB.setBackgroundTintList(ColorStateList.valueOf(AODSigColor));
+        NavPreviewB.setBackgroundTintList(ColorStateList.valueOf(NavColor));
 
 //        RedQT.setText(String.valueOf(sharedPrefs.getInt("red", 255)));
 //        GreenQT.setText(String.valueOf(sharedPrefs.getInt("green", 255)));
@@ -1349,6 +1361,8 @@ public class NoModsFragment extends Fragment {
 
                         if (button == applySig || button == applyAODSig) {
                             sudo("killall com.lge.signboard");
+                        } else if (button == applyNav) {
+                            sudo("killall com.android.systemui");
                         } else {
                             sudo("killall com.lge.quicktools ; killall com.lge.signboard");
                         }
