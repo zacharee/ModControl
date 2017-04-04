@@ -43,7 +43,6 @@
                     android:text="@string/colored_quick_toggles"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="#000"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -161,7 +160,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
                         android:alpha="0.75"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@color/colorPrimary"
                         android:elevation="0dp"
                         android:translationZ="0dp" />
 
@@ -174,7 +173,6 @@
                         android:layout_weight="1"
                         android:text="Pick Color:"
                         android:textAlignment="textEnd"
-                        android:textColor="@android:color/primary_text_light"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -449,7 +447,6 @@
                     android:layout_weight="1"
                     android:text="@string/colored_signature"
                     android:textAlignment="center"
-                    android:textColor="#000"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -557,7 +554,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:alpha="0.75"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@color/colorPrimary"
                         android:elevation="0dp"
                         android:translationZ="0dp" />
 
@@ -571,7 +568,6 @@
                         android:gravity="center_horizontal"
                         android:text="Pick Color:"
                         android:textAlignment="textEnd"
-                        android:textColor="@android:color/primary_text_light"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -816,7 +812,6 @@
                     android:layout_weight="1"
                     android:text="@string/colored_aod_signature"
                     android:textAlignment="center"
-                    android:textColor="#000"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -924,7 +919,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:alpha="0.75"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@color/colorPrimary"
                         android:elevation="0dp"
                         android:translationZ="0dp" />
 
@@ -938,7 +933,6 @@
                         android:gravity="center_horizontal"
                         android:text="Pick Color:"
                         android:textAlignment="textEnd"
-                        android:textColor="@android:color/primary_text_light"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -1182,7 +1176,6 @@
                     android:layout_weight="1"
                     android:text="Colored Navbar Buttons"
                     android:textAlignment="center"
-                    android:textColor="#000"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -1227,7 +1220,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:alpha="0.75"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@color/colorPrimary"
                         android:elevation="0dp"
                         android:translationZ="0dp" />
 
@@ -1240,7 +1233,6 @@
                         android:layout_weight="1"
                         android:text="Pick Color:"
                         android:textAlignment="textEnd"
-                        android:textColor="@android:color/primary_text_light"
                         android:textSize="18sp" />
 
                     <LinearLayout

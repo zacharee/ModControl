@@ -23,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:text="About"
                 android:textAlignment="center"
-                android:textColor="@android:color/primary_text_light"
                 android:textSize="26sp" />
 
             <TextView
@@ -32,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="App created by Zacharee1"
                 android:textAlignment="center"
-                android:textColor="@android:color/tertiary_text_light"
+                android:textColor="@android:color/tertiary_text_dark"
                 android:textSize="18sp" />
 
             <TextView
@@ -42,7 +41,6 @@
                 android:layout_marginTop="16dp"
                 android:text="Created to control certain UI elements of the LG V20"
                 android:textAlignment="center"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <TextView
@@ -52,7 +50,6 @@
                 android:layout_marginTop="10dp"
                 android:text="You will have to install the mod to use this app."
                 android:textAlignment="center"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <TextView
@@ -62,7 +59,6 @@
                 android:layout_marginTop="10dp"
                 android:text="Visit the XDA thread or the Play Store link to download ModInstaller."
                 android:textAlignment="center"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -114,7 +110,6 @@
                 android:layout_marginTop="16dp"
                 android:text="Debug Info"
                 android:textAlignment="center"
-                android:textColor="@android:color/primary_text_light"
                 android:textSize="20sp" />
 
             <TextView

@@ -62,8 +62,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/statusbar_immersive_mode"
-                    android:textColor="@android:color/tertiary_text_light" />
+                    android:text="@string/statusbar_immersive_mode" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -72,8 +71,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/aod"
-                    android:textColor="@android:color/tertiary_text_light" />
+                    android:text="@string/aod" />
             </LinearLayout>
 
             <View
