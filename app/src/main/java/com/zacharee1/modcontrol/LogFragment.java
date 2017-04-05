@@ -5,12 +5,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Looper;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -29,8 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static android.content.Context.MODE_PRIVATE;
-
 /**
  * Created by Zacha on 3/24/2017.
  */
@@ -39,6 +35,7 @@ public class LogFragment extends Fragment {
     View view;
     MainActivity activity;
     Context ctx;
+    SharedPreferences sharedPrefs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +45,8 @@ public class LogFragment extends Fragment {
         if ( getActivity() instanceof MainActivity){
             activity = (MainActivity) getActivity();
         }
+
+        sharedPrefs = activity.getSharedPreferences("com.zacharee1.modcontrol", Context.MODE_PRIVATE);
 
         try {
             buttons();
@@ -104,8 +103,15 @@ public class LogFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+                    int drawable;
+
+                    if (activity.isDark) {
+                        drawable = R.drawable.ic_warning_dark;
+                    } else {
+                        drawable = R.drawable.ic_warning_light;
+                    }
                     new AlertDialog.Builder(ctx)
-                            .setIcon(R.drawable.ic_warning)
+                            .setIcon(drawable)
                             .setTitle("Deleting Log")
                             .setMessage("Are you sure you want to delete the log?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
