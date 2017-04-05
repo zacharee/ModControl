@@ -9,7 +9,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 25
         versionCode 34
-        versionName "7.0"
+        versionName "7.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"

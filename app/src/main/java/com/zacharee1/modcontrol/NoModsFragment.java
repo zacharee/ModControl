@@ -524,6 +524,23 @@ public class NoModsFragment extends Fragment {
             enabled = true;
         }
 
+        if (activity.isDark) {
+            view.findViewById(R.id.qtools).setBackground(activity.getDrawable(R.drawable.layout_bg_dark));
+            view.findViewById(R.id.sig).setBackground(activity.getDrawable(R.drawable.layout_bg_dark));
+            view.findViewById(R.id.sig_aod).setBackground(activity.getDrawable(R.drawable.layout_bg_dark));
+            view.findViewById(R.id.navbar).setBackground(activity.getDrawable(R.drawable.layout_bg_dark));
+
+        } else {
+            view.findViewById(R.id.qtools).setBackground(activity.getDrawable(R.drawable.layout_bg_light));
+            view.findViewById(R.id.sig).setBackground(activity.getDrawable(R.drawable.layout_bg_light));
+            view.findViewById(R.id.sig_aod).setBackground(activity.getDrawable(R.drawable.layout_bg_light));
+            view.findViewById(R.id.navbar).setBackground(activity.getDrawable(R.drawable.layout_bg_light));
+        }
+        view.findViewById(R.id.qtools).setPadding(4, 10, 4, 10);
+        view.findViewById(R.id.sig).setPadding(4, 10, 4, 10);
+        view.findViewById(R.id.sig_aod).setPadding(4, 10, 4, 10);
+        view.findViewById(R.id.navbar).setPadding(4, 10,4,10);
+
 //        qtGroup1 = (RadioGroup) view.findViewById(R.id.color_tool1);
 //        qtGroup2 = (RadioGroup) view.findViewById(R.id.color_tool2);
 //        qtGroup3 = (RadioGroup) view.findViewById(R.id.color_tool3);

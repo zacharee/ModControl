@@ -15,6 +15,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <Switch
+                android:id="@+id/set_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:switchMinWidth="50dp"
+                android:text="Dark Mode"
+                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 

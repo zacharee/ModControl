@@ -13,8 +13,8 @@
         android:theme="@style/DARK2">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/DARK2.NoAppBar">
+            android:label="@string/app_name">
+            <!--android:theme="@style/DARK2.NoAppBar">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

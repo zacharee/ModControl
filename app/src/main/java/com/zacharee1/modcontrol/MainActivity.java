@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -85,9 +86,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static final int WRITE_EXTERNAL_STORAGE = 1;
 
+    public boolean isDark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
+        isDark = sharedPrefs.getBoolean("isDark", false);
+        if (isDark) {
+            setTheme(R.style.DARK2_NoAppBar);
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,8 +127,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainf = new MainFragment();
         logfrag = new LogFragment();
         mHandler = new Handler();
-
-        sharedPrefs = getSharedPreferences("com.zacharee1.modcontrol", MODE_PRIVATE);
 
         if (sharedPrefs.getBoolean("enabled", true)) {
             enabled = true;
