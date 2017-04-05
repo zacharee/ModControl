@@ -133,6 +133,7 @@ public class LogFragment extends Fragment {
         String log = getStringFromFile(Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
         TextView logView = (TextView) view.findViewById(R.id.log_text);
         log = log.replace("\n", "<br />");
+        log = log.replace("\\n", "<br />");
         log = log.replace("try", "<font color='#FFA500'>try</font>");
         log = log.replace("mkdir", "<font color='#FFA500'>mkdir</font>");
         log = log.replace("cp", "<font color='#FFA500'>cp</font>");
@@ -147,8 +148,6 @@ public class LogFragment extends Fragment {
         log = log.replace("ModControl/E/storage/emulated/0/Zacharee1Mods/output.log (No such file or directory)<br />", "\0");
         int ind = log.lastIndexOf("<br />");
         if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("<br />".length()), "").toString();
-        ind = log.lastIndexOf("\n");
-        if( ind >= 0 ) log = new StringBuilder(log).replace(ind, ind + ("\n".length()), "").toString();
 
         Spanned html = Html.fromHtml(log, Html.FROM_HTML_MODE_COMPACT);
 

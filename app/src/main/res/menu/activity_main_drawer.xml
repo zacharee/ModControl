@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/navmenu_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_main"
             android:icon="@drawable/ic_menu_home"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_nomods"
-            android:icon="@drawable/ic_color_lens_black_24dp"
-            android:title="Color Mods" />
-        <item
-            android:id="@+id/nav_mods"
-            android:icon="@drawable/ic_check_box_black_24dp"
-            android:title="@string/extra_mods" />
-        <item
             android:id="@+id/nav_log"
             android:icon="@drawable/ic_menu_log"
             android:title="Log" />
+    </group>
+
+    <group
+        android:id="@+id/navmenu_middle"
+        android:checkableBehavior="single">
+        <item
+        android:id="@+id/nav_nomods"
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:title="Color Mods" />
+        <item
+        android:id="@+id/nav_mods"
+        android:icon="@drawable/ic_check_box_black_24dp"
+        android:title="@string/extra_mods" />
+    </group>
+
+    <group
+        android:id="@+id/navmenu_bottom"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_settings"
@@ -27,7 +39,6 @@
             android:icon="@drawable/ic_menu_list"
             android:title="@string/about" />
     </group>
-
 
 
 </menu>
