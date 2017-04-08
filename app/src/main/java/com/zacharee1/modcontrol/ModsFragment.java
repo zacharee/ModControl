@@ -154,6 +154,7 @@ public class ModsFragment extends Fragment {
             isV20 = false;
             view.findViewById(R.id.minbatstat_imm_switch).setVisibility(View.GONE);
             view.findViewById(R.id.minclockimm_switch).setVisibility(View.GONE);
+            view.findViewById(R.id.sb_shot).setVisibility(View.GONE);
         }
 
         try {

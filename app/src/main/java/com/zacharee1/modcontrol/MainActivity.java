@@ -188,6 +188,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         id = sharedPrefs.getInt("navkey", 0);
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        Menu navMenu = navView.getMenu();
+        navMenu.findItem(id).setChecked(true);
 
         if (id == R.id.nav_main) {
             MainFragment fragment = new MainFragment();

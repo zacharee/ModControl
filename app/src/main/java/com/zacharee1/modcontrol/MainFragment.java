@@ -160,6 +160,7 @@ public class MainFragment extends Fragment {
 
                     editor.putBoolean("poweronplug", false);
                     editor.putBoolean("chargewarning", false);
+                    editor.putBoolean("sb_shot", false);
 
                     editor.apply();
                     enabled = false;
@@ -204,6 +205,7 @@ public class MainFragment extends Fragment {
 
                     Settings.System.putInt(activity.getContentResolver(), "poweronplug", 0);
                     Settings.System.putInt(activity.getContentResolver(), "chargewarning", 1);
+                    sudo("busybox sh /data/media/0/Zacharee1Mods/buildprop sys.capture_signboard.enabled false >> /data/media/0/Zacharee1Mods/output.log 2>&1");
 
                     new Thread(new Runnable() {
                         public void run() {
