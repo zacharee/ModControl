@@ -187,10 +187,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             sudo("echo \"ModControl/E" + e.getMessage() + "\" >> " + Environment.getExternalStorageDirectory() + "/Zacharee1Mods/output.log");
         }
 
-        id = sharedPrefs.getInt("navkey", 0);
+        id = sharedPrefs.getInt("navkey", R.id.nav_main);
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         Menu navMenu = navView.getMenu();
-        navMenu.findItem(id).setChecked(true);
+        if (id != 0) navMenu.findItem(id).setChecked(true);
 
         if (id == R.id.nav_main) {
             MainFragment fragment = new MainFragment();
