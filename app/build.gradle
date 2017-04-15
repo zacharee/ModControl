@@ -8,8 +8,8 @@ android {
         applicationId "com.zacharee1.modcontrol"
         minSdkVersion 24
         targetSdkVersion 25
-        versionCode 39
-        versionName "7.4"
+        versionCode 40
+        versionName "7.4.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
