@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -98,6 +99,14 @@ public class MainFragment extends Fragment {
             isV20 = false;
             modelG5.setChecked(true);
         }
+
+        Button remountSys = (Button) view.findViewById(R.id.mount_sys);
+        remountSys.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sudo("mount -o rw,remount /system");
+            }
+        });
 
         try {
             modEnable();
