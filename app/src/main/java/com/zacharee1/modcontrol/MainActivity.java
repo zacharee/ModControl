@@ -246,6 +246,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
             }
         });
+
+        Button remountSys = (Button) findViewById(R.id.mount_sys);
+        remountSys.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sudo("mount -o rw,remount /system");
+            }
+        });
     }
 
     @Override public void onColorSelected(int dialogId, int color) {

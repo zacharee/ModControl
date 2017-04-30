@@ -14,6 +14,29 @@
         android:paddingTop="16dp"
         tools:ignore="UselessParent">
 
+        <LinearLayout
+            android:id="@+id/has_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Switch
+                android:id="@+id/has_mod_switch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                android:text="@string/mod_installed"
+                android:textColor="@android:color/tertiary_text_light"
+                android:textSize="20sp"
+                tools:ignore="InefficientWeight" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
@@ -73,28 +96,14 @@
 
         </RadioGroup>
 
-        <LinearLayout
-            android:id="@+id/has_mod"
+        <Button
+            android:id="@+id/mount_sys"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <Switch
-                android:id="@+id/has_mod_switch"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:switchTextAppearance="@style/TextAppearance.AppCompat"
-                android:text="@string/mod_installed"
-                android:textColor="@android:color/tertiary_text_light"
-                android:textSize="20sp"
-                tools:ignore="InefficientWeight" />
-        </LinearLayout>
+            android:text="Remount /system RW" />
 
         <TextView
             android:id="@+id/textView8"
